@@ -1,4 +1,4 @@
-package com.codecrafters.companity.user.infrastructure;
+package com.codecrafters.companity.adapter.user.infrastructure;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

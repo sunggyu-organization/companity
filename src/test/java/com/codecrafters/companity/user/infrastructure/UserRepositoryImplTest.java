@@ -1,6 +1,6 @@
 package com.codecrafters.companity.user.infrastructure;
 
-import com.codecrafters.companity.user.service.port.UserRepository;
+import com.codecrafters.companity.application.out.persistance.user.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
