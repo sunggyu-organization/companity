@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface PostServiceCase {
-    Post add(Post post);
+    Post add(Post post, Long userId);
 }

@@ -17,8 +17,7 @@ public class PostController {
     private final PostServiceCase postServiceCase;
     @PostMapping("/add")
     public ResponseEntity<ResponsePost> add(@RequestBody RequestPost requestPost){
-        Post result = postServiceCase.add(requestPost.getPost());
-        //TODO we have to check if it's ok to call directly repository ex) postRepository.add(post.getPost());
+        Post result = postServiceCase.add(requestPost.getPost(), requestPost.getUserId());
         return new ResponseEntity<>(new ResponsePost(result), HttpStatus.OK);
     }
 }
