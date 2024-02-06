@@ -8,12 +8,18 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class PostInMemoryImpl implements PostRepository {
-    private final Map<Long, Post> repository = new ConcurrentHashMap<>();
+    public final Map<Long, Post> repository = new ConcurrentHashMap<>();
     private final AtomicLong keyCreator = new AtomicLong();
     @Override
     public Post add(Post post) {
         post.setId(keyCreator.getAndIncrement());
         repository.put(post.getId(), post);
         return post;
+    }
+
+    @Override
+    public Post getById(Long id) {
+        if(!repository.containsKey(id)) throw new IllegalArgumentException();
+        return repository.get(id);
     }
 }

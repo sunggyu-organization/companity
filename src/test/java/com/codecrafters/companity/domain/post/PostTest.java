@@ -5,7 +5,7 @@ import com.codecrafters.companity.domain.enumclass.SportType;
 import com.codecrafters.companity.domain.user.User;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -13,6 +13,7 @@ class PostTest {
 
     @Test
     void createNewPost() {
+        //given
         String title = "Test Title";
         City city = City.Seoul;
         String content = "Test Content";
@@ -26,10 +27,13 @@ class PostTest {
                 .content(content)
                 .sportType(sportType)
                 .build();
-        User user = User.builder().userId(userId).nickName(nickName).build();
-        LocalDate now = LocalDate.now();
+        User user = User.builder().username(userId).nickName(nickName).build();
+        LocalDateTime now = LocalDateTime.now();
+
+        //when
         Post newPost = requestPost.createNewPost(user, now);
 
+        //then
         assertThat(newPost.getId()).isNull();
         assertThat(newPost.getCity()).isEqualTo(city);
         assertThat(newPost.getComments()).isNull();
@@ -37,6 +41,6 @@ class PostTest {
         assertThat(newPost.getTitle()).isEqualTo(title);
         assertThat(newPost.getLikeCount()).isEqualTo(0);
         assertThat(newPost.getUser()).isEqualTo(user);
-        assertThat(newPost.getLocalDate()).isEqualTo(now);
+        assertThat(newPost.getLocalDateTime()).isEqualTo(now);
     }
 }

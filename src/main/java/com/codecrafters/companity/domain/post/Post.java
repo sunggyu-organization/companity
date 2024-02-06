@@ -5,7 +5,7 @@ import com.codecrafters.companity.domain.enumclass.SportType;
 import com.codecrafters.companity.domain.user.User;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -20,15 +20,15 @@ public class Post {
     private City city;
     private SportType sportType;
     private String content;
-    private LocalDate localDate;
+    private LocalDateTime localDateTime;
     private boolean recruit;
     private int likeCount;
     private List<Comment> comments;
 
-    public Post createNewPost(User user, LocalDate localDate){
+    public Post createNewPost(User user, LocalDateTime localDateTime){
         Post result = new Post();
         result.setUser(user);
-        result.setLocalDate(localDate);
+        result.setLocalDateTime(localDateTime);
         result.setTitle(this.title);
         result.setCity(this.city);
         result.setSportType(this.sportType);
