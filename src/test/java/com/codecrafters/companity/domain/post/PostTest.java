@@ -1,12 +1,12 @@
 package com.codecrafters.companity.domain.post;
 
-import com.codecrafters.companity.domain.enumclass.City;
-import com.codecrafters.companity.domain.enumclass.SportType;
 import com.codecrafters.companity.domain.user.User;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
+import static com.codecrafters.companity.static_reference.PostStatic.*;
+import static com.codecrafters.companity.static_reference.UserStatic.*;
 import static org.assertj.core.api.Assertions.*;
 
 class PostTest {
@@ -14,20 +14,13 @@ class PostTest {
     @Test
     void createNewPost() {
         //given
-        String title = "Test Title";
-        City city = City.Seoul;
-        String content = "Test Content";
-        SportType sportType = SportType.Soccer;
-        String userId = "shtjdrb";
-        String nickName = "노성규";
-
         Post requestPost = Post.builder()
-                .title(title)
-                .city(city)
-                .content(content)
-                .sportType(sportType)
+                .title(TITLE)
+                .city(CITY)
+                .content(CONTENT)
+                .sportType(SPORT_TYPE)
                 .build();
-        User user = User.builder().username(userId).nickName(nickName).build();
+        User user = User.builder().username(USER_NAME).nickName(NICKNAME).build();
         LocalDateTime now = LocalDateTime.now();
 
         //when
@@ -35,10 +28,10 @@ class PostTest {
 
         //then
         assertThat(newPost.getId()).isNull();
-        assertThat(newPost.getCity()).isEqualTo(city);
+        assertThat(newPost.getCity()).isEqualTo(CITY);
         assertThat(newPost.getComments()).isNull();
-        assertThat(newPost.getContent()).isEqualTo(content);
-        assertThat(newPost.getTitle()).isEqualTo(title);
+        assertThat(newPost.getContent()).isEqualTo(CONTENT);
+        assertThat(newPost.getTitle()).isEqualTo(TITLE);
         assertThat(newPost.getLikeCount()).isEqualTo(0);
         assertThat(newPost.getUser()).isEqualTo(user);
         assertThat(newPost.getLocalDateTime()).isEqualTo(now);
