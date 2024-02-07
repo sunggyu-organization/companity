@@ -1,9 +1,11 @@
 package com.codecrafters.companity.domain.post;
 
+import com.codecrafters.companity.domain.BaseDomain;
 import com.codecrafters.companity.domain.enumclass.City;
 import com.codecrafters.companity.domain.enumclass.SportType;
 import com.codecrafters.companity.domain.user.User;
 import lombok.*;
+import org.modelmapper.ModelMapper;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Post {
+public class Post extends BaseDomain {
     private User user;
     private Long id;
     private String title;
@@ -25,14 +27,10 @@ public class Post {
     private int likeCount;
     private List<Comment> comments;
 
-    public Post createPost(User user, LocalDateTime localDateTime){
-        Post result = new Post();
+    public Post create(User user, LocalDateTime localDateTime, ModelMapper modelMapper){
+        Post result = copy(modelMapper, this);
         result.setUser(user);
         result.setLocalDateTime(localDateTime);
-        result.setTitle(this.title);
-        result.setCity(this.city);
-        result.setSportType(this.sportType);
-        result.setContent(this.content);
         return result;
     }
 }

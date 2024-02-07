@@ -2,6 +2,7 @@ package com.codecrafters.companity.domain.post;
 
 import com.codecrafters.companity.domain.user.User;
 import org.junit.jupiter.api.Test;
+import org.modelmapper.ModelMapper;
 
 import java.time.LocalDateTime;
 
@@ -22,9 +23,10 @@ class PostTest {
                 .build();
         User user = User.builder().username(USER_NAME).nickName(NICKNAME).build();
         LocalDateTime now = LocalDateTime.now();
+        ModelMapper mapper = new ModelMapper();
 
         //when
-        Post newPost = requestPost.createPost(user, now);
+        Post newPost = requestPost.create(user, now, mapper);
 
         //then
         //post
