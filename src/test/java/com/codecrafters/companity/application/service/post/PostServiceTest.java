@@ -4,8 +4,6 @@ import com.codecrafters.companity.adapter.post.infrastructure.inmemory.PostInMem
 import com.codecrafters.companity.adapter.user.infrastructure.inmemory.UserInMemoryImpl;
 import com.codecrafters.companity.application.out.persistance.post.PostRepository;
 import com.codecrafters.companity.application.out.persistance.user.UserRepository;
-import com.codecrafters.companity.domain.enumclass.City;
-import com.codecrafters.companity.domain.enumclass.SportType;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.user.User;
 import com.codecrafters.companity.mock.TestLocalDateTimeProvider;
@@ -14,12 +12,12 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
+import static com.codecrafters.companity.static_reference.PostStatic.*;
+import static com.codecrafters.companity.static_reference.UserStatic.*;
 import static org.assertj.core.api.Assertions.*;
 
 class PostServiceTest {
-    private static final String DEFAULT_USER_NAME = "shtjdrb";
-    private static final String DEFAULT_NICKNAME = "노성규";
-    private static final LocalDateTime fixedLocalDateTime = LocalDateTime.now();
+    private static final LocalDateTime FIXED_LOCAL_DATE_TIME = LocalDateTime.now();
 
     private PostService postService;
     private UserRepository userRepository;
@@ -31,13 +29,13 @@ class PostServiceTest {
 
     private UserRepository getUserRepository(){
         UserInMemoryImpl userRepository = new UserInMemoryImpl();
-        User user = User.builder().username(DEFAULT_USER_NAME).nickName(DEFAULT_NICKNAME).build();
+        User user = User.builder().username(USER_NAME).nickName(NICKNAME).build();
         userRepository.add(user);
         return userRepository;
     }
 
     private TestLocalDateTimeProvider getLocalDateTimeProvider(){
-        return new TestLocalDateTimeProvider(fixedLocalDateTime);
+        return new TestLocalDateTimeProvider(FIXED_LOCAL_DATE_TIME);
     }
     @BeforeEach
     public void init(){
@@ -49,30 +47,25 @@ class PostServiceTest {
     @Test
     void add() {
         //given
-        String title = "Test Title";
-        City city = City.Seoul;
-        String content = "Test Content";
-        SportType sportType = SportType.Soccer;
-
         Post post = Post.builder()
-                .title(title)
-                .city(city)
-                .content(content)
-                .sportType(sportType)
+                .title(TITLE)
+                .city(CITY)
+                .content(CONTENT)
+                .sportType(SPORT_TYPE)
                 .build();
-        User user = userRepository.getUserByUsername(DEFAULT_USER_NAME);
+        User user = userRepository.getUserByUsername(USER_NAME);
 
         //when
         Long savedUserId = postService.add(post, user.getId()).getId();
 
         //then
         Post savedPost = postRepository.getById(savedUserId);
-        assertThat(savedPost.getCity()).isEqualTo(city);
+        assertThat(savedPost.getCity()).isEqualTo(CITY);
         assertThat(savedPost.getComments()).isNull();
-        assertThat(savedPost.getContent()).isEqualTo(content);
-        assertThat(savedPost.getTitle()).isEqualTo(title);
+        assertThat(savedPost.getContent()).isEqualTo(CONTENT);
+        assertThat(savedPost.getTitle()).isEqualTo(TITLE);
         assertThat(savedPost.getLikeCount()).isEqualTo(0);
         assertThat(savedPost.getUser()).isEqualTo(user);
-        assertThat(savedPost.getLocalDateTime()).isEqualTo(fixedLocalDateTime);
+        assertThat(savedPost.getLocalDateTime()).isEqualTo(FIXED_LOCAL_DATE_TIME);
     }
 }
