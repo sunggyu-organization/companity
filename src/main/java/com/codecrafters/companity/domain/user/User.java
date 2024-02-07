@@ -9,13 +9,6 @@ import lombok.Setter;
 @Setter
 public class User {
     private Long id;
-    private String userId;
+    private String username;
     private String nickName;
-
-    @Override
-    public boolean equals(Object obj) {
-        User other = (User)obj;
-        if(!other.getUserId().equals(this.userId)) return false;
-        return other.getNickName().equals(this.nickName);
-    }
 }

@@ -59,13 +59,19 @@ class PostServiceTest {
         Long savedUserId = postService.add(post, user.getId()).getId();
 
         //then
+        //post
         Post savedPost = postRepository.getById(savedUserId);
         assertThat(savedPost.getCity()).isEqualTo(CITY);
         assertThat(savedPost.getComments()).isNull();
         assertThat(savedPost.getContent()).isEqualTo(CONTENT);
         assertThat(savedPost.getTitle()).isEqualTo(TITLE);
         assertThat(savedPost.getLikeCount()).isEqualTo(0);
-        assertThat(savedPost.getUser()).isEqualTo(user);
         assertThat(savedPost.getLocalDateTime()).isEqualTo(FIXED_LOCAL_DATE_TIME);
+
+        //user
+        User writer = savedPost.getUser();
+        assertThat(writer.getId()).isEqualTo(savedUserId);
+        assertThat(writer.getUsername()).isEqualTo(USER_NAME);
+        assertThat(writer.getNickName()).isEqualTo(NICKNAME);
     }
 }

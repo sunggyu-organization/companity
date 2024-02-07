@@ -27,13 +27,20 @@ class PostTest {
         Post newPost = requestPost.createNewPost(user, now);
 
         //then
+        //post
         assertThat(newPost.getId()).isNull();
         assertThat(newPost.getCity()).isEqualTo(CITY);
         assertThat(newPost.getComments()).isNull();
         assertThat(newPost.getContent()).isEqualTo(CONTENT);
         assertThat(newPost.getTitle()).isEqualTo(TITLE);
         assertThat(newPost.getLikeCount()).isEqualTo(0);
-        assertThat(newPost.getUser()).isEqualTo(user);
         assertThat(newPost.getLocalDateTime()).isEqualTo(now);
+
+        //user
+        User writer = newPost.getUser();
+        assertThat(writer.getUsername()).isEqualTo(USER_NAME);
+        assertThat(writer.getNickName()).isEqualTo(NICKNAME);
+        assertThat(writer.getId()).isNull();
+
     }
 }
