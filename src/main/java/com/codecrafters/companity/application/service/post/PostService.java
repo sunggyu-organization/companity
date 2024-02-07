@@ -21,7 +21,7 @@ public class PostService implements PostServiceCase {
     @Override
     public Post add(Post post, Long userId) {
         User user = userRepository.getUserById(userId);
-        Post newPost = post.createNewPost(user, dateTimeProvider.getNow());
+        Post newPost = post.createPost(user, dateTimeProvider.getNow());
         return postRepository.add(newPost);
     }
 }

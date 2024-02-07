@@ -24,7 +24,7 @@ class PostTest {
         LocalDateTime now = LocalDateTime.now();
 
         //when
-        Post newPost = requestPost.createNewPost(user, now);
+        Post newPost = requestPost.createPost(user, now);
 
         //then
         //post

@@ -25,7 +25,7 @@ public class Post {
     private int likeCount;
     private List<Comment> comments;
 
-    public Post createNewPost(User user, LocalDateTime localDateTime){
+    public Post createPost(User user, LocalDateTime localDateTime){
         Post result = new Post();
         result.setUser(user);
         result.setLocalDateTime(localDateTime);
