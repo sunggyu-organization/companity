@@ -1,4 +1,4 @@
-package com.codecrafters.companity.adapter.post.infrastructure;
+package com.codecrafters.companity.adapter.post.infrastructure.jpa;
 
 import com.codecrafters.companity.domain.post.Post;
 

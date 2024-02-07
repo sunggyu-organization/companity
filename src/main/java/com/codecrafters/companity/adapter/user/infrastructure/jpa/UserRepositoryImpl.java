@@ -1,6 +1,7 @@
-package com.codecrafters.companity.adapter.user.infrastructure;
+package com.codecrafters.companity.adapter.user.infrastructure.jpa;
 
 import com.codecrafters.companity.application.out.persistance.user.UserRepository;
+import com.codecrafters.companity.domain.user.User;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.codecrafters.companity.user.infrastructure.QUserEntity.userEntity;
-
+import static com.codecrafters.companity.adapter.user.infrastructure.jpa.QUserEntity.userEntity;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
@@ -27,5 +27,20 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
 
-    //interface를 가져오는 것은 좋은데 너무 귀찮은데?? 기본적인 crud를 다 만들어줘야 되잖아
+    @Override
+    public User getUserById(Long userId){
+        //TODO need to describe error message
+        UserEntity entity = userJPARepository.findById(userId).orElseThrow();
+        return UserMapper.toDomain(entity);
+    }
+
+    @Override
+    public User add(User user) {
+        return null;
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return null;
+    }
 }

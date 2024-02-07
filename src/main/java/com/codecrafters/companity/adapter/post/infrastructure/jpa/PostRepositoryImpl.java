@@ -1,4 +1,4 @@
-package com.codecrafters.companity.adapter.post.infrastructure;
+package com.codecrafters.companity.adapter.post.infrastructure.jpa;
 
 import com.codecrafters.companity.application.out.persistance.post.PostRepository;
 import com.codecrafters.companity.domain.post.Post;
@@ -23,5 +23,10 @@ public class PostRepositoryImpl implements PostRepository {
     public Post add(Post post) {
         PostEntity entity = postJPARepository.save(PostMapper.toEntity(post));
         return PostMapper.toDomain(entity);
+    }
+
+    @Override
+    public Post getById(Long id) {
+        return null;
     }
 }

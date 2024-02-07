@@ -1,4 +1,4 @@
-package com.codecrafters.companity.adapter.user.infrastructure;
+package com.codecrafters.companity.adapter.post.infrastructure.jpa;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,12 +7,12 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity(name = "USERS")
+@Entity(name = "Post")
 @Getter
 @Setter
-public class UserEntity {
+public class PostEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String title;
 }
