@@ -22,4 +22,10 @@ public class PostInMemoryImpl implements PostRepository {
         if(!repository.containsKey(id)) throw new IllegalArgumentException();
         return repository.get(id);
     }
+
+    @Override
+    public Post save(Post post) {
+        repository.put(post.getId(), post);
+        return post;
+    }
 }

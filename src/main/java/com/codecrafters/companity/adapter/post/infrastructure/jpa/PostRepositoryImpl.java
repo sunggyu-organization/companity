@@ -29,4 +29,9 @@ public class PostRepositoryImpl implements PostRepository {
     public Post getById(Long id) {
         return null;
     }
+
+    @Override
+    public Post save(Post post) {
+        return null;
+    }
 }

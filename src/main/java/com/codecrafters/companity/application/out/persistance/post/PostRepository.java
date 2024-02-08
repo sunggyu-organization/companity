@@ -6,4 +6,6 @@ public interface PostRepository {
     Post add(Post post);
 
     Post getById(Long id);
+
+    Post save(Post post);
 }

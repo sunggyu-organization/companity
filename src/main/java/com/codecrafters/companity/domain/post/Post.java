@@ -33,4 +33,8 @@ public class Post extends BaseDomain {
         result.setLocalDateTime(localDateTime);
         return result;
     }
+
+    public Post update(Post newPost, ModelMapper modelMapper) {
+        return overwrite(modelMapper, newPost, this);
+    }
 }

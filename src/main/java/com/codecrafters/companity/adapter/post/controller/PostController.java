@@ -1,6 +1,6 @@
 package com.codecrafters.companity.adapter.post.controller;
 
-import com.codecrafters.companity.application.in.post.PostServiceCase;
+import com.codecrafters.companity.application.in.post.PostUserCase;
 import com.codecrafters.companity.domain.post.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/post")
 @RequiredArgsConstructor
 public class PostController {
-    private final PostServiceCase postServiceCase;
+    private final PostUserCase postUserCase;
     @PostMapping("/add")
     public ResponseEntity<ResponsePost> add(@RequestBody RequestPost requestPost){
-        Post result = postServiceCase.add(requestPost.getPost(), requestPost.getUserId());
+        Post result = postUserCase.add(requestPost.getPost(), requestPost.getUserId());
         return new ResponseEntity<>(new ResponsePost(result), HttpStatus.OK);
     }
 }

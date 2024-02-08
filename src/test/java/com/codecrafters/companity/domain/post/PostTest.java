@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.*;
 class PostTest {
 
     @Test
-    void createNewPost() {
+    void create() {
         //given
         Post requestPost = Post.builder()
                 .title(TITLE)
@@ -45,4 +45,40 @@ class PostTest {
         assertThat(writer.getId()).isNull();
 
     }
+
+    @Test
+    void update(){
+        //given
+        LocalDateTime now = LocalDateTime.now();
+        Post oldPost = Post.builder()
+                .title(TITLE)
+                .city(CITY)
+                .content(CONTENT)
+                .sportType(SPORT_TYPE)
+                .user(User.builder().username(USER_NAME).nickName(NICKNAME).build())
+                .localDateTime(now)
+                .build();
+        Post newPost = Post.builder().title("update test").build();
+        ModelMapper mapper = new ModelMapper();
+
+        //when
+        Post updatedPost = oldPost.update(newPost, mapper);
+
+        //then
+        //post
+        assertThat(updatedPost.getId()).isNull();
+        assertThat(updatedPost.getCity()).isEqualTo(CITY);
+        assertThat(updatedPost.getComments()).isNull();
+        assertThat(updatedPost.getContent()).isEqualTo(CONTENT);
+        assertThat(updatedPost.getTitle()).isEqualTo("update test");
+        assertThat(updatedPost.getLikeCount()).isEqualTo(0);
+        assertThat(updatedPost.getLocalDateTime()).isEqualTo(now);
+
+        //user
+        User writer = updatedPost.getUser();
+        assertThat(writer.getUsername()).isEqualTo(USER_NAME);
+        assertThat(writer.getNickName()).isEqualTo(NICKNAME);
+        assertThat(writer.getId()).isNull();
+    }
+
 }
