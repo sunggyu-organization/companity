@@ -66,9 +66,7 @@ class PostServiceTest {
 
         //user
         User writer = savedPost.getUser();
-        assertThat(writer.getId()).isEqualTo(user.getId());
-        assertThat(writer.getUsername()).isEqualTo(USER_NAME);
-        assertThat(writer.getNickName()).isEqualTo(NICKNAME);
+        assertThat(writer.equals(user)).isTrue();
     }
 
     @Test
@@ -92,9 +90,7 @@ class PostServiceTest {
 
         //user
         User writer = savedPost.getUser();
-        assertThat(writer.getId()).isEqualTo(user.getId());
-        assertThat(writer.getUsername()).isEqualTo(USER_NAME);
-        assertThat(writer.getNickName()).isEqualTo(NICKNAME);
+        assertThat(writer.equals(user)).isTrue();
     }
 
     private Post getDefaultPost(){
