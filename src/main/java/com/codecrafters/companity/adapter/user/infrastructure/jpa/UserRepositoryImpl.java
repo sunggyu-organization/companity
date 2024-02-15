@@ -1,6 +1,6 @@
 package com.codecrafters.companity.adapter.user.infrastructure.jpa;
 
-import com.codecrafters.companity.application.out.persistance.user.UserRepository;
+import com.codecrafters.companity.application.out.persistance.UserRepository;
 import com.codecrafters.companity.domain.user.User;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
@@ -36,11 +36,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User add(User user) {
-        return null;
-    }
-
-    @Override
-    public User getUserByUsername(String username) {
         return null;
     }
 }

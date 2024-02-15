@@ -1,4 +1,4 @@
-package com.codecrafters.companity.application.out.persistance.post;
+package com.codecrafters.companity.application.out.persistance;
 
 import com.codecrafters.companity.domain.post.Post;
 

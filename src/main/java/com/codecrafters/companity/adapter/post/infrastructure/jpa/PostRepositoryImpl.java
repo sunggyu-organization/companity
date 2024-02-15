@@ -1,6 +1,6 @@
 package com.codecrafters.companity.adapter.post.infrastructure.jpa;
 
-import com.codecrafters.companity.application.out.persistance.post.PostRepository;
+import com.codecrafters.companity.application.out.persistance.PostRepository;
 import com.codecrafters.companity.domain.post.Post;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;

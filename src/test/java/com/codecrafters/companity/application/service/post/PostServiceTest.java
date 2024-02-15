@@ -2,8 +2,9 @@ package com.codecrafters.companity.application.service.post;
 
 import com.codecrafters.companity.adapter.post.infrastructure.inmemory.PostInMemoryImpl;
 import com.codecrafters.companity.adapter.user.infrastructure.inmemory.UserInMemoryImpl;
-import com.codecrafters.companity.application.out.persistance.post.PostRepository;
-import com.codecrafters.companity.application.out.persistance.user.UserRepository;
+import com.codecrafters.companity.application.out.persistance.PostRepository;
+import com.codecrafters.companity.application.out.persistance.UserRepository;
+import com.codecrafters.companity.application.utility.CustomModelMapper;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.user.User;
 import com.codecrafters.companity.mock.TestLocalDateTimeProvider;
@@ -20,7 +21,7 @@ import static org.assertj.core.api.Assertions.*;
 class PostServiceTest {
     private static final LocalDateTime FIXED_LOCAL_DATE_TIME = LocalDateTime.now();
 
-    private PostUser postService;
+    private PostService postService;
     private UserRepository userRepository;
     private PostRepository postRepository;
 
@@ -39,8 +40,9 @@ class PostServiceTest {
     public void init(){
         userRepository = getUserRepository();
         postRepository = getPostRepository();
-        ModelMapper mapper = new ModelMapper();
-        postService = new PostUser(postRepository, userRepository, mapper, getLocalDateTimeProvider());
+        CustomModelMapper mapper = new CustomModelMapper(new ModelMapper());
+        PostFactory postFactory = new PostFactory(mapper);
+        postService = new PostService(postRepository, userRepository, postFactory, getLocalDateTimeProvider());
     }
 
     @Test

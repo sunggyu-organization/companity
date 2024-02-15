@@ -1,6 +1,6 @@
 package com.codecrafters.companity.adapter.post.infrastructure.inmemory;
 
-import com.codecrafters.companity.application.out.persistance.post.PostRepository;
+import com.codecrafters.companity.application.out.persistance.PostRepository;
 import com.codecrafters.companity.domain.post.Post;
 
 import java.util.Map;

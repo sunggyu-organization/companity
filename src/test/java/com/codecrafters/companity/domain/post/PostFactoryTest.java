@@ -1,5 +1,7 @@
 package com.codecrafters.companity.domain.post;
 
+import com.codecrafters.companity.application.service.post.PostFactory;
+import com.codecrafters.companity.application.utility.CustomModelMapper;
 import com.codecrafters.companity.domain.user.User;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -7,10 +9,11 @@ import org.modelmapper.ModelMapper;
 import java.time.LocalDateTime;
 
 import static com.codecrafters.companity.static_reference.PostStatic.*;
-import static com.codecrafters.companity.static_reference.UserStatic.*;
-import static org.assertj.core.api.Assertions.*;
+import static com.codecrafters.companity.static_reference.UserStatic.NICKNAME;
+import static com.codecrafters.companity.static_reference.UserStatic.USER_NAME;
+import static org.assertj.core.api.Assertions.assertThat;
 
-class PostTest {
+class PostFactoryTest {
 
     @Test
     void create() {
@@ -23,10 +26,11 @@ class PostTest {
                 .build();
         User user = User.builder().username(USER_NAME).nickName(NICKNAME).build();
         LocalDateTime now = LocalDateTime.now();
-        ModelMapper mapper = new ModelMapper();
+        CustomModelMapper mapper = new CustomModelMapper(new ModelMapper());
+        PostFactory postFactory = new PostFactory(mapper);
 
         //when
-        Post newPost = requestPost.create(user, now, mapper);
+        Post newPost = postFactory.create(requestPost, user, now);
 
         //then
         //post
@@ -43,11 +47,10 @@ class PostTest {
         assertThat(writer.getUsername()).isEqualTo(USER_NAME);
         assertThat(writer.getNickName()).isEqualTo(NICKNAME);
         assertThat(writer.getId()).isNull();
-
     }
 
     @Test
-    void update(){
+    void update() {
         //given
         LocalDateTime now = LocalDateTime.now();
         Post oldPost = Post.builder()
@@ -59,10 +62,11 @@ class PostTest {
                 .localDateTime(now)
                 .build();
         Post newPost = Post.builder().title("update test").build();
-        ModelMapper mapper = new ModelMapper();
+        CustomModelMapper mapper = new CustomModelMapper(new ModelMapper());
+        PostFactory postFactory = new PostFactory(mapper);
 
         //when
-        Post updatedPost = oldPost.update(newPost, mapper);
+        Post updatedPost = postFactory.update(oldPost, newPost);
 
         //then
         //post
@@ -80,5 +84,4 @@ class PostTest {
         assertThat(writer.getNickName()).isEqualTo(NICKNAME);
         assertThat(writer.getId()).isNull();
     }
-
 }

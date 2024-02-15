@@ -1,6 +1,6 @@
 package com.codecrafters.companity.adapter.user.infrastructure.inmemory;
 
-import com.codecrafters.companity.application.out.persistance.user.UserRepository;
+import com.codecrafters.companity.application.out.persistance.UserRepository;
 import com.codecrafters.companity.domain.user.User;
 import org.springframework.util.CollectionUtils;
 import java.util.List;
@@ -17,12 +17,6 @@ public class UserInMemoryImpl implements UserRepository {
         user.setId(keyCreator.getAndIncrement());
         repository.put(user.getId(), user);
         return user;
-    }
-
-    @Override
-    public User getUserByUsername(String username) {
-        List<User> foundUser = repository.values().stream().filter(user -> user.getUsername().equals(username)).collect(Collectors.toList());
-        return CollectionUtils.isEmpty(foundUser) ? null : foundUser.get(0);
     }
 
     @Override
