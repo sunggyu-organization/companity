@@ -48,13 +48,8 @@ class PostServiceTest {
     @Test
     void add() {
         //given
-        Post post = Post.builder()
-                .title(TITLE)
-                .city(CITY)
-                .content(CONTENT)
-                .sportType(SPORT_TYPE)
-                .build();
-        User user = userRepository.add(User.builder().username(USER_NAME).nickName(NICKNAME).build());
+        Post post = getDefaultPost();
+        User user = addDefaultUserToRepository();
 
         //when
         Long savedPostId = postService.add(post, user.getId()).getId();
@@ -79,20 +74,9 @@ class PostServiceTest {
     @Test
     void update() {
         //given
-        Post oldPost = Post.builder()
-                .title(TITLE)
-                .city(CITY)
-                .content(CONTENT)
-                .sportType(SPORT_TYPE)
-                .build();
-        User user = userRepository.add(User.builder().username(USER_NAME).nickName(NICKNAME).build());
-        Long savedPostId = postService.add(oldPost, user.getId()).getId();
-        Post newPost = Post.builder()
-                .title("Post Update Test")
-                .city(CITY)
-                .content(CONTENT)
-                .sportType(SPORT_TYPE)
-                .build();
+        User user = addDefaultUserToRepository();
+        Long savedPostId = addDefaultPostToRepository(user);
+        Post newPost = Post.builder().title("Post Update Test").build();
         //when
         postService.update(savedPostId, newPost);
 
@@ -111,5 +95,22 @@ class PostServiceTest {
         assertThat(writer.getId()).isEqualTo(user.getId());
         assertThat(writer.getUsername()).isEqualTo(USER_NAME);
         assertThat(writer.getNickName()).isEqualTo(NICKNAME);
+    }
+
+    private Post getDefaultPost(){
+        return Post.builder()
+                .title(TITLE)
+                .city(CITY)
+                .content(CONTENT)
+                .sportType(SPORT_TYPE)
+                .build();
+    }
+
+    private User addDefaultUserToRepository(){
+        return userRepository.add(User.builder().username(USER_NAME).nickName(NICKNAME).build());
+    }
+
+    private Long addDefaultPostToRepository(User user){
+        return postService.add(getDefaultPost(), user.getId()).getId();
     }
 }
