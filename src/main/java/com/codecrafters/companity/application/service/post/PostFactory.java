@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 
 
-//CustomerModelMapper -> PostFactory -> PostService
 @RequiredArgsConstructor
 @Component
 public class PostFactory {
