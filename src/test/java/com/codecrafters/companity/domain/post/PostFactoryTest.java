@@ -3,6 +3,7 @@ package com.codecrafters.companity.domain.post;
 import com.codecrafters.companity.application.service.post.PostFactory;
 import com.codecrafters.companity.application.utility.CustomModelMapper;
 import com.codecrafters.companity.domain.user.User;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 
@@ -14,23 +15,22 @@ import static com.codecrafters.companity.static_reference.UserStatic.USER_NAME;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PostFactoryTest {
+    private static final LocalDateTime FIXED_LOCAL_DATE_TIME = LocalDateTime.now();
+    private PostFactory postFactory;
+    @BeforeEach
+    public void init(){
+        CustomModelMapper mapper = new CustomModelMapper(new ModelMapper());
+        postFactory = new PostFactory(mapper);
+    }
 
     @Test
     void create() {
         //given
-        Post requestPost = Post.builder()
-                .title(TITLE)
-                .city(CITY)
-                .content(CONTENT)
-                .sportType(SPORT_TYPE)
-                .build();
-        User user = User.builder().username(USER_NAME).nickName(NICKNAME).build();
-        LocalDateTime now = LocalDateTime.now();
-        CustomModelMapper mapper = new CustomModelMapper(new ModelMapper());
-        PostFactory postFactory = new PostFactory(mapper);
+        Post requestPost = getDefaultPost();
+        User user = getDefaultUser();
 
         //when
-        Post newPost = postFactory.create(requestPost, user, now);
+        Post newPost = postFactory.create(requestPost, user, FIXED_LOCAL_DATE_TIME);
 
         //then
         //post
@@ -40,30 +40,19 @@ class PostFactoryTest {
         assertThat(newPost.getContent()).isEqualTo(CONTENT);
         assertThat(newPost.getTitle()).isEqualTo(TITLE);
         assertThat(newPost.getLikeCount()).isEqualTo(0);
-        assertThat(newPost.getLocalDateTime()).isEqualTo(now);
+        assertThat(newPost.getLocalDateTime()).isEqualTo(FIXED_LOCAL_DATE_TIME);
 
         //user
         User writer = newPost.getUser();
-        assertThat(writer.getUsername()).isEqualTo(USER_NAME);
-        assertThat(writer.getNickName()).isEqualTo(NICKNAME);
-        assertThat(writer.getId()).isNull();
+        assertThat(writer.equals(user)).isTrue();
     }
 
     @Test
     void update() {
         //given
-        LocalDateTime now = LocalDateTime.now();
-        Post oldPost = Post.builder()
-                .title(TITLE)
-                .city(CITY)
-                .content(CONTENT)
-                .sportType(SPORT_TYPE)
-                .user(User.builder().username(USER_NAME).nickName(NICKNAME).build())
-                .localDateTime(now)
-                .build();
+        User user = getDefaultUser();
+        Post oldPost = postFactory.create(getDefaultPost(), user, FIXED_LOCAL_DATE_TIME);
         Post newPost = Post.builder().title("update test").build();
-        CustomModelMapper mapper = new CustomModelMapper(new ModelMapper());
-        PostFactory postFactory = new PostFactory(mapper);
 
         //when
         Post updatedPost = postFactory.update(oldPost, newPost);
@@ -76,12 +65,22 @@ class PostFactoryTest {
         assertThat(updatedPost.getContent()).isEqualTo(CONTENT);
         assertThat(updatedPost.getTitle()).isEqualTo("update test");
         assertThat(updatedPost.getLikeCount()).isEqualTo(0);
-        assertThat(updatedPost.getLocalDateTime()).isEqualTo(now);
+        assertThat(updatedPost.getLocalDateTime()).isEqualTo(FIXED_LOCAL_DATE_TIME);
 
         //user
         User writer = updatedPost.getUser();
-        assertThat(writer.getUsername()).isEqualTo(USER_NAME);
-        assertThat(writer.getNickName()).isEqualTo(NICKNAME);
-        assertThat(writer.getId()).isNull();
+        assertThat(writer.equals(user)).isTrue();
+    }
+
+    private Post getDefaultPost(){
+        return Post.builder()
+                .title(TITLE)
+                .city(CITY)
+                .content(CONTENT)
+                .sportType(SPORT_TYPE)
+                .build();
+    }
+    private User getDefaultUser(){
+        return User.builder().username(USER_NAME).nickName(NICKNAME).build();
     }
 }
