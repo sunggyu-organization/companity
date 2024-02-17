@@ -1,11 +1,16 @@
 package com.codecrafters.companity.adapter.post.infrastructure.jpa;
 
 import com.codecrafters.companity.application.out.persistance.PostRepository;
+import com.codecrafters.companity.domain.enumclass.City;
+import com.codecrafters.companity.domain.enumclass.Sport;
+import com.codecrafters.companity.domain.post.OrderType;
 import com.codecrafters.companity.domain.post.Post;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 
 @Repository
@@ -32,6 +37,11 @@ public class PostRepositoryImpl implements PostRepository {
 
     @Override
     public Post save(Post post) {
+        return null;
+    }
+
+    @Override
+    public List<Post> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(Sport sport, City city, boolean recruit, OrderType orderType) {
         return null;
     }
 }

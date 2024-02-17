@@ -1,7 +1,7 @@
 package com.codecrafters.companity.domain.post;
 
 import com.codecrafters.companity.domain.enumclass.City;
-import com.codecrafters.companity.domain.enumclass.SportType;
+import com.codecrafters.companity.domain.enumclass.Sport;
 import com.codecrafters.companity.domain.user.User;
 import lombok.*;
 
@@ -18,7 +18,7 @@ public class Post {
     private Long id;
     private String title;
     private City city;
-    private SportType sportType;
+    private Sport sport;
     private String content;
     private LocalDateTime localDateTime;
     private boolean recruit;

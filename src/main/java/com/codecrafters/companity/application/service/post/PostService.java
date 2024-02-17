@@ -4,11 +4,14 @@ import com.codecrafters.companity.application.in.usecase.PostUseCase;
 import com.codecrafters.companity.application.out.datetime.LocalDateTimeProvider;
 import com.codecrafters.companity.application.out.persistance.PostRepository;
 import com.codecrafters.companity.application.out.persistance.UserRepository;
+import com.codecrafters.companity.domain.post.OrderType;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -32,5 +35,11 @@ public class PostService implements PostUseCase {
     public Post update(Long postId, Post post) {
         Post oldPost = postRepository.getById(postId);
         return postRepository.save(postFactory.update(oldPost, post));
+    }
+
+    @Override
+    public List<Post> findByCriteria(Post criteria, OrderType orderType) {
+        //TODO need to make pagination
+        return postRepository.findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(criteria.getSport(), criteria.getCity(), criteria.isRecruit(), orderType);
     }
 }

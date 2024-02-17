@@ -98,7 +98,7 @@ class PostServiceTest {
                 .title(TITLE)
                 .city(CITY)
                 .content(CONTENT)
-                .sportType(SPORT_TYPE)
+                .sport(SPORT_TYPE)
                 .build();
     }
 
