@@ -1,4 +1,4 @@
-package com.codecrafters.companity.adapter.user.infrastructure.jpa;
+package com.codecrafters.companity.adapter.infrastructure.jpa.user;
 
 import com.codecrafters.companity.application.out.persistance.UserRepository;
 import com.codecrafters.companity.domain.user.User;

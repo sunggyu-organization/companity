@@ -1,4 +1,4 @@
-package com.codecrafters.companity.adapter.user.controller;
+package com.codecrafters.companity.adapter.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

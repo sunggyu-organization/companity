@@ -1,4 +1,4 @@
-package com.codecrafters.companity.adapter.post.infrastructure.jpa;
+package com.codecrafters.companity.adapter.infrastructure.jpa.post;
 
 import com.codecrafters.companity.application.out.persistance.PostRepository;
 import com.codecrafters.companity.domain.enumclass.City;

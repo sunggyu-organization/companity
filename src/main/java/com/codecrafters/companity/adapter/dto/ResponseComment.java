@@ -1,6 +1,4 @@
-package com.codecrafters.companity.adapter.post.controller;
-
-import com.codecrafters.companity.adapter.user.controller.ResponseUser;
+package com.codecrafters.companity.adapter.dto;
 
 import java.time.LocalDateTime;
 

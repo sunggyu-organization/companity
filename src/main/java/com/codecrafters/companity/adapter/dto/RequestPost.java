@@ -1,4 +1,4 @@
-package com.codecrafters.companity.adapter.post.controller;
+package com.codecrafters.companity.adapter.dto;
 
 import com.codecrafters.companity.domain.post.Post;
 import lombok.Getter;

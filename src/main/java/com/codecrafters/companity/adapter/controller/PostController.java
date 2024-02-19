@@ -1,5 +1,7 @@
-package com.codecrafters.companity.adapter.post.controller;
+package com.codecrafters.companity.adapter.controller;
 
+import com.codecrafters.companity.adapter.dto.RequestPost;
+import com.codecrafters.companity.adapter.dto.ResponsePost;
 import com.codecrafters.companity.application.in.usecase.PostUseCase;
 import com.codecrafters.companity.domain.post.OrderType;
 import com.codecrafters.companity.domain.post.Post;
