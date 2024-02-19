@@ -1,8 +1,12 @@
-package com.codecrafters.companity.adapter.post.infrastructure.inmemory;
+package com.codecrafters.companity.mock.repository;
 
 import com.codecrafters.companity.application.out.persistance.PostRepository;
+import com.codecrafters.companity.domain.enumclass.City;
+import com.codecrafters.companity.domain.enumclass.Sport;
+import com.codecrafters.companity.domain.post.OrderType;
 import com.codecrafters.companity.domain.post.Post;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -27,5 +31,10 @@ public class PostInMemoryImpl implements PostRepository {
     public Post save(Post post) {
         repository.put(post.getId(), post);
         return post;
+    }
+
+    @Override
+    public List<Post> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(Sport sport, City city, boolean recruit, OrderType orderType) {
+        return null;
     }
 }

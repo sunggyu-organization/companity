@@ -1,7 +1,7 @@
 package com.codecrafters.companity.application.service.post;
 
-import com.codecrafters.companity.adapter.post.infrastructure.inmemory.PostInMemoryImpl;
-import com.codecrafters.companity.adapter.user.infrastructure.inmemory.UserInMemoryImpl;
+import com.codecrafters.companity.mock.repository.PostInMemoryImpl;
+import com.codecrafters.companity.mock.repository.UserInMemoryImpl;
 import com.codecrafters.companity.application.out.persistance.PostRepository;
 import com.codecrafters.companity.application.out.persistance.UserRepository;
 import com.codecrafters.companity.application.utility.CustomModelMapper;
