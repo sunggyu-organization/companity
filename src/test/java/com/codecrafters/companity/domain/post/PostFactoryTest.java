@@ -5,7 +5,6 @@ import com.codecrafters.companity.application.utility.CustomModelMapper;
 import com.codecrafters.companity.domain.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.modelmapper.ModelMapper;
 
 import java.time.LocalDateTime;
 
@@ -19,7 +18,7 @@ class PostFactoryTest {
     private PostFactory postFactory;
     @BeforeEach
     public void init(){
-        CustomModelMapper mapper = new CustomModelMapper(new ModelMapper());
+        CustomModelMapper mapper = new CustomModelMapper();
         postFactory = new PostFactory(mapper);
     }
 

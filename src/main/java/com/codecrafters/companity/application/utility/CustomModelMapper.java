@@ -8,8 +8,8 @@ import java.lang.reflect.Type;
 @Component
 public class CustomModelMapper {
     private final ModelMapper modelMapper;
-    public CustomModelMapper(ModelMapper modelMapper){
-        this.modelMapper = modelMapper;
+    public CustomModelMapper(){
+        this.modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setSkipNullEnabled(true);
     }
     public <T> T copy(T target){

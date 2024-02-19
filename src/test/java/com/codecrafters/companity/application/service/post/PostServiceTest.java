@@ -10,7 +10,6 @@ import com.codecrafters.companity.domain.user.User;
 import com.codecrafters.companity.mock.TestLocalDateTimeProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.modelmapper.ModelMapper;
 
 import java.time.LocalDateTime;
 
@@ -40,7 +39,7 @@ class PostServiceTest {
     public void init(){
         userRepository = getUserRepository();
         postRepository = getPostRepository();
-        CustomModelMapper mapper = new CustomModelMapper(new ModelMapper());
+        CustomModelMapper mapper = new CustomModelMapper();
         PostFactory postFactory = new PostFactory(mapper);
         postService = new PostService(postRepository, userRepository, postFactory, getLocalDateTimeProvider());
     }
