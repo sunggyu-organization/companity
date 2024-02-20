@@ -1,7 +1,7 @@
 package com.codecrafters.companity.application.service.post;
 
 import com.codecrafters.companity.application.in.usecase.PostUseCase;
-import com.codecrafters.companity.application.out.datetime.LocalDateTimeProvider;
+import com.codecrafters.companity.application.out.utility.LocalDateTimeProvider;
 import com.codecrafters.companity.application.out.persistance.PostRepository;
 import com.codecrafters.companity.application.out.persistance.UserRepository;
 import com.codecrafters.companity.domain.post.OrderType;

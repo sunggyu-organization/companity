@@ -1,4 +1,4 @@
-package com.codecrafters.companity.application.out.datetime;
+package com.codecrafters.companity.application.out.utility;
 
 import java.time.LocalDateTime;
 
