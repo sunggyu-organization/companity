@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 
 @Component
-public class DateTimeProviderImpl implements DateTimeProvider {
+public class LocalDateTimeProvider implements DateTimeProvider {
     @Override
     public LocalDateTime getNow() {
         return LocalDateTime.now();
