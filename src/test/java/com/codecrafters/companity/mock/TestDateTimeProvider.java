@@ -1,11 +1,11 @@
 package com.codecrafters.companity.mock;
 
-import com.codecrafters.companity.application.out.utility.LocalDateTimeProvider;
+import com.codecrafters.companity.application.out.utility.DateTimeProvider;
 import java.time.LocalDateTime;
 
-public class TestLocalDateTimeProvider implements LocalDateTimeProvider {
+public class TestDateTimeProvider implements DateTimeProvider {
     private final LocalDateTime fixedDateTime;
-    public TestLocalDateTimeProvider(LocalDateTime localDateTime){
+    public TestDateTimeProvider(LocalDateTime localDateTime){
         this.fixedDateTime = localDateTime;
     }
     @Override

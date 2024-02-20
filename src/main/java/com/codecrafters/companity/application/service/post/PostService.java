@@ -1,7 +1,7 @@
 package com.codecrafters.companity.application.service.post;
 
 import com.codecrafters.companity.application.in.usecase.PostUseCase;
-import com.codecrafters.companity.application.out.utility.LocalDateTimeProvider;
+import com.codecrafters.companity.application.out.utility.DateTimeProvider;
 import com.codecrafters.companity.application.out.persistance.PostRepository;
 import com.codecrafters.companity.application.out.persistance.UserRepository;
 import com.codecrafters.companity.domain.post.OrderType;
@@ -22,7 +22,7 @@ public class PostService implements PostUseCase {
     private final UserRepository userRepository;
     private final PostFactory postFactory;
 
-    private final LocalDateTimeProvider dateTimeProvider;
+    private final DateTimeProvider dateTimeProvider;
 
     @Override
     public Post add(Post post, Long userId) {

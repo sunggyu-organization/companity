@@ -7,7 +7,7 @@ import com.codecrafters.companity.application.out.persistance.UserRepository;
 import com.codecrafters.companity.application.out.utility.CustomModelMapper;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.user.User;
-import com.codecrafters.companity.mock.TestLocalDateTimeProvider;
+import com.codecrafters.companity.mock.TestDateTimeProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,8 +32,8 @@ class PostServiceTest {
         return new UserInMemoryImpl();
     }
 
-    private TestLocalDateTimeProvider getLocalDateTimeProvider(){
-        return new TestLocalDateTimeProvider(FIXED_LOCAL_DATE_TIME);
+    private TestDateTimeProvider getLocalDateTimeProvider(){
+        return new TestDateTimeProvider(FIXED_LOCAL_DATE_TIME);
     }
     @BeforeEach
     public void init(){
