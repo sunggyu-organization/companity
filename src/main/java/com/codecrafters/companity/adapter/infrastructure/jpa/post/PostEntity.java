@@ -2,8 +2,8 @@ package com.codecrafters.companity.adapter.infrastructure.jpa.post;
 
 import com.codecrafters.companity.adapter.infrastructure.jpa.comment.CommentEntity;
 import com.codecrafters.companity.adapter.infrastructure.jpa.user.UserEntity;
-import com.codecrafters.companity.domain.enumclass.City;
-import com.codecrafters.companity.domain.enumclass.Sport;
+import com.codecrafters.companity.domain.enums.City;
+import com.codecrafters.companity.domain.enums.Sport;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

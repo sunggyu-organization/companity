@@ -1,7 +1,7 @@
 package com.codecrafters.companity.application.out.persistance;
 
-import com.codecrafters.companity.domain.enumclass.City;
-import com.codecrafters.companity.domain.enumclass.Sport;
+import com.codecrafters.companity.domain.enums.City;
+import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.post.OrderType;
 import com.codecrafters.companity.domain.post.Post;
 

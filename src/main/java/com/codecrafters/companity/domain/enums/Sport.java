@@ -1,4 +1,4 @@
-package com.codecrafters.companity.domain.enumclass;
+package com.codecrafters.companity.domain.enums;
 
 public enum Sport {
     Badminton(0 ,"배드민턴"),

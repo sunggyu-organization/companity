@@ -1,4 +1,4 @@
-package com.codecrafters.companity.domain.enumclass;
+package com.codecrafters.companity.domain.enums;
 
 public enum City {
     Seoul(0 ,"서울시"),
