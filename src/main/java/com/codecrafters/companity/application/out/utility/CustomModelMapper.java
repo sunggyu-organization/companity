@@ -1,4 +1,4 @@
-package com.codecrafters.companity.application.utility;
+package com.codecrafters.companity.application.out.utility;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

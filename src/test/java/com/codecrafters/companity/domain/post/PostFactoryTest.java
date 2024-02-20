@@ -1,7 +1,7 @@
 package com.codecrafters.companity.domain.post;
 
 import com.codecrafters.companity.application.service.post.PostFactory;
-import com.codecrafters.companity.application.utility.CustomModelMapper;
+import com.codecrafters.companity.application.out.utility.CustomModelMapper;
 import com.codecrafters.companity.domain.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

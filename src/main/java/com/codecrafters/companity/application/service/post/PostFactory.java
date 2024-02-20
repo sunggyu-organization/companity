@@ -1,6 +1,6 @@
 package com.codecrafters.companity.application.service.post;
 
-import com.codecrafters.companity.application.utility.CustomModelMapper;
+import com.codecrafters.companity.application.out.utility.CustomModelMapper;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.user.User;
 import lombok.RequiredArgsConstructor;
