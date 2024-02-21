@@ -3,27 +3,32 @@ spring:
     properties:
       hibernate:
         format_sql: true
-    hibernate:
-      ddl-auto: none
     show-sql: true
-  security:
-    oauth2:
-      authorization-server:
-        client:
-          oidc-client:
-            registration:
-              client-id: "oidc-client"
-              client-secret: "{noop}secret"
-              client-authentication-methods:
-                - "client_secret_basic"
-              authorization-grant-types:
-                - "authorization_code"
-                - "refresh_token"
-              redirect-uris:
-                - "http://127.0.0.1:8080/login/oauth2/code/oidc-client"
-              post-logout-redirect-uris:
-                - "http://127.0.0.1:8080/"
-              scopes:
-                - "openid"
-                - "profile"
-            require-authorization-consent: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+#  security:
+#    oauth2:
+#      authorization-server:
+#        client:
+#          oidc-client:
+#            registration:
+#              client-id: "oidc-client"
+#              client-secret: "{noop}secret"
+#              client-authentication-methods:
+#                - "client_secret_basic"
+#              authorization-grant-types:
+#                - "authorization_code"
+#                - "refresh_token"
+#              redirect-uris:
+#                - "http://127.0.0.1:8080/login/oauth2/code/oidc-client"
+#              post-logout-redirect-uris:
+#                - "http://127.0.0.1:8080/"
+#              scopes:
+#                - "openid"
+#                - "profile"
+#            require-authorization-consent: true

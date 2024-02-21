@@ -42,6 +42,9 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/org.modelmapper/modelmapper
 	implementation 'org.modelmapper:modelmapper:3.2.0'
+
+	implementation("org.flywaydb:flyway-core")
+	implementation("org.flywaydb:flyway-mysql")
 }
 
 tasks.named('test') {
