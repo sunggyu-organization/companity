@@ -17,11 +17,6 @@ public class UserInMemoryImpl implements UserRepository {
     }
 
     @Override
-    public void testQueryDsl() {
-
-    }
-
-    @Override
     public User getUserById(Long userId) {
         if(!repository.containsKey(userId)) throw new IllegalArgumentException();
         return repository.get(userId);
