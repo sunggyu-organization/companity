@@ -2,6 +2,7 @@ package com.codecrafters.companity.adapter.infrastructure.jpa.post;
 
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
+import com.codecrafters.companity.application.out.utility.CompanityObjectMapper;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.post.OrderType;
@@ -22,11 +23,12 @@ import static com.codecrafters.companity.adapter.infrastructure.jpa.post.QPostEn
 public class PostRepositoryImpl implements PostRepository {
     private final PostJPARepository postJPARepository;
     private final JPAQueryFactory jpaQueryFactory;
+    private final CompanityObjectMapper mapper;
 
     @Override
     public Post add(Post post) {
-        PostEntity entity = postJPARepository.save(PostMapper.toEntity(post));
-        return PostMapper.toDomain(entity);
+        PostEntity entity = postJPARepository.save(mapper.convert(post, PostEntity.class));
+        return mapper.convert(entity, Post.class);
     }
 
     @Override
@@ -41,14 +43,13 @@ public class PostRepositoryImpl implements PostRepository {
 
     @Override
     public List<Post> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(PostCriteria postCriteria) {
-        //TODO
-//        List<PostEntity> postEntities = jpaQueryFactory.selectFrom(postEntity)
-//                .where(eqSport(sport),
-//                        eqCity(city),
-//                        postEntity.recruit.eq(recruit))
-//                .orderBy(getOrderBy(orderType))
-//                .fetch();
-        return null;
+        List<PostEntity> postEntities = jpaQueryFactory.selectFrom(postEntity)
+                .where(eqSport(postCriteria.getSport()),
+                        eqCity(postCriteria.getCity()),
+                        postEntity.recruit.eq(postCriteria.isRecruit()))
+                .orderBy(getOrderBy(postCriteria.getOrderType()))
+                .fetch();
+        return mapper.convertList(postEntities, Post.class);
     }
 
     private BooleanExpression eqSport(Sport sport){
@@ -63,13 +64,10 @@ public class PostRepositoryImpl implements PostRepository {
 
     private OrderSpecifier getOrderBy(OrderType orderType){
         if(orderType == null) return postEntity.createAt.desc();
-        switch (orderType){
-            case Favorite:
-                return postEntity.likeCount.desc();
-            case RecentDate:
-                return postEntity.createAt.desc();
-        }
-        return postEntity.createAt.desc();
+        return switch (orderType) {
+            case Favorite -> postEntity.likeCount.desc();
+            case RecentDate -> postEntity.createAt.desc();
+        };
     }
 
 }

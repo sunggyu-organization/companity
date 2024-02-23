@@ -1,5 +1,6 @@
 package com.codecrafters.companity.adapter.infrastructure.jpa.post;
 
+import com.codecrafters.companity.adapter.utility.CustomModelMapper;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.config.QuerydslConfig;
 import com.codecrafters.companity.domain.enums.City;
@@ -19,7 +20,8 @@ class PostRepositoryImplTest {
     PostRepositoryImpl postRepository;
     @Autowired
     PostRepositoryImplTest(PostJPARepository postJPARepository, JPAQueryFactory jpaQueryFactory){
-        postRepository = new PostRepositoryImpl(postJPARepository, jpaQueryFactory);
+        CustomModelMapper customModelMapper = new CustomModelMapper();
+        postRepository = new PostRepositoryImpl(postJPARepository, jpaQueryFactory, customModelMapper);
     }
 
     @Test
