@@ -1,10 +1,8 @@
 package com.codecrafters.companity.adapter.dto;
 
-import com.codecrafters.companity.domain.post.Comment;
 import com.codecrafters.companity.domain.post.Post;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class ResponsePost {
     private Long id;
@@ -16,7 +14,6 @@ public class ResponsePost {
     private boolean recruit;
     private int likeCount;
     private ResponseUser owner;
-    private List<Comment> comments;
     public ResponsePost(Post post){
     }
 }
