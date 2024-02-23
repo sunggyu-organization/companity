@@ -15,14 +15,15 @@ public class CustomModelMapper implements CompanityObjectMapper {
     public CustomModelMapper(){
         this.modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setSkipNullEnabled(true);
+        modelMapper.getConfiguration().setDeepCopyEnabled(true);
     }
     public <T> T copy(T target){
         return modelMapper.map(target, (Type) target.getClass());
     }
 
-    public <T> T overwrite(T target, T destination){
-        T result = copy(destination);
-        modelMapper.map(target, result);
+    public <T> T overwrite(T newOne, T oldOne){
+        T result = copy(oldOne);
+        modelMapper.map(newOne, result);
         return result;
     }
 
