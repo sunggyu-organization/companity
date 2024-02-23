@@ -1,6 +1,7 @@
 package com.codecrafters.companity.adapter.infrastructure.jpa.post;
 
 import com.codecrafters.companity.application.out.persistance.PostRepository;
+import com.codecrafters.companity.application.service.post.PostCriteria;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.post.OrderType;
@@ -39,7 +40,7 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
-    public List<Post> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(Sport sport, City city, boolean recruit, OrderType orderType) {
+    public List<Post> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(PostCriteria postCriteria) {
         //TODO
 //        List<PostEntity> postEntities = jpaQueryFactory.selectFrom(postEntity)
 //                .where(eqSport(sport),

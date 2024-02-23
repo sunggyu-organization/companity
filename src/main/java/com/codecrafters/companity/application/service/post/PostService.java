@@ -4,7 +4,6 @@ import com.codecrafters.companity.application.in.usecase.PostUseCase;
 import com.codecrafters.companity.application.out.utility.DateTimeProvider;
 import com.codecrafters.companity.application.out.persistance.PostRepository;
 import com.codecrafters.companity.application.out.persistance.UserRepository;
-import com.codecrafters.companity.domain.post.OrderType;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.user.User;
 import lombok.RequiredArgsConstructor;
@@ -38,8 +37,8 @@ public class PostService implements PostUseCase {
     }
 
     @Override
-    public List<Post> findByCriteria(Post criteria, OrderType orderType) {
+    public List<Post> findByCriteria(PostCriteria postCriteria) {
         //TODO need to make pagination
-        return postRepository.findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(criteria.getSport(), criteria.getCity(), criteria.isRecruit(), orderType);
+        return postRepository.findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(postCriteria);
     }
 }

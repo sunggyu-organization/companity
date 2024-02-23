@@ -1,9 +1,9 @@
 package com.codecrafters.companity.adapter.post;
 
+import com.codecrafters.companity.application.service.post.PostCriteria;
 import com.codecrafters.companity.adapter.post.in.RequestPost;
 import com.codecrafters.companity.adapter.post.out.ResponsePost;
 import com.codecrafters.companity.application.in.usecase.PostUseCase;
-import com.codecrafters.companity.domain.post.OrderType;
 import com.codecrafters.companity.domain.post.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,11 +24,8 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public ResponseEntity<List<ResponsePost>> getAll(){
-        //우리는 findAll을 하면 Comment를 안 가져오는 것으로 정하자고 하자
-        //성능을 위해서는 comment를 가져 올 필요가 없지
-        //생각해보니까 애초에 comment를 가져 올 필요가 없지..
-        List<Post> all = postUseCase.findByCriteria(new Post(), OrderType.RecentDate);
+    public ResponseEntity<List<ResponsePost>> getAll(@RequestBody PostCriteria postCriteria){
+        List<Post> all = postUseCase.findByCriteria(postCriteria);
         List<ResponsePost> result = all.stream().map(ResponsePost::new).toList();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

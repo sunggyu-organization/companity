@@ -1,5 +1,6 @@
 package com.codecrafters.companity.adapter.infrastructure.jpa.post;
 
+import com.codecrafters.companity.application.service.post.PostCriteria;
 import com.codecrafters.companity.config.QuerydslConfig;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
@@ -25,6 +26,7 @@ class PostRepositoryImplTest {
 
     @Test
     void findBySportAndCityAndRecruitOrderByRecentDateOrFavorite() {
-        postRepository.findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(Sport.Badminton, City.Seoul, false, OrderType.Favorite);
+        PostCriteria postCriteria = PostCriteria.builder().sport(Sport.Badminton).city(City.Seoul).recruit(false).orderType(OrderType.Favorite).build();
+        postRepository.findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(postCriteria);
     }
 }
