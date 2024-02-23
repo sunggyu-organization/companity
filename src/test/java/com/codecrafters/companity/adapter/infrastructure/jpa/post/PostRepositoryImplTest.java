@@ -15,9 +15,10 @@ import org.springframework.context.annotation.Import;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Import({QuerydslConfig.class, PostRepositoryImpl.class})
+@Import({QuerydslConfig.class})
 class PostRepositoryImplTest {
-    PostRepositoryImpl postRepository;
+    private final PostRepositoryImpl postRepository;
+
     @Autowired
     PostRepositoryImplTest(PostJPARepository postJPARepository, JPAQueryFactory jpaQueryFactory){
         CustomModelMapper customModelMapper = new CustomModelMapper();
