@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "Post")
@@ -37,5 +36,5 @@ public class PostEntity {
     private UserEntity user;
 
     @OneToMany(mappedBy = "post")
-    private List<CommentEntity> comments = new ArrayList<>();
+    private List<CommentEntity> comments;
 }
