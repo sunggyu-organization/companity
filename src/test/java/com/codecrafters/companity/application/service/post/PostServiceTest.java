@@ -4,7 +4,7 @@ import com.codecrafters.companity.mock.repository.PostInMemoryImpl;
 import com.codecrafters.companity.mock.repository.UserInMemoryImpl;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.application.out.persistence.UserRepository;
-import com.codecrafters.companity.application.out.utility.CustomModelMapper;
+import com.codecrafters.companity.adapter.utility.CustomModelMapper;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.user.User;
 import com.codecrafters.companity.mock.TestDateTimeProvider;
