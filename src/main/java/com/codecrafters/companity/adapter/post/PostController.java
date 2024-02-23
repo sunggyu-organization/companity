@@ -24,8 +24,8 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public ResponseEntity<List<ResponsePost>> getAll(@RequestBody PostCriteria postCriteria){
-        List<Post> all = postUseCase.findByCriteria(postCriteria);
+    public ResponseEntity<List<ResponsePost>> getAll(@RequestBody PostCriteria criteria){
+        List<Post> all = postUseCase.findByCriteria(criteria);
         List<ResponsePost> result = all.stream().map(ResponsePost::new).toList();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
