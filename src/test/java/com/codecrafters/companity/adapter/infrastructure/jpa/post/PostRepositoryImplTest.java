@@ -1,6 +1,6 @@
 package com.codecrafters.companity.adapter.infrastructure.jpa.post;
 
-import com.codecrafters.companity.application.service.post.PostCriteria;
+import com.codecrafters.companity.application.out.persistance.PostCriteria;
 import com.codecrafters.companity.config.QuerydslConfig;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)

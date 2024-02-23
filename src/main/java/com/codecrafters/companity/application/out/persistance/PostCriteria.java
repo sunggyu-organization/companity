@@ -1,4 +1,4 @@
-package com.codecrafters.companity.application.service.post;
+package com.codecrafters.companity.application.out.persistance;
 
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;

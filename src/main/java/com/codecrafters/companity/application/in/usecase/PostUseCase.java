@@ -1,6 +1,6 @@
 package com.codecrafters.companity.application.in.usecase;
 
-import com.codecrafters.companity.application.service.post.PostCriteria;
+import com.codecrafters.companity.application.out.persistance.PostCriteria;
 import com.codecrafters.companity.domain.post.Post;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.codecrafters.companity.adapter.infrastructure.jpa.post;
 
 import com.codecrafters.companity.application.out.persistance.PostRepository;
-import com.codecrafters.companity.application.service.post.PostCriteria;
+import com.codecrafters.companity.application.out.persistance.PostCriteria;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.post.OrderType;

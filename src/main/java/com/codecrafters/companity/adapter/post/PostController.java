@@ -1,6 +1,6 @@
 package com.codecrafters.companity.adapter.post;
 
-import com.codecrafters.companity.application.service.post.PostCriteria;
+import com.codecrafters.companity.application.out.persistance.PostCriteria;
 import com.codecrafters.companity.adapter.post.in.RequestPost;
 import com.codecrafters.companity.adapter.post.out.ResponsePost;
 import com.codecrafters.companity.application.in.usecase.PostUseCase;
