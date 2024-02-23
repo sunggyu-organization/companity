@@ -1,10 +1,10 @@
 package com.codecrafters.companity.application.service.post;
 
 import com.codecrafters.companity.application.in.usecase.PostUseCase;
-import com.codecrafters.companity.application.out.persistance.PostCriteria;
+import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.application.out.utility.DateTimeProvider;
-import com.codecrafters.companity.application.out.persistance.PostRepository;
-import com.codecrafters.companity.application.out.persistance.UserRepository;
+import com.codecrafters.companity.application.out.persistence.PostRepository;
+import com.codecrafters.companity.application.out.persistence.UserRepository;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.user.User;
 import lombok.RequiredArgsConstructor;

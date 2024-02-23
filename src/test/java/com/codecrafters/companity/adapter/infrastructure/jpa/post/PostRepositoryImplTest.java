@@ -1,6 +1,6 @@
 package com.codecrafters.companity.adapter.infrastructure.jpa.post;
 
-import com.codecrafters.companity.application.out.persistance.PostCriteria;
+import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.config.QuerydslConfig;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;

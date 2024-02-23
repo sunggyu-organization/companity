@@ -1,6 +1,6 @@
 package com.codecrafters.companity.mock.repository;
 
-import com.codecrafters.companity.application.out.persistance.UserRepository;
+import com.codecrafters.companity.application.out.persistence.UserRepository;
 import com.codecrafters.companity.domain.user.User;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
