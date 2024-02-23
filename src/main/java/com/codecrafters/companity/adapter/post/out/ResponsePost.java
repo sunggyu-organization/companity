@@ -1,5 +1,6 @@
-package com.codecrafters.companity.adapter.dto;
+package com.codecrafters.companity.adapter.post.out;
 
+import com.codecrafters.companity.adapter.user.ResponseUser;
 import com.codecrafters.companity.domain.post.Post;
 
 import java.time.LocalDateTime;
