@@ -39,7 +39,7 @@ class PostFactoryTest {
         assertThat(newPost.getContent()).isEqualTo(CONTENT);
         assertThat(newPost.getTitle()).isEqualTo(TITLE);
         assertThat(newPost.getLikeCount()).isEqualTo(0);
-        assertThat(newPost.getCreateDateTime()).isEqualTo(FIXED_LOCAL_DATE_TIME);
+        assertThat(newPost.getCreatedAt()).isEqualTo(FIXED_LOCAL_DATE_TIME);
 
         //user
         User writer = newPost.getOwner();
@@ -64,7 +64,7 @@ class PostFactoryTest {
         assertThat(updatedPost.getContent()).isEqualTo(CONTENT);
         assertThat(updatedPost.getTitle()).isEqualTo("update test");
         assertThat(updatedPost.getLikeCount()).isEqualTo(0);
-        assertThat(updatedPost.getCreateDateTime()).isEqualTo(FIXED_LOCAL_DATE_TIME);
+        assertThat(updatedPost.getCreatedAt()).isEqualTo(FIXED_LOCAL_DATE_TIME);
 
         //user
         User writer = updatedPost.getOwner();

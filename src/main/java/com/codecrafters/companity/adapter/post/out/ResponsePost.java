@@ -14,7 +14,7 @@ public class ResponsePost {
     private int city;
     private int sportsTypes;
     private String content;
-    private LocalDateTime createDateTime;
+    private LocalDateTime createdAt;
     private boolean recruit;
     private int likeCount;
     private ResponseUser owner;

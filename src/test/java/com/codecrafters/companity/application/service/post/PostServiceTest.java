@@ -61,7 +61,7 @@ class PostServiceTest {
         assertThat(savedPost.getContent()).isEqualTo(CONTENT);
         assertThat(savedPost.getTitle()).isEqualTo(TITLE);
         assertThat(savedPost.getLikeCount()).isEqualTo(0);
-        assertThat(savedPost.getCreateDateTime()).isEqualTo(FIXED_LOCAL_DATE_TIME);
+        assertThat(savedPost.getCreatedAt()).isEqualTo(FIXED_LOCAL_DATE_TIME);
 
         //user
         User writer = savedPost.getOwner();
@@ -85,7 +85,7 @@ class PostServiceTest {
         assertThat(savedPost.getContent()).isEqualTo(CONTENT);
         assertThat(savedPost.getTitle()).isEqualTo("Post Update Test");
         assertThat(savedPost.getLikeCount()).isEqualTo(0);
-        assertThat(savedPost.getCreateDateTime()).isEqualTo(FIXED_LOCAL_DATE_TIME);
+        assertThat(savedPost.getCreatedAt()).isEqualTo(FIXED_LOCAL_DATE_TIME);
 
         //user
         User writer = savedPost.getOwner();

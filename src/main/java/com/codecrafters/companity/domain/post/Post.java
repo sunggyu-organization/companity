@@ -21,7 +21,7 @@ public class Post {
     private City city;
     private Sport sport;
     private String content;
-    private LocalDateTime createDateTime;
+    private LocalDateTime createdAt;
     private Boolean recruit;
     private Integer likeCount;
     private List<Comment> comments;

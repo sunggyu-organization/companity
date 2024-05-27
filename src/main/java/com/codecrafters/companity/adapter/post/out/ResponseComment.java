@@ -7,6 +7,6 @@ import java.time.LocalDateTime;
 public class ResponseComment {
     private Long id;
     private String content;
-    private LocalDateTime date;
+    private LocalDateTime createdAt;
     private ResponseUser owner;
 }

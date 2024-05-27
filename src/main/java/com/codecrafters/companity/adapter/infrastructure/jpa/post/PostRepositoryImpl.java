@@ -66,10 +66,10 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     private OrderSpecifier getOrderBy(OrderType orderType){
-        if(orderType == null) return postEntity.createAt.desc();
+        if(orderType == null) return postEntity.createdAt.desc();
         return switch (orderType) {
             case Favorite -> postEntity.likeCount.desc();
-            case RecentDate -> postEntity.createAt.desc();
+            case RecentDate -> postEntity.createdAt.desc();
         };
     }
 

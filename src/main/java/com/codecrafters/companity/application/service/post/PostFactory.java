@@ -17,7 +17,7 @@ public class PostFactory {
     public Post create(Post target, User user, LocalDateTime localDateTime){
         Post result = modelMapper.copy(target);
         result.setOwner(user);
-        result.setCreateDateTime(localDateTime);
+        result.setCreatedAt(localDateTime);
         return result;
     }
 
