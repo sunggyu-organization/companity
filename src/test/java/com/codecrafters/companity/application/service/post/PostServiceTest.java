@@ -4,7 +4,7 @@ import com.codecrafters.companity.mock.repository.PostInMemoryImpl;
 import com.codecrafters.companity.mock.repository.UserInMemoryImpl;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.application.out.persistence.UserRepository;
-import com.codecrafters.companity.adapter.utility.CustomModelMapper;
+import com.codecrafters.companity.config.mapper.CustomModelMapper;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.user.User;
 import com.codecrafters.companity.mock.TestDateTimeProvider;
@@ -61,10 +61,10 @@ class PostServiceTest {
         assertThat(savedPost.getContent()).isEqualTo(CONTENT);
         assertThat(savedPost.getTitle()).isEqualTo(TITLE);
         assertThat(savedPost.getLikeCount()).isEqualTo(0);
-        assertThat(savedPost.getLocalDateTime()).isEqualTo(FIXED_LOCAL_DATE_TIME);
+        assertThat(savedPost.getCreateDateTime()).isEqualTo(FIXED_LOCAL_DATE_TIME);
 
         //user
-        User writer = savedPost.getUser();
+        User writer = savedPost.getOwner();
         assertThat(writer.equals(user)).isTrue();
     }
 
@@ -85,10 +85,10 @@ class PostServiceTest {
         assertThat(savedPost.getContent()).isEqualTo(CONTENT);
         assertThat(savedPost.getTitle()).isEqualTo("Post Update Test");
         assertThat(savedPost.getLikeCount()).isEqualTo(0);
-        assertThat(savedPost.getLocalDateTime()).isEqualTo(FIXED_LOCAL_DATE_TIME);
+        assertThat(savedPost.getCreateDateTime()).isEqualTo(FIXED_LOCAL_DATE_TIME);
 
         //user
-        User writer = savedPost.getUser();
+        User writer = savedPost.getOwner();
         assertThat(writer.equals(user)).isTrue();
     }
 

@@ -1,6 +1,7 @@
 package com.codecrafters.companity.adapter.utility;
 
 import com.codecrafters.companity.adapter.infrastructure.jpa.post.PostEntity;
+import com.codecrafters.companity.config.mapper.CustomModelMapper;
 import com.codecrafters.companity.domain.post.Post;
 import org.junit.jupiter.api.Test;
 

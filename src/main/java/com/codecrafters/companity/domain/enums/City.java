@@ -24,4 +24,8 @@ public enum City {
         this.no = no;
         this.value = value;
     }
+
+    public int getNo() {
+        return no;
+    }
 }

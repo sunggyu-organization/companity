@@ -11,16 +11,17 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Post {
-    private User user;
+
+    private User owner;
     private Long id;
     private String title;
     private City city;
     private Sport sport;
     private String content;
-    private LocalDateTime localDateTime;
+    private LocalDateTime createDateTime;
     private Boolean recruit;
     private Integer likeCount;
     private List<Comment> comments;

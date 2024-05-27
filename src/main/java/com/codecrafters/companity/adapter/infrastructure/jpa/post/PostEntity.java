@@ -6,14 +6,12 @@ import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity(name = "Post")
 @Getter
-@Setter
 public class PostEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +31,7 @@ public class PostEntity {
 
     @ManyToOne
     @JoinColumn(name="user_id")
-    private UserEntity user;
+    private UserEntity owner;
 
     @OneToMany(mappedBy = "post")
     private List<CommentEntity> comments;

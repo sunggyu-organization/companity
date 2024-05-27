@@ -1,7 +1,7 @@
 package com.codecrafters.companity.domain.post;
 
 import com.codecrafters.companity.application.service.post.PostFactory;
-import com.codecrafters.companity.adapter.utility.CustomModelMapper;
+import com.codecrafters.companity.config.mapper.CustomModelMapper;
 import com.codecrafters.companity.domain.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,10 +39,10 @@ class PostFactoryTest {
         assertThat(newPost.getContent()).isEqualTo(CONTENT);
         assertThat(newPost.getTitle()).isEqualTo(TITLE);
         assertThat(newPost.getLikeCount()).isEqualTo(0);
-        assertThat(newPost.getLocalDateTime()).isEqualTo(FIXED_LOCAL_DATE_TIME);
+        assertThat(newPost.getCreateDateTime()).isEqualTo(FIXED_LOCAL_DATE_TIME);
 
         //user
-        User writer = newPost.getUser();
+        User writer = newPost.getOwner();
         assertThat(writer.equals(user)).isTrue();
     }
 
@@ -64,10 +64,10 @@ class PostFactoryTest {
         assertThat(updatedPost.getContent()).isEqualTo(CONTENT);
         assertThat(updatedPost.getTitle()).isEqualTo("update test");
         assertThat(updatedPost.getLikeCount()).isEqualTo(0);
-        assertThat(updatedPost.getLocalDateTime()).isEqualTo(FIXED_LOCAL_DATE_TIME);
+        assertThat(updatedPost.getCreateDateTime()).isEqualTo(FIXED_LOCAL_DATE_TIME);
 
         //user
-        User writer = updatedPost.getUser();
+        User writer = updatedPost.getOwner();
         assertThat(writer.equals(user)).isTrue();
     }
 

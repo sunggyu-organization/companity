@@ -2,7 +2,7 @@ package com.codecrafters.companity.adapter.infrastructure.jpa.post;
 
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
-import com.codecrafters.companity.application.out.utility.CompanityObjectMapper;
+import com.codecrafters.companity.config.mapper.CompanityObjectMapper;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.post.OrderType;
@@ -33,7 +33,10 @@ public class PostRepositoryImpl implements PostRepository {
 
     @Override
     public Post getById(Long id) {
-        return null;
+        PostEntity entity = postJPARepository.findById(id).orElseThrow(() -> {
+            throw new IllegalArgumentException("존재하지 않는 게시물입니다.");
+        });
+        return mapper.convert(entity, Post.class);
     }
 
     @Override

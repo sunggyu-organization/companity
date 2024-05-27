@@ -10,4 +10,6 @@ public interface PostUseCase {
     Post update(Long postId, Post post);
 
     List<Post> findByCriteria(PostCriteria postCriteria);
+
+    Post findById(Long id);
 }

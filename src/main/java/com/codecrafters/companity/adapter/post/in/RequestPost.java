@@ -1,6 +1,5 @@
 package com.codecrafters.companity.adapter.post.in;
 
-import com.codecrafters.companity.domain.post.Post;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,8 +7,4 @@ import lombok.Setter;
 @Setter
 public class RequestPost {
     private Long userId;
-    public Post getPost(){
-        //TODO need to describe
-        return new Post();
-    }
 }

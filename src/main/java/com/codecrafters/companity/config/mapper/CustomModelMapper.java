@@ -1,7 +1,12 @@
-package com.codecrafters.companity.adapter.utility;
+package com.codecrafters.companity.config.mapper;
 
-import com.codecrafters.companity.application.out.utility.CompanityObjectMapper;
+import com.codecrafters.companity.adapter.post.out.ResponsePost;
+import com.codecrafters.companity.domain.enums.City;
+import com.codecrafters.companity.domain.enums.Sport;
+import com.codecrafters.companity.domain.post.Post;
+import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.config.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
@@ -14,8 +19,11 @@ public class CustomModelMapper implements CompanityObjectMapper {
     private final ModelMapper modelMapper;
     public CustomModelMapper(){
         this.modelMapper = new ModelMapper();
-        modelMapper.getConfiguration().setSkipNullEnabled(true);
-        modelMapper.getConfiguration().setDeepCopyEnabled(true);
+        modelMapper.getConfiguration().setSkipNullEnabled(true).setFieldAccessLevel(Configuration.AccessLevel.PRIVATE);
+        modelMapper.typeMap(Post.class, ResponsePost.class).addMappings(mapper -> {
+            mapper.using((Converter<City, Integer>) context -> context.getSource().getNo()).map(Post::getCity, ResponsePost::setCity);
+            mapper.using((Converter<Sport, Integer>) context -> context.getSource().getNo()).map(Post::getSport, ResponsePost::setSportsTypes);
+        });
     }
     public <T> T copy(T target){
         return modelMapper.map(target, (Type) target.getClass());

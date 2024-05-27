@@ -1,6 +1,6 @@
 package com.codecrafters.companity.application.service.post;
 
-import com.codecrafters.companity.application.out.utility.CompanityObjectMapper;
+import com.codecrafters.companity.config.mapper.CompanityObjectMapper;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.user.User;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +16,8 @@ public class PostFactory {
 
     public Post create(Post target, User user, LocalDateTime localDateTime){
         Post result = modelMapper.copy(target);
-        result.setUser(user);
-        result.setLocalDateTime(localDateTime);
+        result.setOwner(user);
+        result.setCreateDateTime(localDateTime);
         return result;
     }
 

@@ -1,4 +1,4 @@
-package com.codecrafters.companity.application.out.utility;
+package com.codecrafters.companity.config.mapper;
 import java.util.List;
 
 public interface CompanityObjectMapper {
