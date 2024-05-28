@@ -57,7 +57,6 @@ class PostServiceTest {
         //post
         Post savedPost = postRepository.getById(savedPostId);
         assertThat(savedPost.getCity()).isEqualTo(CITY);
-        assertThat(savedPost.getComments()).isNull();
         assertThat(savedPost.getContent()).isEqualTo(CONTENT);
         assertThat(savedPost.getTitle()).isEqualTo(TITLE);
         assertThat(savedPost.getLikeCount()).isEqualTo(0);
@@ -81,7 +80,6 @@ class PostServiceTest {
         //post
         Post savedPost = postRepository.getById(savedPostId);
         assertThat(savedPost.getCity()).isEqualTo(CITY);
-        assertThat(savedPost.getComments()).isNull();
         assertThat(savedPost.getContent()).isEqualTo(CONTENT);
         assertThat(savedPost.getTitle()).isEqualTo("Post Update Test");
         assertThat(savedPost.getLikeCount()).isEqualTo(0);

@@ -35,7 +35,6 @@ class PostFactoryTest {
         //post
         assertThat(newPost.getId()).isNull();
         assertThat(newPost.getCity()).isEqualTo(CITY);
-        assertThat(newPost.getComments()).isNull();
         assertThat(newPost.getContent()).isEqualTo(CONTENT);
         assertThat(newPost.getTitle()).isEqualTo(TITLE);
         assertThat(newPost.getLikeCount()).isEqualTo(0);
@@ -60,7 +59,6 @@ class PostFactoryTest {
         //post
         assertThat(updatedPost.getId()).isNull();
         assertThat(updatedPost.getCity()).isEqualTo(CITY);
-        assertThat(updatedPost.getComments()).isNull();
         assertThat(updatedPost.getContent()).isEqualTo(CONTENT);
         assertThat(updatedPost.getTitle()).isEqualTo("update test");
         assertThat(updatedPost.getLikeCount()).isEqualTo(0);

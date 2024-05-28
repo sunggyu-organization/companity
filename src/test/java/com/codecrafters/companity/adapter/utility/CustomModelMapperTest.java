@@ -26,7 +26,6 @@ class CustomModelMapperTest {
 
         //then
         assertThat(copy.getCity()).isEqualTo(post.getCity());
-        assertThat(copy.getComments()).isNull();
         assertThat(copy.getContent()).isEqualTo(post.getContent());
         assertThat(copy.getTitle()).isEqualTo(post.getTitle());
         assertThat(copy.getLikeCount()).isEqualTo(post.getLikeCount());
@@ -45,7 +44,6 @@ class CustomModelMapperTest {
 
         //then
         assertThat(overwrite.getCity()).isEqualTo(oldOne.getCity());
-        assertThat(overwrite.getComments()).isNull();
         assertThat(overwrite.getContent()).isEqualTo(oldOne.getContent());
         assertThat(overwrite.getLikeCount()).isEqualTo(oldOne.getLikeCount());
         assertThat(overwrite.getRecruit()).isEqualTo(oldOne.getRecruit());
