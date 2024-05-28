@@ -1,6 +1,6 @@
 ## API
 ### 로그인 
-- POST /users
+- POST /login
 - BODY :
 ```
 {
@@ -11,7 +11,7 @@
 
 
 ### 회원가입
-- POST /signup
+- POST /users
 - BODY : User Object
 
 
@@ -54,12 +54,13 @@
 
 ## Object
 ### User
+```
 {
     id : String,
     pw : String,
     nickName : String
 }
-
+```
 
 ### Comment
 ```
