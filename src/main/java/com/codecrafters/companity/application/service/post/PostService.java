@@ -44,7 +44,7 @@ public class PostService implements PostUseCase {
     }
 
     @Override
-    public Post findById(Long id) {
+    public Post findDetailById(Long id) {
         return postRepository.getById(id);
     }
 }

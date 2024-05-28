@@ -11,5 +11,5 @@ public interface PostUseCase {
 
     List<Post> findByCriteria(PostCriteria postCriteria);
 
-    Post findById(Long id);
+    Post findDetailById(Long id);
 }

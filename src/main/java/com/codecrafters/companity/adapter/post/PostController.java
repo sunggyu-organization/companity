@@ -36,7 +36,7 @@ public class PostController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponsePost> getDetail(@PathVariable("id") Long id){
-        ResponsePost result = mapper.convert(postUseCase.findById(id), ResponsePost.class);
+        ResponsePost result = mapper.convert(postUseCase.findDetailById(id), ResponsePost.class);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
