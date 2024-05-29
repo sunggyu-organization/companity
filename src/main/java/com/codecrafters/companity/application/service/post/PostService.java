@@ -1,6 +1,7 @@
 package com.codecrafters.companity.application.service.post;
 
-import com.codecrafters.companity.application.in.usecase.PostUseCase;
+import com.codecrafters.companity.application.in.post.PostUseCase;
+import com.codecrafters.companity.application.in.post.dto.PostCreateDto;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.application.out.persistence.UserRepository;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.codecrafters.companity.config.mapper.PostMapper.postMapper;
+
 
 @RequiredArgsConstructor
 @Slf4j
@@ -21,9 +24,9 @@ public class PostService implements PostUseCase {
     private final UserRepository userRepository;
     private final PostFactory postFactory;
     @Override
-    public Post add(Post post, Long userId) {
+    public Post add(PostCreateDto dto, Long userId) {
         User user = userRepository.getUserById(userId);
-        Post newPost = postFactory.create(post, user);
+        Post newPost = postMapper.getPostForCreating(dto, user);
         return postRepository.add(newPost);
     }
 

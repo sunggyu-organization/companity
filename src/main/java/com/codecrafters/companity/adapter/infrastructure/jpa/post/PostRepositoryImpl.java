@@ -3,7 +3,6 @@ package com.codecrafters.companity.adapter.infrastructure.jpa.post;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.config.mapper.CompanityObjectMapper;
-import com.codecrafters.companity.config.mapper.PostMapper;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.post.OrderType;
@@ -18,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 import static com.codecrafters.companity.adapter.infrastructure.jpa.post.QPostEntity.postEntity;
+import static com.codecrafters.companity.config.mapper.PostMapper.postMapper;
 
 
 @Repository
@@ -30,8 +30,8 @@ public class PostRepositoryImpl implements PostRepository {
 
     @Override
     public Post add(Post post) {
-        PostEntity entity = postJPARepository.save(mapper.convert(post, PostEntity.class));
-        return mapper.convert(entity, Post.class);
+        PostEntity entity = postJPARepository.save(postMapper.domainToEntity(post));
+        return postMapper.entityToDomain(entity);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class PostRepositoryImpl implements PostRepository {
         PostEntity entity = postJPARepository.findById(id).orElseThrow(() -> {
             throw new IllegalArgumentException("존재하지 않는 게시물입니다.");
         });
-        return PostMapper.INSTANCE.entityToDomain(entity);
+        return postMapper.entityToDomain(entity);
     }
 
     @Override

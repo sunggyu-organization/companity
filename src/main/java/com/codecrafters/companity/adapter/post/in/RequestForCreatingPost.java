@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RequestPost {
+public class RequestForCreatingPost {
     private Long userId;
     private String title;
     private City city;

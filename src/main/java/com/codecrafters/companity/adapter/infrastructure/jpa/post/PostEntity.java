@@ -6,12 +6,15 @@ import com.codecrafters.companity.adapter.infrastructure.jpa.user.UserEntity;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.*;
 
 import java.util.List;
 
 @Entity(name = "Post")
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PostEntity extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
