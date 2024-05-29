@@ -34,4 +34,12 @@ public class UserEntity {
         this.userName = userName;
         this.nickName = nickName;
     }
+
+    public User toDomain() {
+        return User.builder()
+                .userId(this.userId)
+                .userName(this.userName)
+                .nickName(this.nickName)
+                .build();
+    }
 }
