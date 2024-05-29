@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RequestPost {
-    private Long userId;
+    private String userId;
     private String title;
     private City city;
     private Sport sport;

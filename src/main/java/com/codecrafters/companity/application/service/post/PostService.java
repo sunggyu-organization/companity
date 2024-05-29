@@ -24,7 +24,7 @@ public class PostService implements PostUseCase {
     private final UserRepository userRepository;
     private final PostFactory postFactory;
     @Override
-    public Post add(PostCreateDto dto, Long userId) {
+    public Post add(PostCreateDto dto, String userId) {
         User user = userRepository.getUserById(userId);
         Post newPost = postMapper.getPostForCreating(dto, user);
         return postRepository.add(newPost);

@@ -101,10 +101,10 @@ class PostServiceTest {
     }
 
     private User addDefaultUserToRepository(){
-        return userRepository.add(User.builder().username(USER_NAME).nickName(NICKNAME).build());
+        return userRepository.save(User.builder().userId(USER_ID).userName(USER_NAME).nickName(NICKNAME).build());
     }
 
     private Long addDefaultPostToRepository(User user){
-        return postService.add(getDefaultPost(), user.getId()).getId();
+        return postService.add(getDefaultPost(), user.getUserId()).getId();
     }
 }
