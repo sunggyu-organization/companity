@@ -23,4 +23,10 @@ public class UserRepositoryImpl implements UserRepository {
                 .nickName(entity.getNickName())
                 .build();
     }
+
+    @Override
+    public User getUserById(String userId) {
+        UserEntity userEntity = userJPARepository.getById(userId);
+        return userEntity.toDomain();
+    }
 }
