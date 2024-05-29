@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 
 import static com.codecrafters.companity.static_reference.PostStatic.*;
-import static com.codecrafters.companity.static_reference.UserStatic.NICKNAME;
-import static com.codecrafters.companity.static_reference.UserStatic.USER_NAME;
+import static com.codecrafters.companity.static_reference.UserStatic.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PostFactoryTest {
@@ -80,6 +79,6 @@ class PostFactoryTest {
                 .build();
     }
     private User getDefaultUser(){
-        return User.builder().username(USER_NAME).nickName(NICKNAME).build();
+        return User.builder().userId(USER_ID).userName(USER_NAME).nickName(NICKNAME).build();
     }
 }
