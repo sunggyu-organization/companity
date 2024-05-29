@@ -16,12 +16,8 @@ public class UserService implements UserUseCase {
     @Override
     public User signUp(UserCreateRequest request) {
         User user = User.from(request);
-        validateUser(user);
-        return userRepository.add(user);
+        user.validateUser();
+        return userRepository.save(user);
     }
 
-    private void validateUser(User user) {
-        if (user.getUserId() == null) throw new IllegalArgumentException("userId is required.");
-        if (user.getUserName() == null) throw  new IllegalArgumentException("userName is required.");
-    }
 }
