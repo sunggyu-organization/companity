@@ -25,7 +25,7 @@ public class PostService implements PostUseCase {
     private final DateTimeProvider dateTimeProvider;
 
     @Override
-    public Post add(Post post, Long userId) {
+    public Post add(Post post, String userId) {
         User user = userRepository.getUserById(userId);
         Post newPost = postFactory.create(post, user, dateTimeProvider.getNow());
         return postRepository.add(newPost);

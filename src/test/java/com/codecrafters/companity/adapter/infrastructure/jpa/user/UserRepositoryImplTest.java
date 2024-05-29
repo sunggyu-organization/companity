@@ -1,4 +1,4 @@
-package com.codecrafters.companity.user.infrastructure;
+package com.codecrafters.companity.adapter.infrastructure.jpa.user;
 
 import com.codecrafters.companity.application.out.persistence.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

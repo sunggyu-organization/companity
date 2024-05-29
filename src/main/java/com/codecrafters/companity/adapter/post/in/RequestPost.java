@@ -6,5 +6,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RequestPost {
-    private Long userId;
+    private String userId;
 }

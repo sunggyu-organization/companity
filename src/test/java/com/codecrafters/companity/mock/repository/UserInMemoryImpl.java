@@ -7,17 +7,16 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class UserInMemoryImpl implements UserRepository {
-    private final Map<Long, User> repository = new ConcurrentHashMap<>();
-    private final AtomicLong keyCreator = new AtomicLong();
+    private final Map<String, User> repository = new ConcurrentHashMap<>();
     @Override
-    public User add(User user) {
-        user.setId(keyCreator.getAndIncrement());
-        repository.put(user.getId(), user);
+    public User save(User user) {
+        user.setUserId(user.getUserId());
+        repository.put(user.getUserId(), user);
         return user;
     }
 
     @Override
-    public User getUserById(Long userId) {
+    public User getUserById(String userId) {
         if(!repository.containsKey(userId)) throw new IllegalArgumentException();
         return repository.get(userId);
     }
