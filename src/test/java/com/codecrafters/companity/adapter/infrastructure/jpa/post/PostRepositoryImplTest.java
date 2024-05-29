@@ -1,5 +1,7 @@
 package com.codecrafters.companity.adapter.infrastructure.jpa.post;
 
+import com.codecrafters.companity.adapter.post.infrastructure.jpa.PostJPARepository;
+import com.codecrafters.companity.adapter.post.infrastructure.jpa.PostRepositoryImpl;
 import com.codecrafters.companity.config.mapper.CustomModelMapper;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.config.QuerydslConfig;

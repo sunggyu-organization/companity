@@ -14,8 +14,17 @@ public class PostInMemoryImpl implements PostRepository {
     private final AtomicLong keyCreator = new AtomicLong();
     @Override
     public Post add(Post post) {
-        post.setId(keyCreator.getAndIncrement());
-        repository.put(post.getId(), post);
+        Post build = Post.builder().id(keyCreator.getAndIncrement())
+                .comments(post.getComments())
+                .createdAt(post.getCreatedAt())
+                .title(post.getTitle())
+                .owner(post.getOwner())
+                .recruit(post.getRecruit())
+                .city(post.getCity())
+                .content(post.getContent())
+                .sport(post.getSport())
+                .likeCount(post.getLikeCount()).build();
+        repository.put(build.getId(), build);
         return post;
     }
 

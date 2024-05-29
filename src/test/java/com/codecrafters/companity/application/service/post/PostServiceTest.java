@@ -1,6 +1,6 @@
 package com.codecrafters.companity.application.service.post;
 
-import com.codecrafters.companity.application.in.post.dto.PostCreateDto;
+import com.codecrafters.companity.application.in.post.dto.PostForCreate;
 import com.codecrafters.companity.mock.repository.PostInMemoryImpl;
 import com.codecrafters.companity.mock.repository.UserInMemoryImpl;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
@@ -8,7 +8,6 @@ import com.codecrafters.companity.application.out.persistence.UserRepository;
 import com.codecrafters.companity.config.mapper.CustomModelMapper;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.user.User;
-import com.codecrafters.companity.mock.TestDateTimeProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,16 +32,13 @@ class PostServiceTest {
         return new UserInMemoryImpl();
     }
 
-    private TestDateTimeProvider getLocalDateTimeProvider(){
-        return new TestDateTimeProvider(FIXED_LOCAL_DATE_TIME);
-    }
     @BeforeEach
     public void init(){
         userRepository = getUserRepository();
         postRepository = getPostRepository();
         CustomModelMapper mapper = new CustomModelMapper();
         PostFactory postFactory = new PostFactory(mapper);
-        postService = new PostService(postRepository, userRepository, postFactory);
+        postService = new PostService(postRepository, postFactory);
     }
 
 //    @Test
@@ -91,8 +87,8 @@ class PostServiceTest {
         assertThat(writer.equals(user)).isTrue();
     }
 
-    private PostCreateDto getDefaultPost(){
-        return PostCreateDto.builder()
+    private PostForCreate getDefaultPost(){
+        return PostForCreate.builder()
                 .title(TITLE)
                 .city(CITY)
                 .content(CONTENT)
@@ -105,6 +101,6 @@ class PostServiceTest {
     }
 
     private Long addDefaultPostToRepository(User user){
-        return postService.add(getDefaultPost(), user.getUserId()).getId();
+        return postService.add(getDefaultPost()).getId();
     }
 }

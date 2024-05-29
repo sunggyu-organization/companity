@@ -10,6 +10,7 @@ import lombok.ToString;
 @Builder
 @ToString
 public class ResponseUser {
-    private Long id;
-    private String username;
+    private String userId;
+    private String userName;
+    private String nickName;
 }

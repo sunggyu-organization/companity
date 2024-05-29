@@ -1,10 +1,9 @@
 package com.codecrafters.companity.application.service.post;
 
 import com.codecrafters.companity.application.in.post.PostUseCase;
-import com.codecrafters.companity.application.in.post.dto.PostCreateDto;
+import com.codecrafters.companity.application.in.post.dto.PostForCreate;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
-import com.codecrafters.companity.application.out.persistence.UserRepository;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.user.User;
 import lombok.RequiredArgsConstructor;
@@ -13,21 +12,23 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.codecrafters.companity.config.mapper.PostMapper.postMapper;
-
 
 @RequiredArgsConstructor
 @Slf4j
 @Service
 public class PostService implements PostUseCase {
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
     private final PostFactory postFactory;
     @Override
-    public Post add(PostCreateDto dto, String userId) {
-        User user = userRepository.getUserById(userId);
-        Post newPost = postMapper.getPostForCreating(dto, user);
-        return postRepository.add(newPost);
+    public Post add(PostForCreate dto) {
+        User user = getUser();
+        return postRepository.add(dto.toPost(user));
+    }
+
+    private User getUser(){
+        //TODO need to implement about get user
+        //maybe we should use userUseCase -> userUseCase.getUser();
+        return User.builder().userId("shtjdrb").userName("노성규").nickName("안녕").build();
     }
 
     @Override

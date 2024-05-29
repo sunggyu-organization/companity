@@ -1,8 +1,8 @@
 package com.codecrafters.companity.adapter.post;
 
-import com.codecrafters.companity.adapter.post.in.RequestForCreatingPost;
+import com.codecrafters.companity.adapter.post.dto.request.RequestForCreatingPost;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
-import com.codecrafters.companity.adapter.post.out.ResponsePost;
+import com.codecrafters.companity.adapter.post.dto.response.ResponsePost;
 import com.codecrafters.companity.application.in.post.PostUseCase;
 import com.codecrafters.companity.domain.post.Post;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.codecrafters.companity.config.mapper.PostMapper.postMapper;
+import static com.codecrafters.companity.adapter.post.mapper.PostMapperForController.POST_MAPPER_FOR_CONTROLLER;
+
 
 @RestController
 @RequestMapping("/posts")
@@ -23,8 +24,8 @@ public class PostController {
     private final PostUseCase postUseCase;
     @PostMapping
     public ResponseEntity<ResponsePost> add(@RequestBody RequestForCreatingPost requestPost){
-        Post result = postUseCase.add(postMapper.toPost(requestPost), requestPost.getUserId());
-        ResponsePost responsePost = postMapper.toResponsePost(result);
+        Post result = postUseCase.add(requestPost.toPostCreateDto());
+        ResponsePost responsePost = POST_MAPPER_FOR_CONTROLLER.toResponsePost(result);
         return new ResponseEntity<>(responsePost, HttpStatus.OK);
     }
 
@@ -36,7 +37,7 @@ public class PostController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponsePost> getDetail(@PathVariable("id") Long id){
-        ResponsePost result = postMapper.toResponsePost(postUseCase.findDetailById(id));
+        ResponsePost result = POST_MAPPER_FOR_CONTROLLER.toResponsePost(postUseCase.findDetailById(id));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

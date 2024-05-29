@@ -1,11 +1,9 @@
 package com.codecrafters.companity.config.mapper;
 
-import com.codecrafters.companity.adapter.infrastructure.jpa.user.UserEntity;
-import com.codecrafters.companity.adapter.post.out.ResponsePost;
+import com.codecrafters.companity.adapter.post.dto.response.ResponsePost;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.post.Post;
-import com.codecrafters.companity.domain.user.User;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration;
@@ -28,12 +26,6 @@ public class CustomModelMapper implements CompanityObjectMapper {
         });
     }
 
-    private Converter<UserEntity, User> toUser(){
-        return ctx -> {
-            UserEntity source = ctx.getSource();
-            return User.builder().id(source.getId()).username(source.getUsername()).build();
-        };
-    }
     public <T> T copy(T target){
         return modelMapper.map(target, (Type) target.getClass());
     }

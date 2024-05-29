@@ -1,4 +1,4 @@
-package com.codecrafters.companity.adapter.post.out;
+package com.codecrafters.companity.adapter.post.dto.response;
 
 import com.codecrafters.companity.adapter.user.ResponseUser;
 

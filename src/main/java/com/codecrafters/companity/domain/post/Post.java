@@ -6,11 +6,11 @@ import com.codecrafters.companity.domain.user.User;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Builder
 public class Post {
-
     private User owner;
     private Long id;
     private String title;
@@ -20,4 +20,5 @@ public class Post {
     private LocalDateTime createdAt;
     private Boolean recruit;
     private Integer likeCount;
+    private List<Comment> comments;
 }

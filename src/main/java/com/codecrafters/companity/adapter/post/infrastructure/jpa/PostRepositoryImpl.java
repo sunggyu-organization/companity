@@ -1,4 +1,4 @@
-package com.codecrafters.companity.adapter.infrastructure.jpa.post;
+package com.codecrafters.companity.adapter.post.infrastructure.jpa;
 
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
@@ -16,8 +16,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.codecrafters.companity.adapter.infrastructure.jpa.post.QPostEntity.postEntity;
-import static com.codecrafters.companity.config.mapper.PostMapper.postMapper;
+import static com.codecrafters.companity.adapter.post.infrastructure.jpa.QPostEntity.postEntity;
+import static com.codecrafters.companity.adapter.post.mapper.PostMapperForController.POST_MAPPER_FOR_CONTROLLER;
 
 
 @Repository
@@ -30,8 +30,8 @@ public class PostRepositoryImpl implements PostRepository {
 
     @Override
     public Post add(Post post) {
-        PostEntity entity = postJPARepository.save(postMapper.domainToEntity(post));
-        return postMapper.entityToDomain(entity);
+        PostEntity entity = postJPARepository.save(POST_MAPPER_FOR_CONTROLLER.domainToEntity(post));
+        return POST_MAPPER_FOR_CONTROLLER.entityToDomain(entity);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class PostRepositoryImpl implements PostRepository {
         PostEntity entity = postJPARepository.findById(id).orElseThrow(() -> {
             throw new IllegalArgumentException("존재하지 않는 게시물입니다.");
         });
-        return postMapper.entityToDomain(entity);
+        return POST_MAPPER_FOR_CONTROLLER.entityToDomain(entity);
     }
 
     @Override
