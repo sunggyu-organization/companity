@@ -7,8 +7,6 @@ import java.util.Objects;
 @Getter
 @Setter
 @Builder
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class User {
     private Long id;
     private String username;

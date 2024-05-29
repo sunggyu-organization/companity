@@ -43,6 +43,10 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.modelmapper/modelmapper
 	implementation 'org.modelmapper:modelmapper:3.2.0'
 
+	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.flywaydb:flyway-mysql")
 }

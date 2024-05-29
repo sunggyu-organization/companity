@@ -14,10 +14,10 @@ import java.time.LocalDateTime;
 public class PostFactory {
     private final CompanityObjectMapper modelMapper;
 
-    public Post create(Post target, User user, LocalDateTime localDateTime){
+    public Post create(Post target, User user){
         Post result = modelMapper.copy(target);
-        result.setOwner(user);
-        result.setCreatedAt(localDateTime);
+//        result.setOwner(user);
+//        result.setCreatedAt(localDateTime);
         return result;
     }
 

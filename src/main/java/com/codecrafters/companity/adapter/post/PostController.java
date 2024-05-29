@@ -5,6 +5,7 @@ import com.codecrafters.companity.adapter.post.in.RequestPost;
 import com.codecrafters.companity.adapter.post.out.ResponsePost;
 import com.codecrafters.companity.application.in.usecase.PostUseCase;
 import com.codecrafters.companity.config.mapper.CompanityObjectMapper;
+import com.codecrafters.companity.config.mapper.PostMapper;
 import com.codecrafters.companity.domain.post.Post;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +37,7 @@ public class PostController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponsePost> getDetail(@PathVariable("id") Long id){
-        ResponsePost result = mapper.convert(postUseCase.findDetailById(id), ResponsePost.class);
+        ResponsePost result = PostMapper.INSTANCE.serviceToResponsePost(postUseCase.findDetailById(id));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

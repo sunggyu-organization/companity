@@ -3,6 +3,7 @@ package com.codecrafters.companity.adapter.infrastructure.jpa.post;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.config.mapper.CompanityObjectMapper;
+import com.codecrafters.companity.config.mapper.PostMapper;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.post.OrderType;
@@ -11,6 +12,7 @@ import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,6 +21,7 @@ import static com.codecrafters.companity.adapter.infrastructure.jpa.post.QPostEn
 
 
 @Repository
+@Slf4j
 @RequiredArgsConstructor
 public class PostRepositoryImpl implements PostRepository {
     private final PostJPARepository postJPARepository;
@@ -36,7 +39,7 @@ public class PostRepositoryImpl implements PostRepository {
         PostEntity entity = postJPARepository.findById(id).orElseThrow(() -> {
             throw new IllegalArgumentException("존재하지 않는 게시물입니다.");
         });
-        return mapper.convert(entity, Post.class);
+        return PostMapper.INSTANCE.entityToDomain(entity);
     }
 
     @Override

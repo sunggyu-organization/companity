@@ -14,7 +14,6 @@ import static com.codecrafters.companity.static_reference.UserStatic.USER_NAME;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PostFactoryTest {
-    private static final LocalDateTime FIXED_LOCAL_DATE_TIME = LocalDateTime.now();
     private PostFactory postFactory;
     @BeforeEach
     public void init(){
@@ -29,7 +28,7 @@ class PostFactoryTest {
         User user = getDefaultUser();
 
         //when
-        Post newPost = postFactory.create(requestPost, user, FIXED_LOCAL_DATE_TIME);
+        Post newPost = postFactory.create(requestPost, user);
 
         //then
         //post
@@ -38,7 +37,6 @@ class PostFactoryTest {
         assertThat(newPost.getContent()).isEqualTo(CONTENT);
         assertThat(newPost.getTitle()).isEqualTo(TITLE);
         assertThat(newPost.getLikeCount()).isEqualTo(0);
-        assertThat(newPost.getCreatedAt()).isEqualTo(FIXED_LOCAL_DATE_TIME);
 
         //user
         User writer = newPost.getOwner();
@@ -49,7 +47,7 @@ class PostFactoryTest {
     void update() {
         //given
         User user = getDefaultUser();
-        Post oldPost = postFactory.create(getDefaultPost(), user, FIXED_LOCAL_DATE_TIME);
+        Post oldPost = postFactory.create(getDefaultPost(), user);
         Post newPost = Post.builder().title("update test").build();
 
         //when
@@ -62,7 +60,6 @@ class PostFactoryTest {
         assertThat(updatedPost.getContent()).isEqualTo(CONTENT);
         assertThat(updatedPost.getTitle()).isEqualTo("update test");
         assertThat(updatedPost.getLikeCount()).isEqualTo(0);
-        assertThat(updatedPost.getCreatedAt()).isEqualTo(FIXED_LOCAL_DATE_TIME);
 
         //user
         User writer = updatedPost.getOwner();
