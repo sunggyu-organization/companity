@@ -1,7 +1,7 @@
 package com.codecrafters.companity.application.service.post;
 
 import com.codecrafters.companity.application.in.post.PostUseCase;
-import com.codecrafters.companity.application.in.post.dto.PostForCreate;
+import com.codecrafters.companity.domain.post.PostForCreate;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.domain.post.Post;
@@ -20,9 +20,9 @@ public class PostService implements PostUseCase {
     private final PostRepository postRepository;
     private final PostFactory postFactory;
     @Override
-    public Post add(PostForCreate dto) {
+    public Post add(PostForCreate postForCreate) {
         User user = getUser();
-        return postRepository.add(dto.toPost(user));
+        return postRepository.add(postForCreate.toPost(user));
     }
 
     private User getUser(){

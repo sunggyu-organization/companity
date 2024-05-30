@@ -3,7 +3,7 @@ package com.codecrafters.companity.adapter.post.mapper;
 import com.codecrafters.companity.adapter.post.dto.request.RequestForCreatingPost;
 import com.codecrafters.companity.adapter.post.dto.response.ResponsePost;
 import com.codecrafters.companity.adapter.post.infrastructure.jpa.PostEntity;
-import com.codecrafters.companity.application.in.post.dto.PostForCreate;
+import com.codecrafters.companity.domain.post.PostForCreate;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.post.Post;

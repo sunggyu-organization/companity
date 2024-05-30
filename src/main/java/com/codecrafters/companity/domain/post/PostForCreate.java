@@ -1,8 +1,7 @@
-package com.codecrafters.companity.application.in.post.dto;
+package com.codecrafters.companity.domain.post;
 
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
-import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;

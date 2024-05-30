@@ -1,6 +1,6 @@
 package com.codecrafters.companity.application.service.post;
 
-import com.codecrafters.companity.application.in.post.dto.PostForCreate;
+import com.codecrafters.companity.domain.post.PostForCreate;
 import com.codecrafters.companity.mock.repository.PostInMemoryImpl;
 import com.codecrafters.companity.mock.repository.UserInMemoryImpl;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
