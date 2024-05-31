@@ -13,17 +13,10 @@ public class PostForCreate {
     private City city;
     private Sport sport;
     private String content;
+    private User owner;
 
-    public Post toPost(User user){
-        return Post.builder()
-                .owner(user)
-                .title(title)
-                .city(city)
-                .sport(sport)
-                .content(content)
-                .recruit(false)
-                .likeCount(0)
-                .comments(null)
-                .build();
+    public void setOwner(User owner){
+        //TODO need to deep copy
+        this.owner = owner;
     }
 }

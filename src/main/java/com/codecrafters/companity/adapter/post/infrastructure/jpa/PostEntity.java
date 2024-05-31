@@ -5,7 +5,6 @@ import com.codecrafters.companity.adapter.infrastructure.jpa.common.BaseTimeEnti
 import com.codecrafters.companity.adapter.user.infrastructure.jpa.UserEntity;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
-import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.post.PostForUpdate;
 import jakarta.persistence.*;
 import lombok.*;
@@ -45,21 +44,5 @@ public class PostEntity extends BaseTimeEntity {
         this.sport = postForUpdate.getSport();
         this.city = postForUpdate.getCity();
         this.content = postForUpdate.getContent();
-    }
-
-    public Post toDomain(){
-        return Post.builder()
-                .id(this.id)
-                .title(this.title)
-                .sport(this.sport)
-                .city(this.city)
-                .content(this.content)
-                .recruit(this.recruit)
-                .likeCount(this.likeCount)
-                .owner(this.owner.toDomain())
-                .comments(null)
-                .createdAt(this.getCreatedAt())
-                .modifiedAt(this.getModifiedAt())
-                .build();
     }
 }

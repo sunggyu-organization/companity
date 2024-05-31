@@ -3,7 +3,7 @@ package com.codecrafters.companity.config.mapper;
 import com.codecrafters.companity.adapter.post.dto.response.ResponsePost;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
-import com.codecrafters.companity.domain.post.Post;
+import com.codecrafters.companity.domain.post.PostWithoutComment;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration;
@@ -20,9 +20,9 @@ public class CustomModelMapper implements CompanityObjectMapper {
     public CustomModelMapper(){
         this.modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setSkipNullEnabled(true).setFieldAccessLevel(Configuration.AccessLevel.PRIVATE).setDeepCopyEnabled(true);
-        modelMapper.typeMap(Post.class, ResponsePost.class).addMappings(mapper -> {
-            mapper.using((Converter<City, Integer>) context -> context.getSource().getNo()).map(Post::getCity, ResponsePost::setCityNo);
-            mapper.using((Converter<Sport, Integer>) context -> context.getSource().getNo()).map(Post::getSport, ResponsePost::setSportsNo);
+        modelMapper.typeMap(PostWithoutComment.class, ResponsePost.class).addMappings(mapper -> {
+            mapper.using((Converter<City, Integer>) context -> context.getSource().getNo()).map(PostWithoutComment::getCity, ResponsePost::setCityNo);
+            mapper.using((Converter<Sport, Integer>) context -> context.getSource().getNo()).map(PostWithoutComment::getSport, ResponsePost::setSportsNo);
         });
     }
 

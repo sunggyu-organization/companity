@@ -1,12 +1,14 @@
 package com.codecrafters.companity.adapter.post.infrastructure.jpa;
 
+import com.codecrafters.companity.adapter.user.infrastructure.jpa.UserEntity;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.config.mapper.CompanityObjectMapper;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.post.OrderType;
-import com.codecrafters.companity.domain.post.Post;
+import com.codecrafters.companity.domain.post.PostWithoutComment;
+import com.codecrafters.companity.domain.post.PostForCreate;
 import com.codecrafters.companity.domain.post.PostForUpdate;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -18,7 +20,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 import static com.codecrafters.companity.adapter.post.infrastructure.jpa.QPostEntity.postEntity;
-import static com.codecrafters.companity.adapter.post.mapper.PostMapperForController.POST_MAPPER_FOR_CONTROLLER;
+import static com.codecrafters.companity.adapter.post.mapper.PostMapperForController.POST_MAPPER;
 
 
 @Repository
@@ -30,38 +32,48 @@ public class PostRepositoryImpl implements PostRepository {
     private final CompanityObjectMapper mapper;
 
     @Override
-    public Post add(Post post) {
-        PostEntity entity = postJPARepository.save(POST_MAPPER_FOR_CONTROLLER.domainToEntity(post));
-        return POST_MAPPER_FOR_CONTROLLER.entityToDomain(entity);
+    public PostWithoutComment add(PostForCreate postForCreate) {
+        PostEntity entity = PostEntity.builder()
+                .title(postForCreate.getTitle())
+                .sport(postForCreate.getSport())
+                .city(postForCreate.getCity())
+                .content(postForCreate.getContent())
+                .recruit(false)
+                .likeCount(0)
+                .owner(UserEntity.from(postForCreate.getOwner()))
+                .comments(null)
+                .build();
+        postJPARepository.save(entity);
+        return POST_MAPPER.entityToDomain(entity);
     }
 
     @Override
-    public Post getById(Long id) {
+    public PostWithoutComment getById(Long id) {
         PostEntity entity = postJPARepository.findById(id).orElseThrow(() -> {
             throw new IllegalArgumentException("존재하지 않는 게시물입니다.");
         });
-        return POST_MAPPER_FOR_CONTROLLER.entityToDomain(entity);
+        return POST_MAPPER.entityToDomain(entity);
     }
 
     @Override
-    public Post update(PostForUpdate postForUpdate) {
+    public PostWithoutComment update(PostForUpdate postForUpdate) {
         PostEntity entity = postJPARepository.findById(postForUpdate.getId()).orElseThrow(() -> {
             throw new IllegalArgumentException("존재하지 않는 게시물입니다.");
         });
         entity.update(postForUpdate);
         postJPARepository.save(entity);
-        return entity.toDomain();
+        return POST_MAPPER.entityToDomain(entity);
     }
 
     @Override
-    public List<Post> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(PostCriteria postCriteria) {
+    public List<PostWithoutComment> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(PostCriteria postCriteria) {
         List<PostEntity> postEntities = jpaQueryFactory.selectFrom(postEntity)
                 .where(eqSport(postCriteria.getSport()),
                         eqCity(postCriteria.getCity()),
                         postEntity.recruit.eq(postCriteria.isRecruit()))
                 .orderBy(getOrderBy(postCriteria.getOrderType()))
                 .fetch();
-        return mapper.convertList(postEntities, Post.class);
+        return mapper.convertList(postEntities, PostWithoutComment.class);
     }
 
     private BooleanExpression eqSport(Sport sport){

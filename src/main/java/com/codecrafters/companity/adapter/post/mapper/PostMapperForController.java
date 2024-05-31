@@ -7,7 +7,7 @@ import com.codecrafters.companity.adapter.post.infrastructure.jpa.PostEntity;
 import com.codecrafters.companity.domain.post.PostForCreate;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
-import com.codecrafters.companity.domain.post.Post;
+import com.codecrafters.companity.domain.post.PostWithoutComment;
 import com.codecrafters.companity.domain.post.PostForUpdate;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -16,20 +16,16 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(mappingControl = DeepClone.class)
 public interface PostMapperForController {
-    PostMapperForController POST_MAPPER_FOR_CONTROLLER = Mappers.getMapper(PostMapperForController.class);
+    PostMapperForController POST_MAPPER = Mappers.getMapper(PostMapperForController.class);
 
     PostForCreate toPostForCreate(RequestForCreatingPost dto);
     PostForUpdate toPostForUpdate(RequestForUpdatingPost dto);
 
-    @Mapping(target = "comments", ignore = true)
-    Post entityToDomain(PostEntity entity);
-
-    @Mapping(target = "comments", ignore = true)
-    PostEntity domainToEntity(Post post);
+    PostWithoutComment entityToDomain(PostEntity entity);
 
     @Mapping(source = "sport", target = "sportsNo")
     @Mapping(source = "city", target = "cityNo")
-    ResponsePost toResponsePost(Post post);
+    ResponsePost toResponsePost(PostWithoutComment post);
 
     default int sportToSportsNo(Sport sport){
         return sport.getNo();

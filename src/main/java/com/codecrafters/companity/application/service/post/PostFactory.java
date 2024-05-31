@@ -1,12 +1,10 @@
 package com.codecrafters.companity.application.service.post;
 
 import com.codecrafters.companity.config.mapper.CompanityObjectMapper;
-import com.codecrafters.companity.domain.post.Post;
+import com.codecrafters.companity.domain.post.PostWithoutComment;
 import com.codecrafters.companity.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDateTime;
 
 
 @RequiredArgsConstructor
@@ -14,14 +12,14 @@ import java.time.LocalDateTime;
 public class PostFactory {
     private final CompanityObjectMapper modelMapper;
 
-    public Post create(Post target, User user){
-        Post result = modelMapper.copy(target);
+    public PostWithoutComment create(PostWithoutComment target, User user){
+        PostWithoutComment result = modelMapper.copy(target);
 //        result.setOwner(user);
 //        result.setCreatedAt(localDateTime);
         return result;
     }
 
-    public Post update(Post oldPost, Post newPost) {
+    public PostWithoutComment update(PostWithoutComment oldPost, PostWithoutComment newPost) {
         return modelMapper.overwrite(newPost, oldPost);
     }
 }

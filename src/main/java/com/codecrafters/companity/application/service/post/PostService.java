@@ -4,7 +4,7 @@ import com.codecrafters.companity.application.in.post.PostUseCase;
 import com.codecrafters.companity.domain.post.PostForCreate;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
-import com.codecrafters.companity.domain.post.Post;
+import com.codecrafters.companity.domain.post.PostWithoutComment;
 import com.codecrafters.companity.domain.post.PostForUpdate;
 import com.codecrafters.companity.domain.user.User;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +20,10 @@ import java.util.List;
 public class PostService implements PostUseCase {
     private final PostRepository postRepository;
     @Override
-    public Post add(PostForCreate postForCreate) {
+    public PostWithoutComment add(PostForCreate postForCreate) {
         User user = getUser();
-        return postRepository.add(postForCreate.toPost(user));
+        postForCreate.setOwner(user);
+        return postRepository.add(postForCreate);
     }
 
     private User getUser(){
@@ -32,18 +33,18 @@ public class PostService implements PostUseCase {
     }
 
     @Override
-    public Post update(PostForUpdate postForUpdate) {
+    public PostWithoutComment update(PostForUpdate postForUpdate) {
         return postRepository.update(postForUpdate);
     }
 
     @Override
-    public List<Post> findByCriteria(PostCriteria postCriteria) {
+    public List<PostWithoutComment> findByCriteria(PostCriteria postCriteria) {
         //TODO need to make pagination
         return postRepository.findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(postCriteria);
     }
 
     @Override
-    public Post findDetailById(Long id) {
+    public PostWithoutComment findDetailById(Long id) {
         return postRepository.getById(id);
     }
 }
