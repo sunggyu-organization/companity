@@ -63,6 +63,9 @@ sourceSets {
 
 tasks.withType(JavaCompile) {
 	options.annotationProcessorGeneratedSourcesDirectory = file(querydslDir)
+	options.compilerArgs = [
+			'-Amapstruct.suppressGeneratorTimestamp=true'
+	]
 }
 
 clean.doLast {

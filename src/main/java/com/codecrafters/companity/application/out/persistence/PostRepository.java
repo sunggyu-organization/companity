@@ -1,6 +1,7 @@
 package com.codecrafters.companity.application.out.persistence;
 
 import com.codecrafters.companity.domain.post.Post;
+import com.codecrafters.companity.domain.post.PostForUpdate;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ public interface PostRepository {
 
     Post getById(Long id);
 
-    Post save(Post post);
+    Post update(PostForUpdate postForUpdate);
 
     List<Post> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(PostCriteria postCriteria);
 }

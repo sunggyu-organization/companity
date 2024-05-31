@@ -5,6 +5,7 @@ import com.codecrafters.companity.domain.post.PostForCreate;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.domain.post.Post;
+import com.codecrafters.companity.domain.post.PostForUpdate;
 import com.codecrafters.companity.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +19,6 @@ import java.util.List;
 @Service
 public class PostService implements PostUseCase {
     private final PostRepository postRepository;
-    private final PostFactory postFactory;
     @Override
     public Post add(PostForCreate postForCreate) {
         User user = getUser();
@@ -32,9 +32,8 @@ public class PostService implements PostUseCase {
     }
 
     @Override
-    public Post update(Long postId, Post post) {
-        Post oldPost = postRepository.getById(postId);
-        return postRepository.save(postFactory.update(oldPost, post));
+    public Post update(PostForUpdate postForUpdate) {
+        return postRepository.update(postForUpdate);
     }
 
     @Override

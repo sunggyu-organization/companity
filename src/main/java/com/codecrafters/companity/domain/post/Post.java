@@ -10,6 +10,7 @@ import java.util.List;
 
 @Getter
 @Builder
+@ToString
 public class Post {
     private User owner;
     private Long id;
@@ -18,6 +19,7 @@ public class Post {
     private Sport sport;
     private String content;
     private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
     private Boolean recruit;
     private Integer likeCount;
     private List<Comment> comments;

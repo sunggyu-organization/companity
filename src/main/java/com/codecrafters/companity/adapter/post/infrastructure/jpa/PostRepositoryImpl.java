@@ -7,6 +7,7 @@ import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.post.OrderType;
 import com.codecrafters.companity.domain.post.Post;
+import com.codecrafters.companity.domain.post.PostForUpdate;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -43,8 +44,13 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
-    public Post save(Post post) {
-        return null;
+    public Post update(PostForUpdate postForUpdate) {
+        PostEntity entity = postJPARepository.findById(postForUpdate.getId()).orElseThrow(() -> {
+            throw new IllegalArgumentException("존재하지 않는 게시물입니다.");
+        });
+        entity.update(postForUpdate);
+        postJPARepository.save(entity);
+        return entity.toDomain();
     }
 
     @Override

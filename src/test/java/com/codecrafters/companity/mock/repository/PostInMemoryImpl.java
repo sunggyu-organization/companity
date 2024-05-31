@@ -3,6 +3,7 @@ package com.codecrafters.companity.mock.repository;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.domain.post.Post;
+import com.codecrafters.companity.domain.post.PostForUpdate;
 
 import java.util.List;
 import java.util.Map;
@@ -35,9 +36,20 @@ public class PostInMemoryImpl implements PostRepository {
     }
 
     @Override
-    public Post save(Post post) {
-        repository.put(post.getId(), post);
-        return post;
+    public Post update(PostForUpdate postForUpdate) {
+        Post post = repository.get(postForUpdate.getId());
+        Post build = Post.builder().id(post.getId())
+                .comments(post.getComments())
+                .createdAt(post.getCreatedAt())
+                .title(postForUpdate.getTitle())
+                .owner(post.getOwner())
+                .recruit(post.getRecruit())
+                .city(postForUpdate.getCity())
+                .content(postForUpdate.getContent())
+                .sport(postForUpdate.getSport())
+                .likeCount(post.getLikeCount()).build();
+        repository.put(post.getId(), build);
+        return build;
     }
 
     @Override
