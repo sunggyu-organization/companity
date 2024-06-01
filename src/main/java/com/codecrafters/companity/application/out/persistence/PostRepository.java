@@ -13,4 +13,6 @@ public interface PostRepository {
     Post update(PostForUpdate postForUpdate);
 
     List<Post> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(PostCriteria postCriteria);
+
+    void delete(Long id);
 }

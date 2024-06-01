@@ -56,4 +56,9 @@ public class PostInMemoryImpl implements PostRepository {
     public List<Post> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(PostCriteria postCriteria) {
         return null;
     }
+
+    @Override
+    public void delete(Long id) {
+
+    }
 }

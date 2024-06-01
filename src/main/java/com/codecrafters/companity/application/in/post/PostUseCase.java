@@ -12,6 +12,4 @@ public interface PostUseCase {
     Post update(PostForUpdate postForUpdate);
 
     List<Post> findByCriteria(PostCriteria postCriteria);
-
-    Post findDetailById(Long id);
 }
