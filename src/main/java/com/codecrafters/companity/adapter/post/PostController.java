@@ -35,7 +35,6 @@ public class PostController {
     @PutMapping
     public ResponseEntity<ResponsePost> update(@RequestBody RequestForUpdatingPost requestPost){
         PostWithoutComment result = postUseCase.update(requestPost.toPostUpdateDto());
-        log.info("result : {}", result);
         ResponsePost responsePost = POST_MAPPER.toResponsePost(result);
         return new ResponseEntity<>(responsePost, HttpStatus.OK);
     }
@@ -48,7 +47,7 @@ public class PostController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponsePost> getDetail(@PathVariable("id") Long id){
-        ResponsePost result = POST_MAPPER.toResponsePost(postRepository.getById(id));
+        ResponsePost result = POST_MAPPER.toResponsePost(postRepository.getPostWithoutComment(id));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

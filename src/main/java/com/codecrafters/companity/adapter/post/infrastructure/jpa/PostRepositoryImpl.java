@@ -48,7 +48,7 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
-    public PostWithoutComment getById(Long id) {
+    public PostWithoutComment getPostWithoutComment(Long id) {
         PostEntity entity = postJPARepository.findById(id).orElseThrow(() -> {
             throw new IllegalArgumentException("존재하지 않는 게시물입니다.");
         });

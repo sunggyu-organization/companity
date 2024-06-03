@@ -30,7 +30,7 @@ public class PostInMemoryImpl implements PostRepository {
     }
 
     @Override
-    public PostWithoutComment getById(Long id) {
+    public PostWithoutComment getPostWithoutComment(Long id) {
         if(!repository.containsKey(id)) throw new IllegalArgumentException();
         return repository.get(id);
     }

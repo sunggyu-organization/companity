@@ -9,7 +9,7 @@ import java.util.List;
 public interface PostRepository {
     PostWithoutComment add(PostForCreate postForCreate);
 
-    PostWithoutComment getById(Long id);
+    PostWithoutComment getPostWithoutComment(Long id);
 
     PostWithoutComment update(PostForUpdate postForUpdate);
 
