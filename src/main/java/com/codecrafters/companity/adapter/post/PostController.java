@@ -6,6 +6,7 @@ import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.adapter.post.dto.response.ResponsePost;
 import com.codecrafters.companity.application.in.post.PostUseCase;
 import com.codecrafters.companity.domain.post.PostWithoutComment;
+import com.codecrafters.companity.application.out.persistence.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ import static com.codecrafters.companity.adapter.post.mapper.PostMapperForContro
 @Slf4j
 public class PostController {
     private final PostUseCase postUseCase;
+    private final PostRepository postRepository;
     @PostMapping
     public ResponseEntity<ResponsePost> add(@RequestBody RequestForCreatingPost requestPost){
         PostWithoutComment result = postUseCase.add(requestPost.toPostCreateDto());
@@ -46,7 +48,13 @@ public class PostController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponsePost> getDetail(@PathVariable("id") Long id){
-        ResponsePost result = POST_MAPPER.toResponsePost(postUseCase.findDetailById(id));
+        ResponsePost result = POST_MAPPER.toResponsePost(postRepository.getById(id));
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable("id") Long id){
+        postRepository.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

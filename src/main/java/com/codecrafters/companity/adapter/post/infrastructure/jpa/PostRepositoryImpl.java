@@ -56,6 +56,14 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
+    public void delete(Long id) {
+        PostEntity postEntity = postJPARepository.findById(id).orElseThrow(() -> {
+            throw new IllegalArgumentException("존재하지 않는 게시물입니다.");
+        });
+        postJPARepository.delete(postEntity);
+    }
+
+    @Override
     public PostWithoutComment update(PostForUpdate postForUpdate) {
         PostEntity entity = postJPARepository.findById(postForUpdate.getId()).orElseThrow(() -> {
             throw new IllegalArgumentException("존재하지 않는 게시물입니다.");

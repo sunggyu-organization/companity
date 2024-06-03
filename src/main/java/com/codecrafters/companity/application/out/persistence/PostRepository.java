@@ -14,4 +14,6 @@ public interface PostRepository {
     PostWithoutComment update(PostForUpdate postForUpdate);
 
     List<PostWithoutComment> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(PostCriteria postCriteria);
+
+    void delete(Long id);
 }

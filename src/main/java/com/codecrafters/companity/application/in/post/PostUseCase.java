@@ -12,6 +12,4 @@ public interface PostUseCase {
     PostWithoutComment update(PostForUpdate postForUpdate);
 
     List<PostWithoutComment> findByCriteria(PostCriteria postCriteria);
-
-    PostWithoutComment findDetailById(Long id);
 }

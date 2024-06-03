@@ -42,9 +42,4 @@ public class PostService implements PostUseCase {
         //TODO need to make pagination
         return postRepository.findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(postCriteria);
     }
-
-    @Override
-    public PostWithoutComment findDetailById(Long id) {
-        return postRepository.getById(id);
-    }
 }
