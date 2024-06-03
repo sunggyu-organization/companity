@@ -34,7 +34,7 @@ public class PostController {
 
     @PutMapping
     public ResponseEntity<ResponsePost> update(@RequestBody RequestForUpdatingPost requestPost){
-        PostWithoutComment result = postUseCase.update(requestPost.toPostUpdateDto());
+        PostWithoutComment result = postRepository.update(requestPost.toPostUpdateDto());
         ResponsePost responsePost = POST_MAPPER.toResponsePost(result);
         return new ResponseEntity<>(responsePost, HttpStatus.OK);
     }

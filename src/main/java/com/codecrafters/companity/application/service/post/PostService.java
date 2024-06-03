@@ -33,11 +33,6 @@ public class PostService implements PostUseCase {
     }
 
     @Override
-    public PostWithoutComment update(PostForUpdate postForUpdate) {
-        return postRepository.update(postForUpdate);
-    }
-
-    @Override
     public List<PostWithoutComment> findByCriteria(PostCriteria postCriteria) {
         //TODO need to make pagination
         return postRepository.findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(postCriteria);
