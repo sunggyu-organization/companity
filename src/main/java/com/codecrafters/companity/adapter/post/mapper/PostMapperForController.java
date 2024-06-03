@@ -4,6 +4,7 @@ import com.codecrafters.companity.adapter.post.dto.request.RequestForCreatingPos
 import com.codecrafters.companity.adapter.post.dto.request.RequestForUpdatingPost;
 import com.codecrafters.companity.adapter.post.dto.response.ResponsePost;
 import com.codecrafters.companity.adapter.post.infrastructure.jpa.PostEntity;
+import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.post.PostForCreate;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
@@ -22,6 +23,7 @@ public interface PostMapperForController {
     PostForUpdate toPostForUpdate(RequestForUpdatingPost dto);
 
     PostWithoutComment entityToDomain(PostEntity entity);
+    PostEntity domainToEntity(Post domain);
 
     @Mapping(source = "sport", target = "sportsNo")
     @Mapping(source = "city", target = "cityNo")

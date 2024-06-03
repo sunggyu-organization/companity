@@ -2,7 +2,7 @@ package com.codecrafters.companity.mock.repository;
 
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
-import com.codecrafters.companity.domain.post.PostForCreate;
+import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.post.PostWithoutComment;
 import com.codecrafters.companity.domain.post.PostForUpdate;
 
@@ -15,7 +15,7 @@ public class PostInMemoryImpl implements PostRepository {
     public final Map<Long, PostWithoutComment> repository = new ConcurrentHashMap<>();
     private final AtomicLong keyCreator = new AtomicLong();
     @Override
-    public PostWithoutComment add(PostForCreate post) {
+    public PostWithoutComment add(Post post) {
         PostWithoutComment build = PostWithoutComment.builder().id(keyCreator.getAndIncrement())
                 .createdAt(null)
                 .title(post.getTitle())

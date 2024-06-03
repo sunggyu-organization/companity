@@ -1,15 +1,11 @@
 package com.codecrafters.companity.adapter.post.infrastructure.jpa;
 
-import com.codecrafters.companity.adapter.user.infrastructure.jpa.UserEntity;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.config.mapper.CompanityObjectMapper;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
-import com.codecrafters.companity.domain.post.OrderType;
-import com.codecrafters.companity.domain.post.PostWithoutComment;
-import com.codecrafters.companity.domain.post.PostForCreate;
-import com.codecrafters.companity.domain.post.PostForUpdate;
+import com.codecrafters.companity.domain.post.*;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -32,19 +28,9 @@ public class PostRepositoryImpl implements PostRepository {
     private final CompanityObjectMapper mapper;
 
     @Override
-    public PostWithoutComment add(PostForCreate postForCreate) {
-        PostEntity entity = PostEntity.builder()
-                .title(postForCreate.getTitle())
-                .sport(postForCreate.getSport())
-                .city(postForCreate.getCity())
-                .content(postForCreate.getContent())
-                .recruit(false)
-                .likeCount(0)
-                .owner(UserEntity.from(postForCreate.getOwner()))
-                .comments(null)
-                .build();
-        postJPARepository.save(entity);
-        return POST_MAPPER.entityToDomain(entity);
+    public PostWithoutComment add(Post post) {
+        PostEntity save = postJPARepository.save(POST_MAPPER.domainToEntity(post));
+        return POST_MAPPER.entityToDomain(save);
     }
 
     @Override

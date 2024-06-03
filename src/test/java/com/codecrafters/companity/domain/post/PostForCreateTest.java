@@ -16,14 +16,15 @@ class PostForCreateTest {
         User user = User.builder().userId("userId").userName("userName").nickName("nickName").build();
 
         // when
-        postForCreate.setOwner(user);
+        Post post = postForCreate.toPost(user);
 
         // then
-        assertThat(postForCreate.getOwner()).isEqualTo(user);
-        assertThat(postForCreate.getCity()).isEqualTo(City.Seoul);
-        assertThat(postForCreate.getSport()).isEqualTo(Sport.Baseball);
-        assertThat(postForCreate.getContent()).isEqualTo("content");
-        assertThat(postForCreate.getTitle()).isEqualTo("title");
+        assertThat(post.getOwner()).isEqualTo(user);
+        assertThat(post.getCity()).isEqualTo(City.Seoul);
+        assertThat(post.getSport()).isEqualTo(Sport.Baseball);
+        assertThat(post.getContent()).isEqualTo("content");
+        assertThat(post.getTitle()).isEqualTo("title");
+        assertThat(post.getComments()).isNull();
     }
 
     @DisplayName("Post 작성자 설정 시 깊은 복사를 사용한다")
@@ -34,14 +35,15 @@ class PostForCreateTest {
         User user = User.builder().userId("userId").userName("userName").nickName("nickName").build();
 
         // when
-        postForCreate.setOwner(user);
+        Post post = postForCreate.toPost(user);
 
         // then
-        assertThat(postForCreate.getOwner()).isEqualTo(user);
-        assertThat(postForCreate.getCity()).isEqualTo(City.Seoul);
-        assertThat(postForCreate.getSport()).isEqualTo(Sport.Baseball);
-        assertThat(postForCreate.getContent()).isEqualTo("content");
-        assertThat(postForCreate.getTitle()).isEqualTo("title");
-        assertThat(postForCreate.getOwner()).isNotSameAs(user);
+        assertThat(post.getOwner()).isEqualTo(user);
+        assertThat(post.getCity()).isEqualTo(City.Seoul);
+        assertThat(post.getSport()).isEqualTo(Sport.Baseball);
+        assertThat(post.getContent()).isEqualTo("content");
+        assertThat(post.getTitle()).isEqualTo("title");
+        assertThat(post.getComments()).isNull();
+        assertThat(post.getOwner()).isNotSameAs(user);
     }
 }

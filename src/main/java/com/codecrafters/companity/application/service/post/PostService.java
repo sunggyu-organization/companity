@@ -5,7 +5,6 @@ import com.codecrafters.companity.domain.post.PostForCreate;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.domain.post.PostWithoutComment;
-import com.codecrafters.companity.domain.post.PostForUpdate;
 import com.codecrafters.companity.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +21,7 @@ public class PostService implements PostUseCase {
     @Override
     public PostWithoutComment add(PostForCreate postForCreate) {
         User user = getUser();
-        postForCreate.setOwner(user);
-        return postRepository.add(postForCreate);
+        return postRepository.add(postForCreate.toPost(user));
     }
 
     private User getUser(){
