@@ -32,7 +32,6 @@ public class UserController {
     @PatchMapping("/{userId}/nick-name")
     public ResponseEntity<HttpStatus> signUp (@PathVariable("userId") String userId, @RequestBody UserUpdateRequest request) {
         User user = userUseCase.updateNickName(userId, request.getNickName());
-        UserCreateResponse response = UserCreateResponse.from(user);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
