@@ -16,7 +16,8 @@ public class UserService implements UserUseCase {
     @Override
     public User signUp(UserCreateRequest request) {
         User user = User.from(request);
-        user.validateUser();
+        user.validateCreateUser();
+
         return userRepository.save(user);
     }
 

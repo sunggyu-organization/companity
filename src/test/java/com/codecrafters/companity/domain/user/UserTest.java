@@ -34,8 +34,8 @@ public class UserTest {
         //when
 
         //then
-        Assertions.assertThrows(IllegalArgumentException.class, () -> userCase1.validateUser());
-        Assertions.assertThrows(IllegalArgumentException.class, () -> userCase2.validateUser());
-        Assertions.assertThrows(IllegalArgumentException.class, () -> userCase3.validateUser());
+        Assertions.assertThrows(IllegalArgumentException.class, () -> userCase1.validateCreateUser());
+        Assertions.assertThrows(IllegalArgumentException.class, () -> userCase2.validateCreateUser());
+        Assertions.assertThrows(IllegalArgumentException.class, () -> userCase3.validateCreateUser());
     }
 }

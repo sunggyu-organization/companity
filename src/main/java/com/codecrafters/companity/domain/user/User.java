@@ -26,7 +26,7 @@ public class User {
         return Objects.equals(userId, user.userId) && Objects.equals(userName, user.userName) && Objects.equals(nickName, user.nickName);
     }
 
-    public void validateUser() {
+    public void validateCreateUser() {
         if (this.userId == null) throw new IllegalArgumentException("userId is required.");
         if (this.userName == null) throw  new IllegalArgumentException("userName is required.");
     }
