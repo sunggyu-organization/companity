@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 class PostForCreateTest {
-    @DisplayName("Post 작성자 설정")
+    @DisplayName("등록용 post 생성")
     @Test
-    void Set_post_owner() {
+    void create_post_for_add() {
         // given
         PostForCreate postForCreate = PostForCreate.builder().title("title").sport(Sport.Baseball).city(City.Seoul).content("content").build();
         User user = User.builder().userId("userId").userName("userName").nickName("nickName").build();
