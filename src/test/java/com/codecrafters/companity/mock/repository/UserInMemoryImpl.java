@@ -20,4 +20,9 @@ public class UserInMemoryImpl implements UserRepository {
         if(!repository.containsKey(userId)) throw new IllegalArgumentException();
         return repository.get(userId);
     }
+
+    @Override
+    public void deleteById(String userId) {
+
+    }
 }
