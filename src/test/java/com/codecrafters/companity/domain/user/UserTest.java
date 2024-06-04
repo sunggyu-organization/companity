@@ -38,4 +38,24 @@ public class UserTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> userCase2.validateCreateUser());
         Assertions.assertThrows(IllegalArgumentException.class, () -> userCase3.validateCreateUser());
     }
+
+    @Test
+    void updateNickName(){
+        //given
+        User user = User.builder()
+                .userId(USER_ID)
+                .userName(USER_NAME)
+                .nickName(NICKNAME)
+                .build();
+
+        //when
+        user.updateNickName("NEW_NICK_NAME");
+
+        //then
+        Assertions.assertAll(() -> {
+            Assertions.assertEquals(USER_ID, user.getUserId());
+            Assertions.assertEquals(USER_NAME, user.getUserName());
+            Assertions.assertEquals("NEW_NICK_NAME", user.getNickName());
+        });
+    }
 }

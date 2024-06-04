@@ -17,6 +17,7 @@ public class UserServiceTest {
     public UserServiceTest() {
         userRepository = new UserInMemoryImpl();
         userService = new UserService(userRepository);
+        userRepository.save(User.builder().userId(USER_ID).userName(USER_NAME).nickName(NICKNAME).build());
     }
 
     @Test
@@ -34,4 +35,22 @@ public class UserServiceTest {
             Assertions.assertEquals(request.getNickName(), user.getNickName());
         });
     }
+
+    @Test
+    public void updateNickName() {
+        //given
+        String userId = USER_ID;
+        String newNickName = "NEW_NICK_NAME";
+
+        //when
+        User newUser = userService.updateNickName(userId, newNickName);
+
+        //then
+        Assertions.assertAll(() -> {
+            Assertions.assertEquals(userId, newUser.getUserId());
+            Assertions.assertEquals(USER_NAME, newUser.getUserName());
+            Assertions.assertEquals(newNickName, newUser.getNickName());
+        });
+    }
+
 }
