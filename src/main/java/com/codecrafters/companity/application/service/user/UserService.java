@@ -20,4 +20,12 @@ public class UserService implements UserUseCase {
         return userRepository.save(user);
     }
 
+    @Override
+    public User updateNickName(String userId, String nickName) {
+        User user = userRepository.getUserById(userId);
+        user.updateNickName(nickName);
+
+        return userRepository.save(user);
+    }
+
 }

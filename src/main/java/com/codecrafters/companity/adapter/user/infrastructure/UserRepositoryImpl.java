@@ -26,7 +26,10 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User getUserById(String userId) {
-        UserEntity userEntity = userJPARepository.getById(userId);
+        UserEntity userEntity = userJPARepository.findById(userId).orElseThrow(() -> {
+            throw new IllegalArgumentException(); // FIXME : SCRUM-14 포함된 CUSTOMEXCEPTION 으로 변경
+        });
+
         return userEntity.toDomain();
     }
 }
