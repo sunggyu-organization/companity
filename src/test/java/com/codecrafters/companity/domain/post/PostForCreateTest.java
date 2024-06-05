@@ -24,7 +24,6 @@ class PostForCreateTest {
         assertThat(post.getSport()).isEqualTo(Sport.Baseball);
         assertThat(post.getContent()).isEqualTo("content");
         assertThat(post.getTitle()).isEqualTo("title");
-        assertThat(post.getComments()).isNull();
     }
 
     @DisplayName("Post 작성자 설정 시 깊은 복사를 사용한다")
@@ -43,7 +42,6 @@ class PostForCreateTest {
         assertThat(post.getSport()).isEqualTo(Sport.Baseball);
         assertThat(post.getContent()).isEqualTo("content");
         assertThat(post.getTitle()).isEqualTo("title");
-        assertThat(post.getComments()).isNull();
         assertThat(post.getOwner()).isNotSameAs(user);
     }
 }

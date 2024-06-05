@@ -15,7 +15,7 @@ class PostEntityTest {
     void update_post() {
         // given
         UserEntity owner = UserEntity.builder().userId("userId").userName("userName").nickName("nickName").build();
-        PostEntity post = PostEntity.builder().id(1L).title("title").sport(Sport.Baseball).owner(owner).city(City.Seoul).content("content").recruit(true).likeCount(20).comments(null).build();
+        PostEntity post = PostEntity.builder().id(1L).title("title").sport(Sport.Baseball).owner(owner).city(City.Seoul).content("content").recruit(true).likeCount(20).build();
         PostForUpdate postForUpdate = PostForUpdate.builder().title("update title").sport(Sport.Soccer).city(City.Busan).content("update content").build();
 
         // when
@@ -27,7 +27,6 @@ class PostEntityTest {
         assertThat(post.getSport()).isEqualTo(Sport.Soccer);
         assertThat(post.getContent()).isEqualTo("update content");
         assertThat(post.getTitle()).isEqualTo("update title");
-        assertThat(post.getComments()).isNull();
     }
 
 }

@@ -1,63 +1,82 @@
 package com.codecrafters.companity.mock.repository;
 
+import com.codecrafters.companity.adapter.post.infrastructure.jpa.PostEntity;
+import com.codecrafters.companity.adapter.user.infrastructure.jpa.UserEntity;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.domain.post.Post;
-import com.codecrafters.companity.domain.post.PostWithoutComment;
 import com.codecrafters.companity.domain.post.PostForUpdate;
+import com.codecrafters.companity.domain.user.User;
 
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+
 public class PostInMemoryImpl implements PostRepository {
-    public final Map<Long, PostWithoutComment> repository = new ConcurrentHashMap<>();
+    public final Map<Long, PostEntity> repository = new ConcurrentHashMap<>();
     private final AtomicLong keyCreator = new AtomicLong();
     @Override
-    public PostWithoutComment add(Post post) {
-        PostWithoutComment build = PostWithoutComment.builder().id(keyCreator.getAndIncrement())
-                .createdAt(null)
+    public Post add(Post post) {
+        PostEntity postToSave = PostEntity.builder().id(keyCreator.getAndIncrement())
                 .title(post.getTitle())
-                .owner(post.getOwner())
-                .recruit(false)
+                .owner(toUserEntity(post.getOwner()))
+                .recruit(post.getRecruit())
                 .city(post.getCity())
                 .content(post.getContent())
                 .sport(post.getSport())
-                .likeCount(0).build();
-        repository.put(build.getId(), build);
-        return build;
+                .likeCount(post.getLikeCount())
+                .build();
+        repository.put(postToSave.getId(), postToSave);
+        return toPost(postToSave);
     }
 
     @Override
-    public PostWithoutComment getPostWithoutComment(Long id) {
+    public Post getPost(Long id) {
         if(!repository.containsKey(id)) throw new IllegalArgumentException();
-        return repository.get(id);
+        PostEntity entity = repository.get(id);
+        return toPost(entity);
     }
 
     @Override
-    public PostWithoutComment update(PostForUpdate postForUpdate) {
-        PostWithoutComment post = repository.get(postForUpdate.getId());
-        PostWithoutComment build = PostWithoutComment.builder().id(post.getId())
-                .createdAt(post.getCreatedAt())
-                .title(postForUpdate.getTitle())
-                .owner(post.getOwner())
-                .recruit(post.getRecruit())
-                .city(postForUpdate.getCity())
-                .content(postForUpdate.getContent())
-                .sport(postForUpdate.getSport())
-                .likeCount(post.getLikeCount()).build();
-        repository.put(post.getId(), build);
-        return build;
+    public Post update(PostForUpdate postForUpdate) {
+        PostEntity entity = repository.get(postForUpdate.getId());
+        if(entity == null) throw new IllegalArgumentException("존재하지 않는 게시물입니다.");
+        entity.update(postForUpdate);
+        repository.put(entity.getId(), entity);
+        return toPost(entity);
     }
 
     @Override
-    public List<PostWithoutComment> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(PostCriteria postCriteria) {
+    public List<Post> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(PostCriteria postCriteria) {
         return null;
     }
 
     @Override
     public void delete(Long id) {
 
+    }
+
+    private UserEntity toUserEntity(User user){
+        return UserEntity.builder().userId(user.getUserId()).userName(user.getUserName()).nickName(user.getNickName()).build();
+    }
+
+    private Post toPost(PostEntity entity){
+        return Post.builder()
+                .id(entity.getId())
+                .createdAt(null)
+                .modifiedAt(null)
+                .title(entity.getTitle())
+                .owner(toUser(entity.getOwner()))
+                .recruit(entity.isRecruit())
+                .city(entity.getCity())
+                .content(entity.getContent())
+                .sport(entity.getSport())
+                .likeCount(entity.getLikeCount())
+                .build();
+    }
+    private User toUser(UserEntity user){
+        return User.builder().userId(user.getUserId()).userName(user.getUserName()).nickName(user.getNickName()).build();
     }
 }

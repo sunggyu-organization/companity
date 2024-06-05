@@ -25,7 +25,6 @@ public class PostForCreate {
                 .recruit(false)
                 .likeCount(0)
                 .owner(owner)
-                .comments(null)
                 .build();
     }
 }

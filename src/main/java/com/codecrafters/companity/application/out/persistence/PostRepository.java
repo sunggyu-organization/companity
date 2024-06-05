@@ -1,19 +1,18 @@
 package com.codecrafters.companity.application.out.persistence;
 
 import com.codecrafters.companity.domain.post.Post;
-import com.codecrafters.companity.domain.post.PostWithoutComment;
 import com.codecrafters.companity.domain.post.PostForUpdate;
 
 import java.util.List;
 
 public interface PostRepository {
-    PostWithoutComment add(Post post);
+    Post add(Post post);
 
-    PostWithoutComment getPostWithoutComment(Long id);
+    Post getPost(Long id);
 
-    PostWithoutComment update(PostForUpdate postForUpdate);
+    Post update(PostForUpdate postForUpdate);
 
-    List<PostWithoutComment> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(PostCriteria postCriteria);
+    List<Post> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(PostCriteria postCriteria);
 
     void delete(Long id);
 }

@@ -28,13 +28,13 @@ public class PostRepositoryImpl implements PostRepository {
     private final CompanityObjectMapper mapper;
 
     @Override
-    public PostWithoutComment add(Post post) {
+    public Post add(Post post) {
         PostEntity save = postJPARepository.save(POST_MAPPER.domainToEntity(post));
         return POST_MAPPER.entityToDomain(save);
     }
 
     @Override
-    public PostWithoutComment getPostWithoutComment(Long id) {
+    public Post getPost(Long id) {
         PostEntity entity = postJPARepository.findById(id).orElseThrow(() -> {
             throw new IllegalArgumentException("존재하지 않는 게시물입니다.");
         });
@@ -50,7 +50,7 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
-    public PostWithoutComment update(PostForUpdate postForUpdate) {
+    public Post update(PostForUpdate postForUpdate) {
         PostEntity entity = postJPARepository.findById(postForUpdate.getId()).orElseThrow(() -> {
             throw new IllegalArgumentException("존재하지 않는 게시물입니다.");
         });
@@ -60,14 +60,14 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
-    public List<PostWithoutComment> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(PostCriteria postCriteria) {
+    public List<Post> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(PostCriteria postCriteria) {
         List<PostEntity> postEntities = jpaQueryFactory.selectFrom(postEntity)
                 .where(eqSport(postCriteria.getSport()),
                         eqCity(postCriteria.getCity()),
                         postEntity.recruit.eq(postCriteria.isRecruit()))
                 .orderBy(getOrderBy(postCriteria.getOrderType()))
                 .fetch();
-        return mapper.convertList(postEntities, PostWithoutComment.class);
+        return mapper.convertList(postEntities, Post.class);
     }
 
     private BooleanExpression eqSport(Sport sport){

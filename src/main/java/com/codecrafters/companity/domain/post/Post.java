@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Builder
@@ -22,5 +21,4 @@ public class Post {
     private LocalDateTime modifiedAt;
     private Boolean recruit;
     private Integer likeCount;
-    private List<Comment> comments;
 }

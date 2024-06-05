@@ -8,7 +8,6 @@ import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.post.PostForCreate;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
-import com.codecrafters.companity.domain.post.PostWithoutComment;
 import com.codecrafters.companity.domain.post.PostForUpdate;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -22,12 +21,12 @@ public interface PostMapperForController {
     PostForCreate toPostForCreate(RequestForCreatingPost dto);
     PostForUpdate toPostForUpdate(RequestForUpdatingPost dto);
 
-    PostWithoutComment entityToDomain(PostEntity entity);
+    Post entityToDomain(PostEntity entity);
     PostEntity domainToEntity(Post domain);
 
     @Mapping(source = "sport", target = "sportsNo")
     @Mapping(source = "city", target = "cityNo")
-    ResponsePost toResponsePost(PostWithoutComment post);
+    ResponsePost toResponsePost(Post post);
 
     default int sportToSportsNo(Sport sport){
         return sport.getNo();
