@@ -16,7 +16,6 @@ public class PostForCreate {
     private User owner;
 
     public Post toPost(User owner){
-        //TODO need to deep copy
         return Post.builder()
                 .title(title)
                 .sport(sport)
@@ -24,7 +23,7 @@ public class PostForCreate {
                 .content(content)
                 .recruit(false)
                 .likeCount(0)
-                .owner(owner)
+                .owner(owner.clone())
                 .build();
     }
 }
