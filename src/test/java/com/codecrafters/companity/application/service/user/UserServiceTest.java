@@ -3,6 +3,7 @@ package com.codecrafters.companity.application.service.user;
 import com.codecrafters.companity.adapter.user.dto.request.UserCreateRequest;
 import com.codecrafters.companity.application.out.persistence.UserRepository;
 import com.codecrafters.companity.domain.user.User;
+import com.codecrafters.companity.exception.CustomException;
 import com.codecrafters.companity.mock.repository.UserInMemoryImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -51,6 +52,20 @@ public class UserServiceTest {
             Assertions.assertEquals(USER_NAME, newUser.getUserName());
             Assertions.assertEquals(newNickName, newUser.getNickName());
         });
+    }
+
+    @Test
+    public void userId에_해당하는_특정_User를_삭제할_수_있다() {
+        //given
+        String userId = USER_ID;
+        UserCreateRequest request = new UserCreateRequest(userId, USER_NAME, NICKNAME);
+        User user = userService.signUp(request);
+
+        //when
+        userService.delete(userId);
+
+        //then
+        Assertions.assertThrows(CustomException.class, () -> userRepository.getUserById(userId));
     }
 
 }

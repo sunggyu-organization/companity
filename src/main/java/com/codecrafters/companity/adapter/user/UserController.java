@@ -25,7 +25,14 @@ public class UserController {
         User user = userUseCase.signUp(request);
         UserCreateResponse response = UserCreateResponse.from(user);
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<HttpStatus> delete (@PathVariable("userId") String userId) throws Exception {
+        userUseCase.delete(userId);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     // FIXME: 인증 Token을 이용해 userId를 가져오는 방식으로 변경 필요 /users/{userId}/nick-name -> /users/nick-name

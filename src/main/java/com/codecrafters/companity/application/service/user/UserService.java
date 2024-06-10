@@ -29,4 +29,12 @@ public class UserService implements UserUseCase {
         return userRepository.save(user);
     }
 
+    @Override
+    public void delete(String userId) {
+        User user = userRepository.getUserById(userId);
+        if (user == null) throw new IllegalArgumentException("user not found with UserID : " + userId);
+
+        userRepository.deleteById(userId);
+    }
+
 }
