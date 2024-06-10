@@ -2,10 +2,12 @@ package com.codecrafters.companity.application.service.post;
 
 import com.codecrafters.companity.mock.repository.PostInMemoryImpl;
 import com.codecrafters.companity.mock.repository.UserInMemoryImpl;
-import com.codecrafters.companity.application.out.persistence.PostRepository;
+import com.codecrafters.companity.post.application.port.out.persistence.PostRepository;
+import com.codecrafters.companity.post.application.PostFactory;
+import com.codecrafters.companity.post.application.PostService;
 import com.codecrafters.companity.user.application.port.out.UserRepository;
 import com.codecrafters.companity.config.mapper.CustomModelMapper;
-import com.codecrafters.companity.domain.post.Post;
+import com.codecrafters.companity.post.domain.Post;
 import com.codecrafters.companity.user.domain.User;
 import com.codecrafters.companity.mock.TestDateTimeProvider;
 import org.junit.jupiter.api.BeforeEach;

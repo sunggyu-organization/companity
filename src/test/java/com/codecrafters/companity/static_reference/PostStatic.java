@@ -1,7 +1,7 @@
 package com.codecrafters.companity.static_reference;
 
-import com.codecrafters.companity.domain.enums.City;
-import com.codecrafters.companity.domain.enums.Sport;
+import com.codecrafters.companity.post.domain.enums.City;
+import com.codecrafters.companity.post.domain.enums.Sport;
 
 public class PostStatic {
     public static final String TITLE = "Test Title";

@@ -1,9 +1,9 @@
 package com.codecrafters.companity.config.mapper;
 
-import com.codecrafters.companity.adapter.post.out.ResponsePost;
-import com.codecrafters.companity.domain.enums.City;
-import com.codecrafters.companity.domain.enums.Sport;
-import com.codecrafters.companity.domain.post.Post;
+import com.codecrafters.companity.post.adapter.dto.response.ResponsePost;
+import com.codecrafters.companity.post.domain.enums.City;
+import com.codecrafters.companity.post.domain.enums.Sport;
+import com.codecrafters.companity.post.domain.Post;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration;

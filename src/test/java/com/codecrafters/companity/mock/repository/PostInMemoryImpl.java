@@ -1,8 +1,8 @@
 package com.codecrafters.companity.mock.repository;
 
-import com.codecrafters.companity.application.out.persistence.PostRepository;
-import com.codecrafters.companity.application.out.persistence.PostCriteria;
-import com.codecrafters.companity.domain.post.Post;
+import com.codecrafters.companity.post.application.port.out.persistence.PostRepository;
+import com.codecrafters.companity.post.application.port.out.persistence.PostCriteria;
+import com.codecrafters.companity.post.domain.Post;
 
 import java.util.List;
 import java.util.Map;

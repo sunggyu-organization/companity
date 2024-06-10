@@ -1,11 +1,13 @@
 package com.codecrafters.companity.adapter.infrastructure.jpa.post;
 
 import com.codecrafters.companity.config.mapper.CustomModelMapper;
-import com.codecrafters.companity.application.out.persistence.PostCriteria;
+import com.codecrafters.companity.post.adapter.infrastructure.jpa.PostJPARepository;
+import com.codecrafters.companity.post.adapter.infrastructure.PostRepositoryImpl;
+import com.codecrafters.companity.post.application.port.out.persistence.PostCriteria;
 import com.codecrafters.companity.config.QuerydslConfig;
-import com.codecrafters.companity.domain.enums.City;
-import com.codecrafters.companity.domain.enums.Sport;
-import com.codecrafters.companity.domain.post.OrderType;
+import com.codecrafters.companity.post.domain.enums.City;
+import com.codecrafters.companity.post.domain.enums.Sport;
+import com.codecrafters.companity.post.domain.enums.OrderType;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

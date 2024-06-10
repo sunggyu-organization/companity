@@ -1,6 +1,6 @@
 package com.codecrafters.companity.mock;
 
-import com.codecrafters.companity.application.out.utility.DateTimeProvider;
+import com.codecrafters.companity.common.application.DateTimeProvider;
 import java.time.LocalDateTime;
 
 public class TestDateTimeProvider implements DateTimeProvider {

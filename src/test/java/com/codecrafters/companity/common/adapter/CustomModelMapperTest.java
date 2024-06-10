@@ -1,8 +1,8 @@
 package com.codecrafters.companity.common.adapter;
 
-import com.codecrafters.companity.adapter.infrastructure.jpa.post.PostEntity;
+import com.codecrafters.companity.post.adapter.infrastructure.jpa.PostEntity;
 import com.codecrafters.companity.config.mapper.CustomModelMapper;
-import com.codecrafters.companity.domain.post.Post;
+import com.codecrafters.companity.post.domain.Post;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
