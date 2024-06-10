@@ -41,16 +41,17 @@ public class UserTest {
     }
 
     @Test
-    void updateNickName(){
+    void 사용자의_nickName을_새로운_nick_name으로_변경한다(){
         //given
         User user = User.builder()
                 .userId(USER_ID)
                 .userName(USER_NAME)
                 .nickName(NICKNAME)
                 .build();
+        String newNickName = "NEW_NICK_NAME";
 
         //when
-        user.updateNickName("NEW_NICK_NAME");
+        user.updateNickName(newNickName);
 
         //then
         Assertions.assertAll(() -> {

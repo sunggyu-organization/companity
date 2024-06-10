@@ -39,7 +39,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void updateNickName() {
+    public void 사용자의_nickName을_변경할_수_있다() {
         //given
         String userId = USER_ID;
         String newNickName = "NEW_NICK_NAME";
