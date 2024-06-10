@@ -1,4 +1,4 @@
-package com.codecrafters.companity.adapter.utility;
+package com.codecrafters.companity.common.adapter;
 
 import com.codecrafters.companity.application.out.utility.DateTimeProvider;
 import org.springframework.stereotype.Component;

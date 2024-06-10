@@ -2,7 +2,7 @@ package com.codecrafters.companity.user.adapter.infrastructure;
 
 import com.codecrafters.companity.user.adapter.infrastructure.jpa.UserEntity;
 import com.codecrafters.companity.user.adapter.infrastructure.jpa.UserJPARepository;
-import com.codecrafters.companity.adapter.utility.dto.response.ResultCode;
+import com.codecrafters.companity.common.adapter.dto.response.ResultCode;
 import com.codecrafters.companity.user.application.port.out.UserRepository;
 import com.codecrafters.companity.user.domain.User;
 import com.codecrafters.companity.exception.CustomException;

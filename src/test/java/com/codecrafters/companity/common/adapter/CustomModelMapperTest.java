@@ -1,4 +1,4 @@
-package com.codecrafters.companity.adapter.utility;
+package com.codecrafters.companity.common.adapter;
 
 import com.codecrafters.companity.adapter.infrastructure.jpa.post.PostEntity;
 import com.codecrafters.companity.config.mapper.CustomModelMapper;
