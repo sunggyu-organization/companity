@@ -1,9 +1,9 @@
-package com.codecrafters.companity.adapter.user.infrastructure.jpa;
+package com.codecrafters.companity.user.adapter.infrastructure.jpa;
 
 import jakarta.persistence.Column;
 import lombok.Getter;
 
-import com.codecrafters.companity.domain.user.User;
+import com.codecrafters.companity.user.domain.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Builder;

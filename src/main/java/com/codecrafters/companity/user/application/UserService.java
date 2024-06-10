@@ -1,9 +1,9 @@
-package com.codecrafters.companity.application.service.user;
+package com.codecrafters.companity.user.application;
 
-import com.codecrafters.companity.adapter.user.dto.request.UserCreateRequest;
-import com.codecrafters.companity.application.in.usecase.UserUseCase;
-import com.codecrafters.companity.application.out.persistence.UserRepository;
-import com.codecrafters.companity.domain.user.User;
+import com.codecrafters.companity.user.adapter.dto.request.UserCreateRequest;
+import com.codecrafters.companity.user.application.port.in.UserUseCase;
+import com.codecrafters.companity.user.application.port.out.UserRepository;
+import com.codecrafters.companity.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

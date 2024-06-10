@@ -1,17 +1,14 @@
-package com.codecrafters.companity.adapter.user;
+package com.codecrafters.companity.user.adapter;
 
-import com.codecrafters.companity.adapter.user.dto.request.UserCreateRequest;
-import com.codecrafters.companity.adapter.user.dto.request.UserUpdateRequest;
-import com.codecrafters.companity.adapter.user.dto.resposne.UserCreateResponse;
-import com.codecrafters.companity.application.in.usecase.UserUseCase;
-import com.codecrafters.companity.domain.user.User;
+import com.codecrafters.companity.user.adapter.dto.request.UserCreateRequest;
+import com.codecrafters.companity.user.adapter.dto.request.UserUpdateRequest;
+import com.codecrafters.companity.user.adapter.dto.resposne.UserCreateResponse;
+import com.codecrafters.companity.user.application.port.in.UserUseCase;
+import com.codecrafters.companity.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/users")

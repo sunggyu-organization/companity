@@ -1,4 +1,4 @@
-package com.codecrafters.companity.adapter.user.dto.request;
+package com.codecrafters.companity.user.adapter.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

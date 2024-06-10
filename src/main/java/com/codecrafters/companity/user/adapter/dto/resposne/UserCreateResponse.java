@@ -1,7 +1,7 @@
-package com.codecrafters.companity.adapter.user.dto.resposne;
+package com.codecrafters.companity.user.adapter.dto.resposne;
 
 
-import com.codecrafters.companity.domain.user.User;
+import com.codecrafters.companity.user.domain.User;
 import lombok.Getter;
 
 @Getter

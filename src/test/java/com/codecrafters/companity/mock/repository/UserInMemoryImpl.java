@@ -1,14 +1,13 @@
 package com.codecrafters.companity.mock.repository;
 
 import com.codecrafters.companity.adapter.utility.dto.response.ResultCode;
-import com.codecrafters.companity.application.out.persistence.UserRepository;
-import com.codecrafters.companity.domain.user.User;
+import com.codecrafters.companity.user.application.port.out.UserRepository;
+import com.codecrafters.companity.user.domain.User;
 import com.codecrafters.companity.exception.CustomException;
 import org.springframework.http.HttpStatus;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class UserInMemoryImpl implements UserRepository {
     private final Map<String, User> repository = new ConcurrentHashMap<>();

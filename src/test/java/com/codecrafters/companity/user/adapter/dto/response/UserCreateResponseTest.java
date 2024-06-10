@@ -1,7 +1,7 @@
-package com.codecrafters.companity.adapter.user.dto.response;
+package com.codecrafters.companity.user.adapter.dto.response;
 
-import com.codecrafters.companity.adapter.user.dto.resposne.UserCreateResponse;
-import com.codecrafters.companity.domain.user.User;
+import com.codecrafters.companity.user.adapter.dto.resposne.UserCreateResponse;
+import com.codecrafters.companity.user.domain.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

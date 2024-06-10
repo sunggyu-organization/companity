@@ -1,6 +1,6 @@
 package com.codecrafters.companity.adapter.infrastructure.jpa.user;
 
-import com.codecrafters.companity.application.out.persistence.UserRepository;
+import com.codecrafters.companity.user.application.port.out.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 

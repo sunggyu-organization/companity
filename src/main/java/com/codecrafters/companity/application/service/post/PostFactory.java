@@ -2,7 +2,7 @@ package com.codecrafters.companity.application.service.post;
 
 import com.codecrafters.companity.config.mapper.CompanityObjectMapper;
 import com.codecrafters.companity.domain.post.Post;
-import com.codecrafters.companity.domain.user.User;
+import com.codecrafters.companity.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

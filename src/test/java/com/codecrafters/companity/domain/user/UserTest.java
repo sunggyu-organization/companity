@@ -1,6 +1,7 @@
 package com.codecrafters.companity.domain.user;
 
-import com.codecrafters.companity.adapter.user.dto.request.UserCreateRequest;
+import com.codecrafters.companity.user.adapter.dto.request.UserCreateRequest;
+import com.codecrafters.companity.user.domain.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

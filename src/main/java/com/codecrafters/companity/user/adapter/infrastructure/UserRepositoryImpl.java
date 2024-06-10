@@ -1,10 +1,10 @@
-package com.codecrafters.companity.adapter.user.infrastructure;
+package com.codecrafters.companity.user.adapter.infrastructure;
 
-import com.codecrafters.companity.adapter.user.infrastructure.jpa.UserEntity;
-import com.codecrafters.companity.adapter.user.infrastructure.jpa.UserJPARepository;
+import com.codecrafters.companity.user.adapter.infrastructure.jpa.UserEntity;
+import com.codecrafters.companity.user.adapter.infrastructure.jpa.UserJPARepository;
 import com.codecrafters.companity.adapter.utility.dto.response.ResultCode;
-import com.codecrafters.companity.application.out.persistence.UserRepository;
-import com.codecrafters.companity.domain.user.User;
+import com.codecrafters.companity.user.application.port.out.UserRepository;
+import com.codecrafters.companity.user.domain.User;
 import com.codecrafters.companity.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

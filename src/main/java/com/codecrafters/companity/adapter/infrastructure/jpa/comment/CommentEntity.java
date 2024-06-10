@@ -2,12 +2,10 @@ package com.codecrafters.companity.adapter.infrastructure.jpa.comment;
 
 import com.codecrafters.companity.adapter.infrastructure.jpa.common.BaseTimeEntity;
 import com.codecrafters.companity.adapter.infrastructure.jpa.post.PostEntity;
-import com.codecrafters.companity.adapter.user.infrastructure.jpa.UserEntity;
+import com.codecrafters.companity.user.adapter.infrastructure.jpa.UserEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 @Entity(name = "Comment")
 @Getter

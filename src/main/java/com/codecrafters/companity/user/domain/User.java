@@ -1,6 +1,6 @@
-package com.codecrafters.companity.domain.user;
+package com.codecrafters.companity.user.domain;
 
-import com.codecrafters.companity.adapter.user.dto.request.UserCreateRequest;
+import com.codecrafters.companity.user.adapter.dto.request.UserCreateRequest;
 import lombok.*;
 
 import java.util.Objects;

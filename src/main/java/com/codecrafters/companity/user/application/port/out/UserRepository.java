@@ -1,6 +1,6 @@
-package com.codecrafters.companity.application.out.persistence;
+package com.codecrafters.companity.user.application.port.out;
 
-import com.codecrafters.companity.domain.user.User;
+import com.codecrafters.companity.user.domain.User;
 
 public interface UserRepository {
     User save(User user);
