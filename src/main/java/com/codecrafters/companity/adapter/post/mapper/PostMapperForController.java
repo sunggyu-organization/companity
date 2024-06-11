@@ -14,6 +14,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.control.DeepClone;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper(mappingControl = DeepClone.class)
 public interface PostMapperForController {
     PostMapperForController POST_MAPPER = Mappers.getMapper(PostMapperForController.class);
@@ -22,6 +24,7 @@ public interface PostMapperForController {
     PostForUpdate toPostForUpdate(RequestForUpdatingPost dto);
 
     Post entityToDomain(PostEntity entity);
+    List<Post> entitiesToDomains(List<PostEntity> entities);
     PostEntity domainToEntity(Post domain);
 
     @Mapping(source = "sport", target = "sportsNo")

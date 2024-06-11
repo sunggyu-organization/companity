@@ -13,7 +13,6 @@ public class PostForCreate {
     private City city;
     private Sport sport;
     private String content;
-    private User owner;
 
     public Post toPost(User owner){
         return Post.builder()

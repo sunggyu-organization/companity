@@ -2,7 +2,6 @@ package com.codecrafters.companity.adapter.post.infrastructure.jpa;
 
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
-import com.codecrafters.companity.config.mapper.CompanityObjectMapper;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.post.*;
@@ -25,7 +24,6 @@ import static com.codecrafters.companity.adapter.post.mapper.PostMapperForContro
 public class PostRepositoryImpl implements PostRepository {
     private final PostJPARepository postJPARepository;
     private final JPAQueryFactory jpaQueryFactory;
-    private final CompanityObjectMapper mapper;
 
     @Override
     public Post add(Post post) {
@@ -67,7 +65,7 @@ public class PostRepositoryImpl implements PostRepository {
                         postEntity.recruit.eq(postCriteria.isRecruit()))
                 .orderBy(getOrderBy(postCriteria.getOrderType()))
                 .fetch();
-        return mapper.convertList(postEntities, Post.class);
+        return POST_MAPPER.entitiesToDomains(postEntities);
     }
 
     private BooleanExpression eqSport(Sport sport){
