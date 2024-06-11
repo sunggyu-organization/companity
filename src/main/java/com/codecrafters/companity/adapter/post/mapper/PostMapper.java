@@ -17,8 +17,8 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper(mappingControl = DeepClone.class)
-public interface PostMapperForController {
-    PostMapperForController POST_MAPPER = Mappers.getMapper(PostMapperForController.class);
+public interface PostMapper {
+    PostMapper POST_MAPPER = Mappers.getMapper(PostMapper.class);
 
     PostForCreate toPostForCreate(RequestForCreatingPost dto);
     PostForUpdate toPostForUpdate(RequestForUpdatingPost dto);

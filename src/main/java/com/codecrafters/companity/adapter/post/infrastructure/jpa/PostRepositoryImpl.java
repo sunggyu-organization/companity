@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 import static com.codecrafters.companity.adapter.post.infrastructure.jpa.QPostEntity.postEntity;
-import static com.codecrafters.companity.adapter.post.mapper.PostMapperForController.POST_MAPPER;
+import static com.codecrafters.companity.adapter.post.mapper.PostMapper.POST_MAPPER;
 
 
 @Repository

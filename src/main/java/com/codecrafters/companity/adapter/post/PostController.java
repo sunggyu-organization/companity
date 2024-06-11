@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.codecrafters.companity.adapter.post.mapper.PostMapperForController.POST_MAPPER;
+import static com.codecrafters.companity.adapter.post.mapper.PostMapper.POST_MAPPER;
 
 
 @RestController

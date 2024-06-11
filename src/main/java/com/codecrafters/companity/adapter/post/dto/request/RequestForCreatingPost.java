@@ -1,6 +1,6 @@
 package com.codecrafters.companity.adapter.post.dto.request;
 
-import com.codecrafters.companity.adapter.post.mapper.PostMapperForController;
+import com.codecrafters.companity.adapter.post.mapper.PostMapper;
 import com.codecrafters.companity.domain.post.PostForCreate;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
@@ -15,6 +15,6 @@ public class RequestForCreatingPost {
     private String content;
 
     public PostForCreate toPostCreateDto(){
-        return PostMapperForController.POST_MAPPER.toPostForCreate(this);
+        return PostMapper.POST_MAPPER.toPostForCreate(this);
     }
 }
