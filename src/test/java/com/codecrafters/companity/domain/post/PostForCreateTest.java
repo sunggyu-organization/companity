@@ -5,10 +5,15 @@ import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.user.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 class PostForCreateTest {
-    @DisplayName("등록용 post 생성")
+    @DisplayName("post 생성")
     @Test
     void create_post_for_add() {
         // given
@@ -26,7 +31,7 @@ class PostForCreateTest {
         assertThat(post.getTitle()).isEqualTo("title");
     }
 
-    @DisplayName("Post 작성자 설정 시 깊은 복사를 사용한다")
+    @DisplayName("사용자는 깊은 복사한다.")
     @Test
     void Use_deep_copy_when_setting_owner() {
         // given
@@ -43,5 +48,27 @@ class PostForCreateTest {
         assertThat(post.getContent()).isEqualTo("content");
         assertThat(post.getTitle()).isEqualTo("title");
         assertThat(post.getOwner()).isNotSameAs(user);
+    }
+
+    @DisplayName("제목, 도시, 스포츠는 필수 값이다.")
+    @MethodSource("provideTitleCitySport")
+    @ParameterizedTest(name="{index} => title={0}, city={1}, sport={2}, errorMessage={3}")
+    void title_city_sport_are_require(String title, City city, Sport sport, String errorMessage) {
+        // given
+        PostForCreate postForCreate = PostForCreate.builder().title(title).sport(sport).city(city).content("content").build();
+        User user = User.builder().userId("userId").userName("userName").nickName("nickName").build();
+
+        // when
+        // then
+        assertThatThrownBy(() -> postForCreate.toPost(user)).isInstanceOf(IllegalArgumentException.class).hasMessage(errorMessage);
+    }
+
+    private static Stream<Arguments> provideTitleCitySport(){
+        return Stream.of(
+                Arguments.of("", City.Seoul, Sport.Baseball, "title is required."),
+                Arguments.of(null, City.Seoul, Sport.Baseball, "title is required."),
+                Arguments.of("Title", null, Sport.Baseball, "city is required."),
+                Arguments.of("Title", City.Seoul, null, "sport is required.")
+        );
     }
 }
