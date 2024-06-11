@@ -15,7 +15,7 @@ class PostForUpdateTest {
     @DisplayName("키, 제목, 도시, 스포츠는 필수 값이다.")
     @MethodSource("provideIdTitleCitySport")
     @ParameterizedTest(name="{index} => id={0}, title={1}, city={2}, sport={3}, errorMessage={4}")
-    void title_city_sport_are_require(Long id, String title, City city, Sport sport, String errorMessage) {
+    void id_title_city_sport_are_require(Long id, String title, City city, Sport sport, String errorMessage) {
         // given
         PostForUpdate postForUpdate = PostForUpdate.builder().id(id).title(title).sport(sport).city(city).content("content").build();
 
