@@ -44,7 +44,7 @@ public class PostController {
 
     @PutMapping
     public ResponseEntity<ResponsePost> update(@RequestBody RequestForUpdatingPost requestPost){
-        Post result = postRepository.update(requestPost.toPostUpdateDto());
+        Post result = postUseCase.update(requestPost.toPostUpdateDto());
         ResponsePost responsePost = POST_MAPPER.toResponsePost(result);
         return new ResponseEntity<>(responsePost, HttpStatus.OK);
     }
