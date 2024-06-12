@@ -64,21 +64,7 @@ public class PostRepositoryImpl implements PostRepository {
 
     @Override
     public Page<Post> findByCriteria(PostCriteria postCriteria, Pageable pageable) {
-        List<PostEntity> postEntities = jpaQueryFactory
-                .selectFrom(postEntity)
-                .leftJoin(postEntity.owner)
-                .fetchJoin()
-                .where(likeTitle(postCriteria.getTitle()),
-                        likeContent(postCriteria.getContent()),
-                        eqSport(postCriteria.getSport()),
-                        eqCity(postCriteria.getCity()),
-                        eqRecruit(postCriteria.getRecruit()))
-                .orderBy(getOrderBy(postCriteria.getOrderType()))
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
-                .fetch();
-
-        JPAQuery<PostEntity> countQuery = jpaQueryFactory
+        JPAQuery<PostEntity> basicQuery = jpaQueryFactory
                 .selectFrom(postEntity)
                 .where(likeTitle(postCriteria.getTitle()),
                         likeContent(postCriteria.getContent()),
@@ -87,8 +73,15 @@ public class PostRepositoryImpl implements PostRepository {
                         eqRecruit(postCriteria.getRecruit()))
                 .orderBy(getOrderBy(postCriteria.getOrderType()));
 
+        List<PostEntity> postEntities = basicQuery.clone()
+                .leftJoin(postEntity.owner)
+                .fetchJoin()
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
         //FIXME need to change deprecated method
-        return PageableExecutionUtils.getPage(POST_MAPPER.toDomains(postEntities), pageable, countQuery::fetchCount);
+        return PageableExecutionUtils.getPage(POST_MAPPER.toDomains(postEntities), pageable, basicQuery::fetchCount);
     }
 
     private BooleanExpression likeTitle(String title){
