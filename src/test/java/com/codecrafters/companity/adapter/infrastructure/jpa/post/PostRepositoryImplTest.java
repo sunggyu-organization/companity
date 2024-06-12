@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.Pageable;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -28,6 +29,6 @@ class PostRepositoryImplTest {
     @Test
     void findBySportAndCityAndRecruitOrderByRecentDateOrFavorite() {
         PostCriteria postCriteria = PostCriteria.builder().withSport(Sport.Badminton).withCity(City.Seoul).withRecruit(false).withOrderType(OrderType.Favorite).build();
-        postRepository.findByCriteria(postCriteria);
+        postRepository.findByCriteria(postCriteria, Pageable.ofSize(10));
     }
 }

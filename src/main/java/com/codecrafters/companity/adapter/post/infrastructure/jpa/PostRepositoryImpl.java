@@ -7,9 +7,13 @@ import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.post.*;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -59,16 +63,32 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
-    public List<Post> findByCriteria(PostCriteria postCriteria) {
-        List<PostEntity> postEntities = jpaQueryFactory.selectFrom(postEntity)
+    public Page<Post> findByCriteria(PostCriteria postCriteria, Pageable pageable) {
+        List<PostEntity> postEntities = jpaQueryFactory
+                .selectFrom(postEntity)
+                .leftJoin(postEntity.owner)
+                .fetchJoin()
                 .where(likeTitle(postCriteria.getTitle()),
                         likeContent(postCriteria.getContent()),
                         eqSport(postCriteria.getSport()),
                         eqCity(postCriteria.getCity()),
                         eqRecruit(postCriteria.getRecruit()))
                 .orderBy(getOrderBy(postCriteria.getOrderType()))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .fetch();
-        return POST_MAPPER.toDomains(postEntities);
+
+        JPAQuery<PostEntity> countQuery = jpaQueryFactory
+                .selectFrom(postEntity)
+                .where(likeTitle(postCriteria.getTitle()),
+                        likeContent(postCriteria.getContent()),
+                        eqSport(postCriteria.getSport()),
+                        eqCity(postCriteria.getCity()),
+                        eqRecruit(postCriteria.getRecruit()))
+                .orderBy(getOrderBy(postCriteria.getOrderType()));
+
+        //FIXME need to change deprecated method
+        return PageableExecutionUtils.getPage(POST_MAPPER.toDomains(postEntities), pageable, countQuery::fetchCount);
     }
 
     private BooleanExpression likeTitle(String title){

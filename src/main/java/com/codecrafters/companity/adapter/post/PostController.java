@@ -10,6 +10,9 @@ import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,10 +53,10 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ResponsePost>> getList(@RequestBody PostCriteria criteria){
-        List<Post> result = postRepository.findByCriteria(criteria);
-        List<ResponsePost> responsePosts = POST_MAPPER.toDtos(result);
-        return new ResponseEntity<>(responsePosts, HttpStatus.OK);
+    public ResponseEntity<Page<ResponsePost>> getList(@RequestBody PostCriteria criteria, Pageable pageable){
+        Page<Post> result = postRepository.findByCriteria(criteria, pageable);
+        List<ResponsePost> content = POST_MAPPER.toDtos(result.getContent());
+        return new ResponseEntity<>(new PageImpl<>(content, result.getPageable(), result.getTotalElements()), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
