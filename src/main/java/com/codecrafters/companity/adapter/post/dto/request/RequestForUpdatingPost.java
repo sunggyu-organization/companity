@@ -17,6 +17,6 @@ public class RequestForUpdatingPost {
     private String content;
 
     public PostForUpdate toPostUpdateDto(){
-        return PostMapper.POST_MAPPER.toPostForUpdate(this);
+        return PostMapper.POST_MAPPER.toDomain(this);
     }
 }

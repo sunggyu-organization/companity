@@ -15,6 +15,6 @@ public class RequestForCreatingPost {
     private String content;
 
     public PostForCreate toPostCreateDto(){
-        return PostMapper.POST_MAPPER.toPostForCreate(this);
+        return PostMapper.POST_MAPPER.toDomain(this);
     }
 }
