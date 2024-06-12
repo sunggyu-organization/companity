@@ -49,7 +49,7 @@ public class PostInMemoryImpl implements PostRepository {
     }
 
     @Override
-    public List<Post> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(PostCriteria postCriteria) {
+    public List<Post> findByCriteria(PostCriteria postCriteria) {
         return null;
     }
 

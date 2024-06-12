@@ -27,7 +27,7 @@ class PostRepositoryImplTest {
 
     @Test
     void findBySportAndCityAndRecruitOrderByRecentDateOrFavorite() {
-        PostCriteria postCriteria = PostCriteria.builder().sport(Sport.Badminton).city(City.Seoul).recruit(false).orderType(OrderType.Favorite).build();
-        postRepository.findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(postCriteria);
+        PostCriteria postCriteria = PostCriteria.builder().withSport(Sport.Badminton).withCity(City.Seoul).withRecruit(false).withOrderType(OrderType.Favorite).build();
+        postRepository.findByCriteria(postCriteria);
     }
 }

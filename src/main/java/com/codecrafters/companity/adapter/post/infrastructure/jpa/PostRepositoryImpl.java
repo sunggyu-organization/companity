@@ -11,6 +11,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -27,8 +28,8 @@ public class PostRepositoryImpl implements PostRepository {
 
     @Override
     public Post add(Post post) {
-        PostEntity save = postJPARepository.save(POST_MAPPER.domainToEntity(post));
-        return POST_MAPPER.entityToDomain(save);
+        PostEntity save = postJPARepository.save(POST_MAPPER.toEntity(post));
+        return POST_MAPPER.toDomain(save);
     }
 
     @Override
@@ -36,7 +37,7 @@ public class PostRepositoryImpl implements PostRepository {
         PostEntity entity = postJPARepository.findById(id).orElseThrow(() -> {
             throw new IllegalArgumentException("존재하지 않는 게시물입니다.");
         });
-        return POST_MAPPER.entityToDomain(entity);
+        return POST_MAPPER.toDomain(entity);
     }
 
     @Override
@@ -54,18 +55,30 @@ public class PostRepositoryImpl implements PostRepository {
         });
         entity.update(postForUpdate);
         postJPARepository.save(entity);
-        return POST_MAPPER.entityToDomain(entity);
+        return POST_MAPPER.toDomain(entity);
     }
 
     @Override
-    public List<Post> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(PostCriteria postCriteria) {
+    public List<Post> findByCriteria(PostCriteria postCriteria) {
         List<PostEntity> postEntities = jpaQueryFactory.selectFrom(postEntity)
-                .where(eqSport(postCriteria.getSport()),
+                .where(likeTitle(postCriteria.getTitle()),
+                        likeContent(postCriteria.getContent()),
+                        eqSport(postCriteria.getSport()),
                         eqCity(postCriteria.getCity()),
-                        postEntity.recruit.eq(postCriteria.isRecruit()))
+                        eqRecruit(postCriteria.getRecruit()))
                 .orderBy(getOrderBy(postCriteria.getOrderType()))
                 .fetch();
-        return POST_MAPPER.entitiesToDomains(postEntities);
+        return POST_MAPPER.toDomains(postEntities);
+    }
+
+    private BooleanExpression likeTitle(String title){
+        if(!StringUtils.hasText(title)) return null;
+        return postEntity.title.contains(title);
+    }
+
+    private BooleanExpression likeContent(String content){
+        if(!StringUtils.hasText(content)) return null;
+        return postEntity.content.contains(content);
     }
 
     private BooleanExpression eqSport(Sport sport){
@@ -76,6 +89,11 @@ public class PostRepositoryImpl implements PostRepository {
     private BooleanExpression eqCity(City city){
         if(city == null) return null;
         return postEntity.city.eq(city);
+    }
+
+    private BooleanExpression eqRecruit(Boolean recruit){
+        if(recruit == null) return null;
+        return postEntity.recruit.eq(recruit);
     }
 
     private OrderSpecifier getOrderBy(OrderType orderType){

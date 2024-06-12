@@ -32,7 +32,7 @@ public class PostController {
         //TODO need to use user use case
         User user = getUser();
         Post result = postUseCase.add(requestPost.toPostCreateDto(), user);
-        ResponsePost responsePost = POST_MAPPER.toResponsePost(result);
+        ResponsePost responsePost = POST_MAPPER.toDto(result);
         return new ResponseEntity<>(responsePost, HttpStatus.OK);
     }
 
@@ -45,19 +45,20 @@ public class PostController {
     @PutMapping
     public ResponseEntity<ResponsePost> update(@RequestBody RequestForUpdatingPost requestPost){
         Post result = postUseCase.update(requestPost.toPostUpdateDto());
-        ResponsePost responsePost = POST_MAPPER.toResponsePost(result);
+        ResponsePost responsePost = POST_MAPPER.toDto(result);
         return new ResponseEntity<>(responsePost, HttpStatus.OK);
     }
 
-    @GetMapping("/")
-    public ResponseEntity<List<ResponsePost>> getAll(@RequestBody PostCriteria criteria){
-        //TODO need to implement
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<List<ResponsePost>> getList(@RequestBody PostCriteria criteria){
+        List<Post> result = postRepository.findByCriteria(criteria);
+        List<ResponsePost> responsePosts = POST_MAPPER.toDtos(result);
+        return new ResponseEntity<>(responsePosts, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponsePost> getDetail(@PathVariable("id") Long id){
-        ResponsePost result = POST_MAPPER.toResponsePost(postRepository.getPost(id));
+        ResponsePost result = POST_MAPPER.toDto(postRepository.getPost(id));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

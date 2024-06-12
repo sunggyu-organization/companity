@@ -1,6 +1,5 @@
 package com.codecrafters.companity.adapter.post.dto.response;
 
-import com.codecrafters.companity.adapter.user.ResponseUser;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,5 +19,5 @@ public class ResponsePost {
     private LocalDateTime modifiedAt;
     private boolean recruit;
     private int likeCount;
-    private ResponseUser owner;
+    private String ownerName;
 }
