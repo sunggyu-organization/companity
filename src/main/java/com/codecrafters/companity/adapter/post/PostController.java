@@ -7,6 +7,7 @@ import com.codecrafters.companity.adapter.post.dto.response.ResponsePost;
 import com.codecrafters.companity.application.in.post.PostUseCase;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
+import com.codecrafters.companity.domain.post.PostForUpdate;
 import com.codecrafters.companity.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +45,8 @@ public class PostController {
 
     @PutMapping
     public ResponseEntity<ResponsePost> update(@RequestBody RequestForUpdatingPost requestPost){
-        Post result = postUseCase.update(requestPost.toPostUpdateDto());
+        PostForUpdate postForUpdate = requestPost.toPostUpdateDto(getUser());
+        Post result = postUseCase.update(postForUpdate);
         ResponsePost responsePost = POST_MAPPER.toResponsePost(result);
         return new ResponseEntity<>(responsePost, HttpStatus.OK);
     }

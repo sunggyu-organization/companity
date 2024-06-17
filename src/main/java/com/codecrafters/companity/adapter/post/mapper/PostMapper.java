@@ -9,6 +9,7 @@ import com.codecrafters.companity.domain.post.PostForCreate;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.post.PostForUpdate;
+import com.codecrafters.companity.domain.user.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.control.DeepClone;
@@ -21,7 +22,8 @@ public interface PostMapper {
     PostMapper POST_MAPPER = Mappers.getMapper(PostMapper.class);
 
     PostForCreate toPostForCreate(RequestForCreatingPost dto);
-    PostForUpdate toPostForUpdate(RequestForUpdatingPost dto);
+    @Mapping(target = "owner", source = "user")
+    PostForUpdate toPostForUpdate(RequestForUpdatingPost dto, User user);
 
     Post entityToDomain(PostEntity entity);
     List<Post> entitiesToDomains(List<PostEntity> entities);
