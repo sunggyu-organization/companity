@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Builder
-public class Post {
+public class Post implements Cloneable{
     private User owner;
     private Long id;
     private String title;
@@ -21,4 +21,25 @@ public class Post {
     private LocalDateTime modifiedAt;
     private Boolean recruit;
     private Integer likeCount;
+
+    @Override
+    public Post clone() {
+        try {
+            super.clone();
+            return Post.builder()
+                    .owner(owner.clone())
+                    .id(id)
+                    .title(title)
+                    .city(city)
+                    .sport(sport)
+                    .content(content)
+                    .createdAt(createdAt)
+                    .modifiedAt(modifiedAt)
+                    .recruit(recruit)
+                    .likeCount(likeCount)
+                    .build();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

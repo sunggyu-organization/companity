@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.codecrafters.companity.adapter.post.mapper.PostMapper.POST_MAPPER;
+import static com.codecrafters.companity.adapter.post.PostMapper.POST_MAPPER;
 
 
 @RestController
@@ -61,7 +61,7 @@ public class PostController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponsePost> getDetail(@PathVariable("id") Long id){
-        ResponsePost result = POST_MAPPER.toDto(postRepository.getPost(id));
+        ResponsePost result = POST_MAPPER.toDto(postUseCase.get(id));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

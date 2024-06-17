@@ -26,4 +26,9 @@ public class PostService implements PostUseCase {
         postForUpdate.validate();
         return postRepository.update(postForUpdate);
     }
+
+    @Override
+    public Post get(Long postId) {
+        return postRepository.getPost(postId);
+    }
 }

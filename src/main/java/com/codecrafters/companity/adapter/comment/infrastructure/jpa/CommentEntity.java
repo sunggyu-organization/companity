@@ -1,15 +1,16 @@
-package com.codecrafters.companity.adapter.infrastructure.jpa.comment;
+package com.codecrafters.companity.adapter.comment.infrastructure.jpa;
 
-import com.codecrafters.companity.adapter.infrastructure.jpa.common.BaseTimeEntity;
+import com.codecrafters.companity.adapter.common.infrastructure.jpa.BaseTimeEntity;
 import com.codecrafters.companity.adapter.post.infrastructure.jpa.PostEntity;
 import com.codecrafters.companity.adapter.user.infrastructure.jpa.UserEntity;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity(name = "Comment")
 @Getter
-@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CommentEntity extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

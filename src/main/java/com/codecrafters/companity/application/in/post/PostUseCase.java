@@ -9,4 +9,6 @@ public interface PostUseCase {
     Post add(PostForCreate postForCreate, User user);
 
     Post update(PostForUpdate postForUpdate);
+
+    Post get(Long postId);
 }
