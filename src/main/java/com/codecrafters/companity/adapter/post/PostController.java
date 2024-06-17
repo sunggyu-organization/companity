@@ -33,7 +33,7 @@ public class PostController {
         User user = getUser();
         Post result = postUseCase.add(requestPost.toPostCreateDto(), user);
         ResponsePost responsePost = POST_MAPPER.toResponsePost(result);
-        return new ResponseEntity<>(responsePost, HttpStatus.OK);
+        return new ResponseEntity<>(responsePost, HttpStatus.CREATED);
     }
 
     private User getUser(){
