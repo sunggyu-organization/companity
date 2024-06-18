@@ -31,6 +31,15 @@ public class PostService implements PostUseCase {
     }
 
     @Override
+    public void delete(Long id, User user) {
+        Post target = postRepository.getById(id);
+        if (user == null || !target.getOwner().getUserId().equals(user.getUserId())){
+            throw new IllegalArgumentException("writer can only delete.");
+        }
+        postRepository.delete(id);
+    }
+
+    @Override
     public List<Post> findByCriteria(PostCriteria postCriteria) {
         //TODO need to make pagination
         return postRepository.findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(postCriteria);

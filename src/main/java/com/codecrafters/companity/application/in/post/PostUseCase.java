@@ -12,5 +12,7 @@ public interface PostUseCase {
     Post add(PostForCreate postForCreate, User user);
 
     Post update(PostForUpdate postForUpdate);
+
+    void delete(Long id, User user);
     List<Post> findByCriteria(PostCriteria postCriteria);
 }
