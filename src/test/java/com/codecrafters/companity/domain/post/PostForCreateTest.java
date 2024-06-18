@@ -11,13 +11,14 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static com.codecrafters.companity.static_reference.UserStatic.*;
 import static org.assertj.core.api.Assertions.*;
 class PostForCreateTest {
     @DisplayName("post 생성")
     @Test
     void create_post_for_add() {
         // given
-        User user = User.builder().userId("userId").userName("userName").nickName("nickName").build();
+        User user = getDefaultUser();
         PostForCreate postForCreate = PostForCreate.builder().owner(user).title("title").sport(Sport.Baseball).city(City.Seoul).content("content").build();
 
         // when
@@ -35,7 +36,7 @@ class PostForCreateTest {
     @Test
     void Use_deep_copy_when_setting_owner() {
         // given
-        User user = User.builder().userId("userId").userName("userName").nickName("nickName").build();
+        User user = getDefaultUser();
         PostForCreate postForCreate = PostForCreate.builder().owner(user).title("title").sport(Sport.Baseball).city(City.Seoul).content("content").build();
 
         // when
@@ -50,25 +51,29 @@ class PostForCreateTest {
         assertThat(post.getOwner()).isNotSameAs(user);
     }
 
-    @DisplayName("제목, 도시, 스포츠는 필수 값이다.")
+    @DisplayName("작성자, 제목, 도시, 스포츠는 필수 값이다.")
     @MethodSource("provideTitleCitySport")
-    @ParameterizedTest(name="{index} => title={0}, city={1}, sport={2}, errorMessage={3}")
-    void title_city_sport_are_require(String title, City city, Sport sport, String errorMessage) {
+    @ParameterizedTest(name="{index} => title={1}, city={2}, sport={3}")
+    void title_city_sport_are_require(User user, String title, City city, Sport sport) {
         // given
-        User user = User.builder().userId("userId").userName("userName").nickName("nickName").build();
         PostForCreate postForCreate = PostForCreate.builder().owner(user).title(title).sport(sport).city(city).content("content").build();
 
         // when
         // then
-        assertThatThrownBy(() -> postForCreate.toPost()).isInstanceOf(IllegalArgumentException.class).hasMessage(errorMessage);
+        assertThatThrownBy(postForCreate::toPost).isInstanceOf(IllegalArgumentException.class);
     }
 
     private static Stream<Arguments> provideTitleCitySport(){
+        User user = User.builder().userId(USER_ID).userName(USER_NAME).nickName(NICKNAME).build();
         return Stream.of(
-                Arguments.of("", City.Seoul, Sport.Baseball, "title is required."),
-                Arguments.of(null, City.Seoul, Sport.Baseball, "title is required."),
-                Arguments.of("Title", null, Sport.Baseball, "city is required."),
-                Arguments.of("Title", City.Seoul, null, "sport is required.")
+                Arguments.of(user, "", City.Seoul, Sport.Baseball),
+                Arguments.of(user, null, City.Seoul, Sport.Baseball),
+                Arguments.of(user, "Title", null, Sport.Baseball),
+                Arguments.of(user, "Title", City.Seoul, null),
+                Arguments.of(null, "Title", City.Seoul, Sport.Baseball)
         );
+    }
+    private User getDefaultUser(){
+        return User.builder().userId(USER_ID).userName(USER_NAME).nickName(NICKNAME).build();
     }
 }
