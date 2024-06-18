@@ -5,12 +5,11 @@ import com.codecrafters.companity.domain.post.PostForCreate;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.domain.post.PostForDelete;
 import com.codecrafters.companity.domain.post.PostForUpdate;
-import com.codecrafters.companity.domain.user.User;
 
 import java.util.List;
 
 public interface PostUseCase {
-    Post add(PostForCreate postForCreate, User user);
+    Post add(PostForCreate postForCreate);
 
     Post update(PostForUpdate postForUpdate);
 

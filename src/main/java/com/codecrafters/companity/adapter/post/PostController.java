@@ -34,7 +34,7 @@ public class PostController {
     public ResponseEntity<ResponsePost> add(@RequestBody RequestForCreatingPost requestPost){
         //TODO need to use user use case
         User user = getUser();
-        Post result = postUseCase.add(PostMapper.POST_MAPPER.toPostForCreate(requestPost), user);
+        Post result = postUseCase.add(PostMapper.POST_MAPPER.toPostForCreate(requestPost, user));
         ResponsePost responsePost = POST_MAPPER.toResponsePost(result);
         return new ResponseEntity<>(responsePost, HttpStatus.CREATED);
     }

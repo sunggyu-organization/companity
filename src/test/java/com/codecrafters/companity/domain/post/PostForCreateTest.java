@@ -17,11 +17,11 @@ class PostForCreateTest {
     @Test
     void create_post_for_add() {
         // given
-        PostForCreate postForCreate = PostForCreate.builder().title("title").sport(Sport.Baseball).city(City.Seoul).content("content").build();
         User user = User.builder().userId("userId").userName("userName").nickName("nickName").build();
+        PostForCreate postForCreate = PostForCreate.builder().owner(user).title("title").sport(Sport.Baseball).city(City.Seoul).content("content").build();
 
         // when
-        Post post = postForCreate.toPost(user);
+        Post post = postForCreate.toPost();
 
         // then
         assertThat(post.getOwner()).isEqualTo(user);
@@ -35,11 +35,11 @@ class PostForCreateTest {
     @Test
     void Use_deep_copy_when_setting_owner() {
         // given
-        PostForCreate postForCreate = PostForCreate.builder().title("title").sport(Sport.Baseball).city(City.Seoul).content("content").build();
         User user = User.builder().userId("userId").userName("userName").nickName("nickName").build();
+        PostForCreate postForCreate = PostForCreate.builder().owner(user).title("title").sport(Sport.Baseball).city(City.Seoul).content("content").build();
 
         // when
-        Post post = postForCreate.toPost(user);
+        Post post = postForCreate.toPost();
 
         // then
         assertThat(post.getOwner()).isEqualTo(user);
@@ -55,12 +55,12 @@ class PostForCreateTest {
     @ParameterizedTest(name="{index} => title={0}, city={1}, sport={2}, errorMessage={3}")
     void title_city_sport_are_require(String title, City city, Sport sport, String errorMessage) {
         // given
-        PostForCreate postForCreate = PostForCreate.builder().title(title).sport(sport).city(city).content("content").build();
         User user = User.builder().userId("userId").userName("userName").nickName("nickName").build();
+        PostForCreate postForCreate = PostForCreate.builder().owner(user).title(title).sport(sport).city(city).content("content").build();
 
         // when
         // then
-        assertThatThrownBy(() -> postForCreate.toPost(user)).isInstanceOf(IllegalArgumentException.class).hasMessage(errorMessage);
+        assertThatThrownBy(() -> postForCreate.toPost()).isInstanceOf(IllegalArgumentException.class).hasMessage(errorMessage);
     }
 
     private static Stream<Arguments> provideTitleCitySport(){

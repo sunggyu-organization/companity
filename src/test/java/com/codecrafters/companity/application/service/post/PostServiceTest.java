@@ -32,11 +32,11 @@ class PostServiceTest {
     @Test
     void add() {
         //given
-        PostForCreate postForCreate = getDefaultPost();
         User user = getDefaultUser();
+        PostForCreate postForCreate = getDefaultPost(user);
 
         // when
-        Long savedId = postService.add(postForCreate, user).getId();
+        Long savedId = postService.add(postForCreate).getId();
         Post post = postRepository.getById(savedId);
 
         // then
@@ -49,8 +49,9 @@ class PostServiceTest {
         assertThat(post.getLikeCount()).isEqualTo(0);
     }
 
-    private PostForCreate getDefaultPost(){
+    private PostForCreate getDefaultPost(User user){
         return PostForCreate.builder()
+                .owner(user)
                 .title(TITLE)
                 .city(CITY)
                 .content(CONTENT)

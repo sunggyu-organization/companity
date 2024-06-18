@@ -19,9 +19,11 @@ import java.util.List;
 
 @Mapper(mappingControl = DeepClone.class)
 public interface PostMapper {
+
     PostMapper POST_MAPPER = Mappers.getMapper(PostMapper.class);
 
-    PostForCreate toPostForCreate(RequestForCreatingPost dto);
+    @Mapping(target = "owner", source = "user")
+    PostForCreate toPostForCreate(RequestForCreatingPost dto, User user);
     @Mapping(target = "owner", source = "user")
     PostForUpdate toPostForUpdate(RequestForUpdatingPost dto, User user);
 
