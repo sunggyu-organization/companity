@@ -26,7 +26,7 @@ public class PostService implements PostUseCase {
 
     @Override
     public Post update(PostForUpdate postForUpdate) {
-        Post post = postRepository.getPost(postForUpdate.getId());
+        Post post = postRepository.getById(postForUpdate.getId());
         return postRepository.update(postForUpdate.toPost(post));
     }
 

@@ -59,7 +59,7 @@ public class PostController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponsePost> getDetail(@PathVariable("id") Long id){
-        ResponsePost result = POST_MAPPER.toResponsePost(postRepository.getPost(id));
+        ResponsePost result = POST_MAPPER.toResponsePost(postRepository.getById(id));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

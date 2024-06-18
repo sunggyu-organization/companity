@@ -34,7 +34,7 @@ class PostServiceTest {
 
         // when
         Long savedId = postService.add(postForCreate, user).getId();
-        Post post = postRepository.getPost(savedId);
+        Post post = postRepository.getById(savedId);
 
         // then
         assertThat(post.getOwner()).isEqualTo(user);

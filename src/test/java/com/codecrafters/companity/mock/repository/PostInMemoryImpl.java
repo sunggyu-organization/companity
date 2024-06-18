@@ -32,7 +32,7 @@ public class PostInMemoryImpl implements PostRepository {
     }
 
     @Override
-    public Post getPost(Long id) {
+    public Post getById(Long id) {
         if(!repository.containsKey(id)) throw new IllegalArgumentException();
         PostEntity entity = repository.get(id);
         return toPost(entity);

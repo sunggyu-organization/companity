@@ -7,7 +7,7 @@ import java.util.List;
 public interface PostRepository {
     Post add(Post post);
 
-    Post getPost(Long id);
+    Post getById(Long id);
 
     Post update(Post post);
 
