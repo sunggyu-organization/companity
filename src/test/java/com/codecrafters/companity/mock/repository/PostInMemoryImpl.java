@@ -54,7 +54,8 @@ public class PostInMemoryImpl implements PostRepository {
 
     @Override
     public void delete(Long id) {
-
+        if(!repository.containsKey(id)) throw new IllegalArgumentException();
+        repository.remove(id);
     }
 
     private UserEntity toUserEntity(User user){

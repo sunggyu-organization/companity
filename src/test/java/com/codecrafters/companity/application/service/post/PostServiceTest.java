@@ -6,6 +6,7 @@ import com.codecrafters.companity.mock.repository.PostInMemoryImpl;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.domain.user.User;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 
@@ -27,8 +28,10 @@ class PostServiceTest {
         postService = new PostService(postRepository);
     }
 
+    @DisplayName("게시물 추가")
     @Test
     void add() {
+        //given
         PostForCreate postForCreate = getDefaultPost();
         User user = getDefaultUser();
 

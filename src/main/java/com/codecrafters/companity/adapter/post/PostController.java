@@ -7,6 +7,7 @@ import com.codecrafters.companity.adapter.post.dto.response.ResponsePost;
 import com.codecrafters.companity.application.in.post.PostUseCase;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
+import com.codecrafters.companity.domain.post.PostForDelete;
 import com.codecrafters.companity.domain.post.PostForUpdate;
 import com.codecrafters.companity.domain.user.User;
 import lombok.RequiredArgsConstructor;
@@ -65,7 +66,7 @@ public class PostController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable("id") Long id){
-        postUseCase.delete(id, getUser());
+        postUseCase.delete(PostForDelete.builder().postId(id).owner(getUser()).build());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

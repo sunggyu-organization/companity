@@ -5,6 +5,7 @@ import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.post.PostForCreate;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
+import com.codecrafters.companity.domain.post.PostForDelete;
 import com.codecrafters.companity.domain.post.PostForUpdate;
 import com.codecrafters.companity.domain.user.User;
 import lombok.RequiredArgsConstructor;
@@ -31,12 +32,10 @@ public class PostService implements PostUseCase {
     }
 
     @Override
-    public void delete(Long id, User user) {
-        Post target = postRepository.getById(id);
-        if (user == null || !target.getOwner().getUserId().equals(user.getUserId())){
-            throw new IllegalArgumentException("writer can only delete.");
-        }
-        postRepository.delete(id);
+    public void delete(PostForDelete postForDelete) {
+        Post target = postRepository.getById(postForDelete.getPostId());
+        postForDelete.validate(target);
+        postRepository.delete(target.getId());
     }
 
     @Override
