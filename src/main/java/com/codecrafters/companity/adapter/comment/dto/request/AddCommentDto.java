@@ -1,6 +1,8 @@
 package com.codecrafters.companity.adapter.comment.dto.request;
 
 import com.codecrafters.companity.domain.Comment.AddingComment;
+import com.codecrafters.companity.domain.post.Post;
+import com.codecrafters.companity.domain.user.User;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,7 +14,7 @@ public class AddCommentDto {
     private Long postId;
     private String content;
 
-    public AddingComment toAddingComment(){
-        return AddingComment.builder().content(content).build();
+    public AddingComment toAddingComment(Post post, User user){
+        return AddingComment.builder().post(post).user(user).content(content).build();
     }
 }

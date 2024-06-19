@@ -26,17 +26,14 @@ public class CommentController {
     private final PostUseCase postUseCase;
     @PostMapping
     public ResponseEntity<ResponseComment> add(@RequestBody AddCommentDto request){
-        //TODO need to use user use case
-        User user = getUser();
         Post post = postUseCase.get(request.getPostId());
-        Comment result = commentUseCase.add(request.toAddingComment(), post, user);
+        Comment result = commentUseCase.add(request.toAddingComment(post, getUser()));
         ResponseComment responsePost = COMMENT_MAPPER.toDto(result);
         return new ResponseEntity<>(responsePost, HttpStatus.CREATED);
     }
 
+    //FIXME need to implement about get user
     private User getUser(){
-        //FIXME need to implement about get user
-        //maybe we should use userUseCase -> userUseCase.getUser();
         return User.builder().userId("shtjdrb").userName("노성규").nickName("안녕").build();
     }
 }
