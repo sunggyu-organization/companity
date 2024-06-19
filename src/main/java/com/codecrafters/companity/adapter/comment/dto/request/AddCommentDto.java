@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class AddedCommentDto {
+public class AddCommentDto {
     private Long postId;
     private String content;
 
