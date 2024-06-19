@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static com.codecrafters.companity.static_reference.UserStatic.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 public class UserTest {
 
@@ -17,11 +20,11 @@ public class UserTest {
          User user = User.from(request);
 
          //then
-         Assertions.assertAll(() -> {
-             Assertions.assertEquals(request.getUserId(), user.getUserId());
-             Assertions.assertEquals(request.getUserName(), user.getUserName());
-             Assertions.assertEquals(request.getNickName(), user.getNickName());
-         });
+        assertSoftly(softAssertions -> {
+            assertThat(user.getUserId()).isEqualTo(request.getUserId());
+            assertThat(user.getUserName()).isEqualTo(request.getUserName());
+            assertThat(user.getNickName()).isEqualTo(request.getNickName());
+        });
     }
 
     @Test
@@ -34,9 +37,11 @@ public class UserTest {
         //when
 
         //then
-        Assertions.assertThrows(IllegalArgumentException.class, () -> userCase1.validateCreateUser());
-        Assertions.assertThrows(IllegalArgumentException.class, () -> userCase2.validateCreateUser());
-        Assertions.assertThrows(IllegalArgumentException.class, () -> userCase3.validateCreateUser());
+        assertSoftly(softAssertions -> {
+            assertThatThrownBy(userCase1::validateCreateUser).isInstanceOf(IllegalArgumentException.class).hasMessage("userId is required.");
+            assertThatThrownBy(userCase2::validateCreateUser).isInstanceOf(IllegalArgumentException.class).hasMessage("userName is required.");
+            assertThatThrownBy(userCase3::validateCreateUser).isInstanceOf(IllegalArgumentException.class).hasMessage("userId is required.");
+        });
     }
 
     @Test
@@ -52,10 +57,10 @@ public class UserTest {
         user.updateNickName("NEW_NICK_NAME");
 
         //then
-        Assertions.assertAll(() -> {
-            Assertions.assertEquals(USER_ID, user.getUserId());
-            Assertions.assertEquals(USER_NAME, user.getUserName());
-            Assertions.assertEquals("NEW_NICK_NAME", user.getNickName());
+        assertSoftly(softAssertions -> {
+            assertThat(user.getUserId()).isEqualTo(USER_ID);
+            assertThat(user.getUserName()).isEqualTo(USER_NAME);
+            assertThat(user.getNickName()).isEqualTo("NEW_NICK_NAME");
         });
     }
 }

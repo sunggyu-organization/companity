@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static com.codecrafters.companity.static_reference.UserStatic.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 public class UserServiceTest {
 
@@ -29,10 +31,10 @@ public class UserServiceTest {
         User user = userService.signUp(request);
 
         //then
-        Assertions.assertAll(() -> {
-            Assertions.assertEquals(request.getUserId(), user.getUserId());
-            Assertions.assertEquals(request.getUserName(), user.getUserName());
-            Assertions.assertEquals(request.getNickName(), user.getNickName());
+        assertSoftly(softAssertions -> {
+            assertThat(user.getUserId()).isEqualTo(request.getUserId());
+            assertThat(user.getUserName()).isEqualTo(request.getUserName());
+            assertThat(user.getNickName()).isEqualTo(request.getNickName());
         });
     }
 
@@ -46,10 +48,10 @@ public class UserServiceTest {
         User newUser = userService.updateNickName(userId, newNickName);
 
         //then
-        Assertions.assertAll(() -> {
-            Assertions.assertEquals(userId, newUser.getUserId());
-            Assertions.assertEquals(USER_NAME, newUser.getUserName());
-            Assertions.assertEquals(newNickName, newUser.getNickName());
+        assertSoftly(softAssertions -> {
+            assertThat(newUser.getUserId()).isEqualTo(userId);
+            assertThat(newUser.getUserName()).isEqualTo(USER_NAME);
+            assertThat(newUser.getNickName()).isEqualTo(newNickName);
         });
     }
 
