@@ -7,10 +7,15 @@ import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.post.*;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -27,8 +32,8 @@ public class PostRepositoryImpl implements PostRepository {
 
     @Override
     public Post add(Post post) {
-        PostEntity save = postJPARepository.save(POST_MAPPER.domainToEntity(post));
-        return POST_MAPPER.entityToDomain(save);
+        PostEntity save = postJPARepository.save(POST_MAPPER.toEntity(post));
+        return POST_MAPPER.toDomain(save);
     }
 
     @Override
@@ -36,7 +41,7 @@ public class PostRepositoryImpl implements PostRepository {
         PostEntity entity = postJPARepository.findById(id).orElseThrow(() -> {
             throw new IllegalArgumentException("존재하지 않는 게시물입니다.");
         });
-        return POST_MAPPER.entityToDomain(entity);
+        return POST_MAPPER.toDomain(entity);
     }
 
     @Override
@@ -54,18 +59,39 @@ public class PostRepositoryImpl implements PostRepository {
         });
         entity.update(post);
         postJPARepository.save(entity);
-        return POST_MAPPER.entityToDomain(entity);
+        return POST_MAPPER.toDomain(entity);
     }
 
     @Override
-    public List<Post> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(PostCriteria postCriteria) {
-        List<PostEntity> postEntities = jpaQueryFactory.selectFrom(postEntity)
-                .where(eqSport(postCriteria.getSport()),
+    public Page<Post> findByCriteria(PostCriteria postCriteria, Pageable pageable) {
+        JPAQuery<PostEntity> basicQuery = jpaQueryFactory
+                .selectFrom(postEntity)
+                .where(likeTitle(postCriteria.getTitle()),
+                        likeContent(postCriteria.getContent()),
+                        eqSport(postCriteria.getSport()),
                         eqCity(postCriteria.getCity()),
-                        postEntity.recruit.eq(postCriteria.isRecruit()))
-                .orderBy(getOrderBy(postCriteria.getOrderType()))
+                        eqRecruit(postCriteria.getRecruit()))
+                .orderBy(getOrderBy(postCriteria.getOrderType()));
+
+        List<PostEntity> postEntities = basicQuery.clone()
+                .leftJoin(postEntity.owner)
+                .fetchJoin()
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .fetch();
-        return POST_MAPPER.entitiesToDomains(postEntities);
+
+        //FIXME need to change deprecated method
+        return PageableExecutionUtils.getPage(POST_MAPPER.toDomains(postEntities), pageable, basicQuery::fetchCount);
+    }
+
+    private BooleanExpression likeTitle(String title){
+        if(!StringUtils.hasText(title)) return null;
+        return postEntity.title.contains(title);
+    }
+
+    private BooleanExpression likeContent(String content){
+        if(!StringUtils.hasText(content)) return null;
+        return postEntity.content.contains(content);
     }
 
     private BooleanExpression eqSport(Sport sport){
@@ -76,6 +102,11 @@ public class PostRepositoryImpl implements PostRepository {
     private BooleanExpression eqCity(City city){
         if(city == null) return null;
         return postEntity.city.eq(city);
+    }
+
+    private BooleanExpression eqRecruit(Boolean recruit){
+        if(recruit == null) return null;
+        return postEntity.recruit.eq(recruit);
     }
 
     private OrderSpecifier getOrderBy(OrderType orderType){

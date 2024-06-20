@@ -1,8 +1,8 @@
 package com.codecrafters.companity.application.out.persistence;
 
 import com.codecrafters.companity.domain.post.Post;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface PostRepository {
     Post add(Post post);
@@ -11,7 +11,7 @@ public interface PostRepository {
 
     Post update(Post post);
 
-    List<Post> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(PostCriteria postCriteria);
+    Page<Post> findByCriteria(PostCriteria postCriteria, Pageable pageable);
 
     void delete(Long id);
 }

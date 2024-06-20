@@ -23,17 +23,23 @@ public interface PostMapper {
     PostMapper POST_MAPPER = Mappers.getMapper(PostMapper.class);
 
     @Mapping(target = "owner", source = "user")
-    PostForCreate toPostForCreate(RequestForCreatingPost dto, User user);
+    PostForCreate toDomain(RequestForCreatingPost dto, User user);
     @Mapping(target = "owner", source = "user")
-    PostForUpdate toPostForUpdate(RequestForUpdatingPost dto, User user);
+    PostForUpdate toDomain(RequestForUpdatingPost dto, User user);
 
-    Post entityToDomain(PostEntity entity);
-    List<Post> entitiesToDomains(List<PostEntity> entities);
-    PostEntity domainToEntity(Post domain);
+    Post toDomain(PostEntity entity);
+    List<Post> toDomains(List<PostEntity> entities);
+    PostEntity toEntity(Post domain);
 
     @Mapping(source = "sport", target = "sportsNo")
     @Mapping(source = "city", target = "cityNo")
-    ResponsePost toResponsePost(Post post);
+    @Mapping(source = "owner.userName", target = "ownerName")
+    ResponsePost toDto(Post post);
+
+    @Mapping(source = "sport", target = "sportsNo")
+    @Mapping(source = "city", target = "cityNo")
+    @Mapping(source = "owner.userName", target = "ownerName")
+    List<ResponsePost> toDtos(List<Post> post);
 
     default int sportToSportsNo(Sport sport){
         return sport.getNo();

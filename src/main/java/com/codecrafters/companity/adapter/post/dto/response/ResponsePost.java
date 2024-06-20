@@ -1,6 +1,5 @@
 package com.codecrafters.companity.adapter.post.dto.response;
 
-import com.codecrafters.companity.adapter.user.ResponseUser;
 import com.codecrafters.companity.domain.post.Post;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +8,6 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 
 import static com.codecrafters.companity.adapter.post.mapper.PostMapper.POST_MAPPER;
-
 @Setter
 @Getter
 @ToString
@@ -23,10 +21,9 @@ public class ResponsePost {
     private LocalDateTime modifiedAt;
     private boolean recruit;
     private int likeCount;
-    private ResponseUser owner;
-
+    private String ownerName;
 
     public static ResponsePost toDomain(Post post) {
-        return POST_MAPPER.toResponsePost(post);
+        return POST_MAPPER.toDto(post);
     }
 }

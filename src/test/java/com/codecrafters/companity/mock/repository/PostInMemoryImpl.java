@@ -6,8 +6,9 @@ import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.user.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -48,7 +49,7 @@ public class PostInMemoryImpl implements PostRepository {
     }
 
     @Override
-    public List<Post> findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(PostCriteria postCriteria) {
+    public Page<Post> findByCriteria(PostCriteria postCriteria, Pageable pageable) {
         return null;
     }
 

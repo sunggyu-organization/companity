@@ -12,11 +12,14 @@ import com.codecrafters.companity.domain.post.PostForUpdate;
 import com.codecrafters.companity.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import static com.codecrafters.companity.adapter.post.mapper.PostMapper.POST_MAPPER;
 
 @RestController
 @RequestMapping("/posts")
@@ -29,8 +32,7 @@ public class PostController {
     @PostMapping
     public ResponseEntity<ResponsePost> add(@RequestBody RequestForCreatingPost requestPost){
         //TODO need to use user use case
-        User user = getUser();
-        Post result = postUseCase.add(requestPost.toPostForCreate(user));
+        Post result = postUseCase.add(requestPost.toPostForCreate(getUser()));
         return new ResponseEntity<>(ResponsePost.toDomain(result), HttpStatus.CREATED);
     }
 
@@ -47,10 +49,11 @@ public class PostController {
         return new ResponseEntity<>(ResponsePost.toDomain(result), HttpStatus.OK);
     }
 
-    @GetMapping("/")
-    public ResponseEntity<List<ResponsePost>> getAll(@RequestBody PostCriteria criteria){
-        //TODO need to implement
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<Page<ResponsePost>> getList(@RequestBody PostCriteria criteria, Pageable pageable){
+        Page<Post> result = postRepository.findByCriteria(criteria, pageable);
+        List<ResponsePost> content = POST_MAPPER.toDtos(result.getContent());
+        return new ResponseEntity<>(new PageImpl<>(content, result.getPageable(), result.getTotalElements()), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

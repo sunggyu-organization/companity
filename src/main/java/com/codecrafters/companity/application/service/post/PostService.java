@@ -3,15 +3,12 @@ package com.codecrafters.companity.application.service.post;
 import com.codecrafters.companity.application.in.post.PostUseCase;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.post.PostForCreate;
-import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.domain.post.PostForDelete;
 import com.codecrafters.companity.domain.post.PostForUpdate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -35,11 +32,5 @@ public class PostService implements PostUseCase {
         Post target = postRepository.getById(postForDelete.getPostId());
         postForDelete.validate(target);
         postRepository.delete(target.getId());
-    }
-
-    @Override
-    public List<Post> findByCriteria(PostCriteria postCriteria) {
-        //TODO need to make pagination
-        return postRepository.findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(postCriteria);
     }
 }

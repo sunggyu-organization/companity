@@ -18,6 +18,6 @@ public class RequestForUpdatingPost {
     private String content;
 
     public PostForUpdate toPostForCreate(User user){
-        return PostMapper.POST_MAPPER.toPostForUpdate(this, user);
+        return PostMapper.POST_MAPPER.toDomain(this, user);
     }
 }
