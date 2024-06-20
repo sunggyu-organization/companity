@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Getter
 @Builder
@@ -41,5 +42,21 @@ public class Post implements Cloneable{
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Post post)) return false;
+        return Objects.equals(owner, post.getOwner())
+                && Objects.equals(id, post.getId())
+                && Objects.equals(title, post.getTitle())
+                && Objects.equals(city, post.getCity())
+                && Objects.equals(sport, post.getSport())
+                && Objects.equals(content, post.getContent())
+                && Objects.equals(createdAt, post.getCreatedAt())
+                && Objects.equals(modifiedAt, post.getModifiedAt())
+                && Objects.equals(recruit, post.getRecruit())
+                && Objects.equals(likeCount, post.getLikeCount());
     }
 }
