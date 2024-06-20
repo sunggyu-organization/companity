@@ -10,12 +10,13 @@ import org.springframework.util.StringUtils;
 @Getter
 @Builder
 public class PostForCreate {
+    private User owner;
     private String title;
     private City city;
     private Sport sport;
     private String content;
 
-    public Post toPost(User owner){
+    public Post toPost(){
         validate();
         return Post.builder()
                 .title(title)
@@ -29,6 +30,7 @@ public class PostForCreate {
     }
 
     private void validate(){
+        if (owner == null) throw new IllegalArgumentException("owner is required.");
         if (!StringUtils.hasText(title)) throw new IllegalArgumentException("title is required.");
         if (city == null) throw new IllegalArgumentException("city is required.");
         if (sport == null) throw new IllegalArgumentException("sport is required.");

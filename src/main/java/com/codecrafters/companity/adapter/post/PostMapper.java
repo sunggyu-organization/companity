@@ -9,6 +9,7 @@ import com.codecrafters.companity.domain.post.PostForCreate;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.post.PostForUpdate;
+import com.codecrafters.companity.domain.user.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.control.DeepClone;
@@ -18,10 +19,13 @@ import java.util.List;
 
 @Mapper(mappingControl = DeepClone.class)
 public interface PostMapper {
+
     PostMapper POST_MAPPER = Mappers.getMapper(PostMapper.class);
 
-    PostForCreate toDomain(RequestForCreatingPost dto);
-    PostForUpdate toDomain(RequestForUpdatingPost dto);
+    @Mapping(target = "owner", source = "user")
+    PostForCreate toDomain(RequestForCreatingPost dto, User user);
+    @Mapping(target = "owner", source = "user")
+    PostForUpdate toDomain(RequestForUpdatingPost dto, User user);
 
     Post toDomain(PostEntity entity);
     List<Post> toDomains(List<PostEntity> entities);

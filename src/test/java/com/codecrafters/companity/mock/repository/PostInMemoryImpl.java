@@ -5,7 +5,6 @@ import com.codecrafters.companity.adapter.user.infrastructure.jpa.UserEntity;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.domain.post.Post;
-import com.codecrafters.companity.domain.post.PostForUpdate;
 import com.codecrafters.companity.domain.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,17 +33,17 @@ public class PostInMemoryImpl implements PostRepository {
     }
 
     @Override
-    public Post getPost(Long id) {
+    public Post getById(Long id) {
         if(!repository.containsKey(id)) throw new IllegalArgumentException();
         PostEntity entity = repository.get(id);
         return toPost(entity);
     }
 
     @Override
-    public Post update(PostForUpdate postForUpdate) {
-        PostEntity entity = repository.get(postForUpdate.getId());
+    public Post update(Post post) {
+        PostEntity entity = repository.get(post.getId());
         if(entity == null) throw new IllegalArgumentException("존재하지 않는 게시물입니다.");
-        entity.update(postForUpdate);
+        entity.update(post);
         repository.put(entity.getId(), entity);
         return toPost(entity);
     }
@@ -56,7 +55,8 @@ public class PostInMemoryImpl implements PostRepository {
 
     @Override
     public void delete(Long id) {
-
+        if(!repository.containsKey(id)) throw new IllegalArgumentException();
+        repository.remove(id);
     }
 
     private UserEntity toUserEntity(User user){

@@ -6,6 +6,7 @@ import com.codecrafters.companity.mock.repository.PostInMemoryImpl;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.domain.user.User;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 
@@ -27,14 +28,16 @@ class PostServiceTest {
         postService = new PostService(postRepository);
     }
 
+    @DisplayName("게시물 추가")
     @Test
     void add() {
-        PostForCreate postForCreate = getDefaultPost();
+        //given
         User user = getDefaultUser();
+        PostForCreate postForCreate = getDefaultPost(user);
 
         // when
-        Long savedId = postService.add(postForCreate, user).getId();
-        Post post = postRepository.getPost(savedId);
+        Long savedId = postService.add(postForCreate).getId();
+        Post post = postRepository.getById(savedId);
 
         // then
         assertThat(post.getOwner()).isEqualTo(user);
@@ -46,8 +49,9 @@ class PostServiceTest {
         assertThat(post.getLikeCount()).isEqualTo(0);
     }
 
-    private PostForCreate getDefaultPost(){
+    private PostForCreate getDefaultPost(User user){
         return PostForCreate.builder()
+                .owner(user)
                 .title(TITLE)
                 .city(CITY)
                 .content(CONTENT)

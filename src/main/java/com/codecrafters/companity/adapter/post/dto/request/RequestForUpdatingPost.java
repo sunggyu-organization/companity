@@ -4,6 +4,7 @@ import com.codecrafters.companity.adapter.post.PostMapper;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.post.PostForUpdate;
+import com.codecrafters.companity.domain.user.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +17,7 @@ public class RequestForUpdatingPost {
     private Sport sport;
     private String content;
 
-    public PostForUpdate toPostUpdateDto(){
-        return PostMapper.POST_MAPPER.toDomain(this);
+    public PostForUpdate toPostForCreate(User user){
+        return PostMapper.POST_MAPPER.toDomain(this, user);
     }
 }

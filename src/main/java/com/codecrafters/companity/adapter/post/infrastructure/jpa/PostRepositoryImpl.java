@@ -37,7 +37,7 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
-    public Post getPost(Long id) {
+    public Post getById(Long id) {
         PostEntity entity = postJPARepository.findById(id).orElseThrow(() -> {
             throw new IllegalArgumentException("존재하지 않는 게시물입니다.");
         });
@@ -53,11 +53,11 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
-    public Post update(PostForUpdate postForUpdate) {
-        PostEntity entity = postJPARepository.findById(postForUpdate.getId()).orElseThrow(() -> {
+    public Post update(Post post) {
+        PostEntity entity = postJPARepository.findById(post.getId()).orElseThrow(() -> {
             throw new IllegalArgumentException("존재하지 않는 게시물입니다.");
         });
-        entity.update(postForUpdate);
+        entity.update(post);
         postJPARepository.save(entity);
         return POST_MAPPER.toDomain(entity);
     }

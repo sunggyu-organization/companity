@@ -7,6 +7,8 @@ import com.codecrafters.companity.adapter.post.dto.response.ResponsePost;
 import com.codecrafters.companity.application.in.post.PostUseCase;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
+import com.codecrafters.companity.domain.post.PostForDelete;
+import com.codecrafters.companity.domain.post.PostForUpdate;
 import com.codecrafters.companity.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,11 +18,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
-import static com.codecrafters.companity.adapter.post.PostMapper.POST_MAPPER;
-
+import static com.codecrafters.companity.adapter.post.mapper.PostMapper.POST_MAPPER;
 
 @RestController
 @RequestMapping("/posts")
@@ -33,10 +32,8 @@ public class PostController {
     @PostMapping
     public ResponseEntity<ResponsePost> add(@RequestBody RequestForCreatingPost requestPost){
         //TODO need to use user use case
-        User user = getUser();
-        Post result = postUseCase.add(requestPost.toPostCreateDto(), user);
-        ResponsePost responsePost = POST_MAPPER.toDto(result);
-        return new ResponseEntity<>(responsePost, HttpStatus.OK);
+        Post result = postUseCase.add(requestPost.toPostForCreate(getUser()));
+        return new ResponseEntity<>(ResponsePost.toDomain(result), HttpStatus.CREATED);
     }
 
     private User getUser(){
@@ -47,9 +44,9 @@ public class PostController {
 
     @PutMapping
     public ResponseEntity<ResponsePost> update(@RequestBody RequestForUpdatingPost requestPost){
-        Post result = postUseCase.update(requestPost.toPostUpdateDto());
-        ResponsePost responsePost = POST_MAPPER.toDto(result);
-        return new ResponseEntity<>(responsePost, HttpStatus.OK);
+        PostForUpdate postForUpdate = requestPost.toPostForCreate(getUser());
+        Post result = postUseCase.update(postForUpdate);
+        return new ResponseEntity<>(ResponsePost.toDomain(result), HttpStatus.OK);
     }
 
     @GetMapping
@@ -61,13 +58,13 @@ public class PostController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponsePost> getDetail(@PathVariable("id") Long id){
-        ResponsePost result = POST_MAPPER.toDto(postUseCase.get(id));
+        ResponsePost result = ResponsePost.toDomain(postRepository.getById(id));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable("id") Long id){
-        postRepository.delete(id);
+    public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id){
+        postUseCase.delete(PostForDelete.builder().postId(id).owner(getUser()).build());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
