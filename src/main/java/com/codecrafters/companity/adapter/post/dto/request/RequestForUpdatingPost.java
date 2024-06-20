@@ -17,7 +17,7 @@ public class RequestForUpdatingPost {
     private Sport sport;
     private String content;
 
-    public PostForUpdate toPostForCreate(User user){
+    public PostForUpdate toPostForUpdate(User user){
         return PostMapper.POST_MAPPER.toDomain(this, user);
     }
 }
