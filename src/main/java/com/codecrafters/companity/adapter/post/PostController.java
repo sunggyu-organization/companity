@@ -18,8 +18,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import static com.codecrafters.companity.adapter.post.mapper.PostMapper.POST_MAPPER;
 
 @RestController
 @RequestMapping("/posts")
@@ -32,8 +32,7 @@ public class PostController {
     @PostMapping
     public ResponseEntity<ResponsePost> add(@RequestBody RequestForCreatingPost requestPost){
         //TODO need to use user use case
-        User user = getUser();
-        Post result = postUseCase.add(requestPost.toPostForCreate(user));
+        Post result = postUseCase.add(requestPost.toPostForCreate(getUser()));
         return new ResponseEntity<>(ResponsePost.toDomain(result), HttpStatus.CREATED);
     }
 

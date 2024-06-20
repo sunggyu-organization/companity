@@ -23,9 +23,9 @@ public interface PostMapper {
     PostMapper POST_MAPPER = Mappers.getMapper(PostMapper.class);
 
     @Mapping(target = "owner", source = "user")
-    PostForCreate toDomain(RequestForCreatingPost dto);
+    PostForCreate toDomain(RequestForCreatingPost dto, User user);
     @Mapping(target = "owner", source = "user")
-    PostForUpdate toDomain(RequestForUpdatingPost dto);
+    PostForUpdate toDomain(RequestForUpdatingPost dto, User user);
 
     Post toDomain(PostEntity entity);
     List<Post> toDomains(List<PostEntity> entities);

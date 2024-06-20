@@ -24,6 +24,6 @@ public class ResponsePost {
     private String ownerName;
 
     public static ResponsePost toDomain(Post post) {
-        return POST_MAPPER.toResponsePost(post);
+        return POST_MAPPER.toDto(post);
     }
 }
