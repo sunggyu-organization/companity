@@ -2,7 +2,6 @@ package com.codecrafters.companity.adapter.post;
 
 import com.codecrafters.companity.adapter.post.dto.request.RequestForCreatingPost;
 import com.codecrafters.companity.adapter.post.dto.request.RequestForUpdatingPost;
-import com.codecrafters.companity.adapter.post.mapper.PostMapper;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.adapter.post.dto.response.ResponsePost;
 import com.codecrafters.companity.application.in.post.PostUseCase;
@@ -34,7 +33,7 @@ public class PostController {
     public ResponseEntity<ResponsePost> add(@RequestBody RequestForCreatingPost requestPost){
         //TODO need to use user use case
         User user = getUser();
-        Post result = postUseCase.add(PostMapper.POST_MAPPER.toPostForCreate(requestPost, user));
+        Post result = postUseCase.add(requestPost.toPostForCreate(user));
         ResponsePost responsePost = POST_MAPPER.toResponsePost(result);
         return new ResponseEntity<>(responsePost, HttpStatus.CREATED);
     }
@@ -47,7 +46,7 @@ public class PostController {
 
     @PutMapping
     public ResponseEntity<ResponsePost> update(@RequestBody RequestForUpdatingPost requestPost){
-        PostForUpdate postForUpdate = PostMapper.POST_MAPPER.toPostForUpdate(requestPost, getUser());
+        PostForUpdate postForUpdate = requestPost.toPostForCreate(getUser());
         Post result = postUseCase.update(postForUpdate);
         ResponsePost responsePost = POST_MAPPER.toResponsePost(result);
         return new ResponseEntity<>(responsePost, HttpStatus.OK);
