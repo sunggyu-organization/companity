@@ -18,9 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.codecrafters.companity.adapter.post.mapper.PostMapper.POST_MAPPER;
-
-
 @RestController
 @RequestMapping("/posts")
 @RequiredArgsConstructor
@@ -34,8 +31,7 @@ public class PostController {
         //TODO need to use user use case
         User user = getUser();
         Post result = postUseCase.add(requestPost.toPostForCreate(user));
-        ResponsePost responsePost = POST_MAPPER.toResponsePost(result);
-        return new ResponseEntity<>(responsePost, HttpStatus.CREATED);
+        return new ResponseEntity<>(ResponsePost.toDomain(result), HttpStatus.CREATED);
     }
 
     private User getUser(){
@@ -48,8 +44,7 @@ public class PostController {
     public ResponseEntity<ResponsePost> update(@RequestBody RequestForUpdatingPost requestPost){
         PostForUpdate postForUpdate = requestPost.toPostForCreate(getUser());
         Post result = postUseCase.update(postForUpdate);
-        ResponsePost responsePost = POST_MAPPER.toResponsePost(result);
-        return new ResponseEntity<>(responsePost, HttpStatus.OK);
+        return new ResponseEntity<>(ResponsePost.toDomain(result), HttpStatus.OK);
     }
 
     @GetMapping("/")
@@ -60,12 +55,12 @@ public class PostController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponsePost> getDetail(@PathVariable("id") Long id){
-        ResponsePost result = POST_MAPPER.toResponsePost(postRepository.getById(id));
+        ResponsePost result = ResponsePost.toDomain(postRepository.getById(id));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable("id") Long id){
+    public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id){
         postUseCase.delete(PostForDelete.builder().postId(id).owner(getUser()).build());
         return new ResponseEntity<>(HttpStatus.OK);
     }
