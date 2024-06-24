@@ -7,4 +7,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface CommentRepository {
     Comment add(Comment comment);
+    Page<Comment> findAllByPost(Post post, Pageable pageable);
 }
