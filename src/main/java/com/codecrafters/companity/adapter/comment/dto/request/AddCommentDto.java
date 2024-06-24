@@ -14,7 +14,7 @@ public class AddCommentDto {
     private Long postId;
     private String content;
 
-    public CommentForCreate toAddingComment(Post post, User user){
+    public CommentForCreate toCommentForCreate(Post post, User user){
         return CommentForCreate.builder().post(post).user(user).content(content).build();
     }
 }
