@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 class PostForUpdateTest {
 
@@ -50,14 +51,16 @@ class PostForUpdateTest {
         Post updatedPost = newOne.toPost(oldOne);
 
         // then
-        assertThat(updatedPost.getOwner()).isEqualTo(newOne.getOwner());
-        assertThat(updatedPost.getId()).isEqualTo(newOne.getId());
-        assertThat(updatedPost.getTitle()).isEqualTo(newOne.getTitle());
-        assertThat(updatedPost.getContent()).isEqualTo(newOne.getContent());
-        assertThat(updatedPost.getCity()).isEqualTo(newOne.getCity());
-        assertThat(updatedPost.getSport()).isEqualTo(newOne.getSport());
-        assertThat(updatedPost.getLikeCount()).isEqualTo(oldOne.getLikeCount());
-        assertThat(updatedPost.getRecruit()).isEqualTo(oldOne.getRecruit());
+        assertSoftly(softAssertions -> {
+            assertThat(updatedPost.getOwner()).isEqualTo(newOne.getOwner());
+            assertThat(updatedPost.getId()).isEqualTo(newOne.getId());
+            assertThat(updatedPost.getTitle()).isEqualTo(newOne.getTitle());
+            assertThat(updatedPost.getContent()).isEqualTo(newOne.getContent());
+            assertThat(updatedPost.getCity()).isEqualTo(newOne.getCity());
+            assertThat(updatedPost.getSport()).isEqualTo(newOne.getSport());
+            assertThat(updatedPost.getLikeCount()).isEqualTo(oldOne.getLikeCount());
+            assertThat(updatedPost.getRecruit()).isEqualTo(oldOne.getRecruit());
+        });
     }
 
     @DisplayName("작성자는 null일 수 없다.")

@@ -13,6 +13,8 @@ import java.util.stream.Stream;
 
 import static com.codecrafters.companity.static_reference.UserStatic.*;
 import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.SoftAssertions.assertSoftly;
+
 class PostForCreateTest {
     @DisplayName("post 생성")
     @Test
@@ -25,11 +27,13 @@ class PostForCreateTest {
         Post post = postForCreate.toPost();
 
         // then
-        assertThat(post.getOwner()).isEqualTo(user);
-        assertThat(post.getCity()).isEqualTo(City.Seoul);
-        assertThat(post.getSport()).isEqualTo(Sport.Baseball);
-        assertThat(post.getContent()).isEqualTo("content");
-        assertThat(post.getTitle()).isEqualTo("title");
+        assertSoftly(softAssertions -> {
+            assertThat(post.getOwner()).isEqualTo(user);
+            assertThat(post.getCity()).isEqualTo(City.Seoul);
+            assertThat(post.getSport()).isEqualTo(Sport.Baseball);
+            assertThat(post.getContent()).isEqualTo("content");
+            assertThat(post.getTitle()).isEqualTo("title");
+        });
     }
 
     @DisplayName("사용자는 깊은 복사한다.")
@@ -43,12 +47,14 @@ class PostForCreateTest {
         Post post = postForCreate.toPost();
 
         // then
-        assertThat(post.getOwner()).isEqualTo(user);
-        assertThat(post.getCity()).isEqualTo(City.Seoul);
-        assertThat(post.getSport()).isEqualTo(Sport.Baseball);
-        assertThat(post.getContent()).isEqualTo("content");
-        assertThat(post.getTitle()).isEqualTo("title");
-        assertThat(post.getOwner()).isNotSameAs(user);
+        assertSoftly(softAssertions -> {
+            assertThat(post.getOwner()).isEqualTo(user);
+            assertThat(post.getCity()).isEqualTo(City.Seoul);
+            assertThat(post.getSport()).isEqualTo(Sport.Baseball);
+            assertThat(post.getContent()).isEqualTo("content");
+            assertThat(post.getTitle()).isEqualTo("title");
+            assertThat(post.getOwner()).isNotSameAs(user);
+        });
     }
 
     @DisplayName("작성자, 제목, 도시, 스포츠는 필수 값이다.")
