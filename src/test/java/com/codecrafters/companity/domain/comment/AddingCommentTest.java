@@ -1,4 +1,4 @@
-package com.codecrafters.companity.domain.Comment;
+package com.codecrafters.companity.domain.comment;
 
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;

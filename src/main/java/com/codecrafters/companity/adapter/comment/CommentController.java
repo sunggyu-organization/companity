@@ -4,7 +4,7 @@ import com.codecrafters.companity.adapter.comment.dto.request.AddCommentDto;
 import com.codecrafters.companity.adapter.comment.dto.response.ResponseComment;
 import com.codecrafters.companity.application.in.comment.CommentUseCase;
 import com.codecrafters.companity.application.in.post.PostUseCase;
-import com.codecrafters.companity.domain.Comment.Comment;
+import com.codecrafters.companity.domain.comment.Comment;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.user.User;
 import lombok.RequiredArgsConstructor;
