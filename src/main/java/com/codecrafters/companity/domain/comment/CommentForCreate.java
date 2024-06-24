@@ -8,7 +8,7 @@ import org.springframework.util.StringUtils;
 
 @Getter
 @Builder
-public class AddingComment {
+public class CommentForCreate {
     private String content;
     private Post post;
     private User user;
