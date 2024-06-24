@@ -1,4 +1,4 @@
-package com.codecrafters.companity.domain.Comment;
+package com.codecrafters.companity.domain.comment;
 
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
@@ -17,12 +17,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class AddingCommentTest {
+class CommentForCreateTest {
     @DisplayName("Comment 생성")
     @Test
     void add(){
         //given
-        AddingComment target = AddingComment.builder().user(getDefaultUser()).post(getDefaultPost()).content("test").build();
+        CommentForCreate target = CommentForCreate.builder().user(getDefaultUser()).post(getDefaultPost()).content("test").build();
 
         //when
         Comment comment = target.toComment();
@@ -40,7 +40,7 @@ class AddingCommentTest {
     @Test
     void Use_deep_copy_when_setting_owner_and_post() {
         //given
-        AddingComment target = AddingComment.builder().user(getDefaultUser()).post(getDefaultPost()).content("test").build();
+        CommentForCreate target = CommentForCreate.builder().user(getDefaultUser()).post(getDefaultPost()).content("test").build();
 
         //when
         Comment comment = target.toComment();
@@ -60,7 +60,7 @@ class AddingCommentTest {
     @ParameterizedTest
     void content_owner_post_are_require(String content, User user, Post post) {
         // given
-        AddingComment target = AddingComment.builder().user(user).post(post).content(content).build();
+        CommentForCreate target = CommentForCreate.builder().user(user).post(post).content(content).build();
 
         // when
         // then

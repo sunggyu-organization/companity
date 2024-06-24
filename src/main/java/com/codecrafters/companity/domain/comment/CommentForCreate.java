@@ -1,4 +1,4 @@
-package com.codecrafters.companity.domain.Comment;
+package com.codecrafters.companity.domain.comment;
 
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.user.User;
@@ -8,7 +8,7 @@ import org.springframework.util.StringUtils;
 
 @Getter
 @Builder
-public class AddingComment {
+public class CommentForCreate {
     private String content;
     private Post post;
     private User user;

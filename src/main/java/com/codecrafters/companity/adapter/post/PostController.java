@@ -64,6 +64,6 @@ public class PostController {
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id){
         postUseCase.delete(PostForDelete.builder().postId(id).owner(getUser()).build());
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

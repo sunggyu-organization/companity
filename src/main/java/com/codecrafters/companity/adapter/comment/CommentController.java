@@ -5,7 +5,7 @@ import com.codecrafters.companity.adapter.comment.dto.response.ResponseComment;
 import com.codecrafters.companity.application.in.comment.CommentUseCase;
 import com.codecrafters.companity.application.in.post.PostUseCase;
 import com.codecrafters.companity.application.out.persistence.CommentRepository;
-import com.codecrafters.companity.domain.Comment.Comment;
+import com.codecrafters.companity.domain.comment.Comment;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.user.User;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +32,7 @@ public class CommentController {
     @PostMapping
     public ResponseEntity<ResponseComment> add(@RequestBody AddCommentDto request){
         Post post = postUseCase.get(request.getPostId());
-        Comment result = commentUseCase.add(request.toAddingComment(post, getUser()));
+        Comment result = commentUseCase.add(request.toCommentForCreate(post, getUser()));
         ResponseComment responsePost = COMMENT_MAPPER.toDto(result);
         return new ResponseEntity<>(responsePost, HttpStatus.CREATED);
     }

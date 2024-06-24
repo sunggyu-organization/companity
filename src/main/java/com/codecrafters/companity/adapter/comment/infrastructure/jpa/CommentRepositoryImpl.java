@@ -1,7 +1,7 @@
 package com.codecrafters.companity.adapter.comment.infrastructure.jpa;
 
 import com.codecrafters.companity.application.out.persistence.CommentRepository;
-import com.codecrafters.companity.domain.Comment.Comment;
+import com.codecrafters.companity.domain.comment.Comment;
 import com.codecrafters.companity.domain.post.Post;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
