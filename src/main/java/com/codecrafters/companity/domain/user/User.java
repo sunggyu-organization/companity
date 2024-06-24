@@ -8,9 +8,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Builder
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class User {
+public class User implements Cloneable{
     private String userId;
     private String userName;
     private String nickName;
@@ -29,5 +27,15 @@ public class User {
     public void validateUser() {
         if (this.userId == null) throw new IllegalArgumentException("userId is required.");
         if (this.userName == null) throw  new IllegalArgumentException("userName is required.");
+    }
+
+    @Override
+    public User clone() {
+        try {
+            super.clone();
+            return User.builder().userId(userId).userName(userName).nickName(nickName).build();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
