@@ -1,6 +1,6 @@
 package com.codecrafters.companity.adapter.post.dto.request;
 
-import com.codecrafters.companity.adapter.post.mapper.PostMapper;
+import com.codecrafters.companity.adapter.post.PostMapper;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.post.PostForUpdate;

@@ -33,4 +33,9 @@ public class PostService implements PostUseCase {
         postForDelete.validate(target);
         postRepository.delete(target.getId());
     }
+
+    @Override
+    public Post get(Long postId) {
+        return postRepository.getById(postId);
+    }
 }

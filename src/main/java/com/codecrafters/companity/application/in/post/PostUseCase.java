@@ -11,4 +11,6 @@ public interface PostUseCase {
     Post update(PostForUpdate postForUpdate);
 
     void delete(PostForDelete postForDelete);
+
+    Post get(Long postId);
 }

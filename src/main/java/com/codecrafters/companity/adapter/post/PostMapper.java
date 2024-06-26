@@ -1,4 +1,4 @@
-package com.codecrafters.companity.adapter.post.mapper;
+package com.codecrafters.companity.adapter.post;
 
 import com.codecrafters.companity.adapter.post.dto.request.RequestForCreatingPost;
 import com.codecrafters.companity.adapter.post.dto.request.RequestForUpdatingPost;

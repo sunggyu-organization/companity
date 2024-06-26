@@ -20,7 +20,7 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 import static com.codecrafters.companity.adapter.post.infrastructure.jpa.QPostEntity.postEntity;
-import static com.codecrafters.companity.adapter.post.mapper.PostMapper.POST_MAPPER;
+import static com.codecrafters.companity.adapter.post.PostMapper.POST_MAPPER;
 
 
 @Repository

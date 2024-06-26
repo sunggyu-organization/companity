@@ -1,6 +1,6 @@
 package com.codecrafters.companity.adapter.post.infrastructure.jpa;
 
-import com.codecrafters.companity.adapter.infrastructure.jpa.common.BaseTimeEntity;
+import com.codecrafters.companity.adapter.common.infrastructure.jpa.BaseTimeEntity;
 import com.codecrafters.companity.adapter.user.infrastructure.jpa.UserEntity;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
