@@ -5,4 +5,5 @@ import com.codecrafters.companity.domain.user.User;
 
 public interface UserUseCase {
     public User signUp(UserCreateRequest user);
+    public void delete(String userId) throws Exception;
 }
