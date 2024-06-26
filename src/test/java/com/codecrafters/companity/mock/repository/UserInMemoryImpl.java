@@ -14,7 +14,6 @@ public class UserInMemoryImpl implements UserRepository {
     private final Map<String, User> repository = new ConcurrentHashMap<>();
     @Override
     public User save(User user) {
-        user.setUserId(user.getUserId());
         repository.put(user.getUserId(), user);
         return user;
     }

@@ -16,7 +16,16 @@ public class UserService implements UserUseCase {
     @Override
     public User signUp(UserCreateRequest request) {
         User user = User.from(request);
-        user.validateUser();
+        user.validateCreateUser();
+
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User updateNickName(String userId, String nickName) {
+        User user = userRepository.getUserById(userId);
+        user.updateNickName(nickName);
+
         return userRepository.save(user);
     }
 
