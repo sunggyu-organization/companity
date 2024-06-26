@@ -7,9 +7,7 @@ import java.util.Objects;
 
 @Getter
 @Builder
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class User {
+public class User implements Cloneable{
     private String userId;
     private String userName;
     private String nickName;
@@ -32,5 +30,15 @@ public class User {
 
     public void updateNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    @Override
+    public User clone() {
+        try {
+            super.clone();
+            return User.builder().userId(userId).userName(userName).nickName(nickName).build();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

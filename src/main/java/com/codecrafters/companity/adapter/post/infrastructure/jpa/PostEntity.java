@@ -1,17 +1,19 @@
-package com.codecrafters.companity.adapter.infrastructure.jpa.post;
+package com.codecrafters.companity.adapter.post.infrastructure.jpa;
 
-import com.codecrafters.companity.adapter.infrastructure.jpa.comment.CommentEntity;
 import com.codecrafters.companity.adapter.infrastructure.jpa.common.BaseTimeEntity;
 import com.codecrafters.companity.adapter.user.infrastructure.jpa.UserEntity;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
+import com.codecrafters.companity.domain.post.Post;
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.*;
 
-import java.util.List;
 
 @Entity(name = "Post")
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PostEntity extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +34,10 @@ public class PostEntity extends BaseTimeEntity {
     @JoinColumn(name="user_id")
     private UserEntity owner;
 
-    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
-    private List<CommentEntity> comments;
+    public void update(Post post){
+        this.title = post.getTitle();
+        this.sport = post.getSport();
+        this.city = post.getCity();
+        this.content = post.getContent();
+    }
 }

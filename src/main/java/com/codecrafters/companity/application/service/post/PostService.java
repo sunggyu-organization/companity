@@ -1,17 +1,14 @@
 package com.codecrafters.companity.application.service.post;
 
-import com.codecrafters.companity.application.in.usecase.PostUseCase;
-import com.codecrafters.companity.application.out.persistence.PostCriteria;
-import com.codecrafters.companity.application.out.utility.DateTimeProvider;
-import com.codecrafters.companity.application.out.persistence.PostRepository;
-import com.codecrafters.companity.application.out.persistence.UserRepository;
+import com.codecrafters.companity.application.in.post.PostUseCase;
 import com.codecrafters.companity.domain.post.Post;
-import com.codecrafters.companity.domain.user.User;
+import com.codecrafters.companity.domain.post.PostForCreate;
+import com.codecrafters.companity.application.out.persistence.PostRepository;
+import com.codecrafters.companity.domain.post.PostForDelete;
+import com.codecrafters.companity.domain.post.PostForUpdate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -19,32 +16,21 @@ import java.util.List;
 @Service
 public class PostService implements PostUseCase {
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
-    private final PostFactory postFactory;
-
-    private final DateTimeProvider dateTimeProvider;
-
     @Override
-    public Post add(Post post, String userId) {
-        User user = userRepository.getUserById(userId);
-        Post newPost = postFactory.create(post, user, dateTimeProvider.getNow());
-        return postRepository.add(newPost);
+    public Post add(PostForCreate postForCreate) {
+        return postRepository.add(postForCreate.toPost());
     }
 
     @Override
-    public Post update(Long postId, Post post) {
-        Post oldPost = postRepository.getById(postId);
-        return postRepository.save(postFactory.update(oldPost, post));
+    public Post update(PostForUpdate postForUpdate) {
+        Post post = postRepository.getById(postForUpdate.getId());
+        return postRepository.update(postForUpdate.toPost(post));
     }
 
     @Override
-    public List<Post> findByCriteria(PostCriteria postCriteria) {
-        //TODO need to make pagination
-        return postRepository.findBySportAndCityAndRecruitOrderByRecentDateOrFavorite(postCriteria);
-    }
-
-    @Override
-    public Post findById(Long id) {
-        return postRepository.getById(id);
+    public void delete(PostForDelete postForDelete) {
+        Post target = postRepository.getById(postForDelete.getPostId());
+        postForDelete.validate(target);
+        postRepository.delete(target.getId());
     }
 }
