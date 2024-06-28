@@ -8,4 +8,8 @@ import org.springframework.data.domain.Pageable;
 public interface CommentRepository {
     Comment add(Comment comment);
     Page<Comment> findAllByPost(Post post, Pageable pageable);
+
+    Comment update(Comment comment);
+
+    Comment getById(Long id);
 }

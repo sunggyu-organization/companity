@@ -1,6 +1,7 @@
 package com.codecrafters.companity.adapter.comment;
 
 import com.codecrafters.companity.adapter.comment.dto.request.AddCommentDto;
+import com.codecrafters.companity.adapter.comment.dto.request.UpdatingCommentDto;
 import com.codecrafters.companity.adapter.comment.dto.response.ResponseComment;
 import com.codecrafters.companity.application.in.comment.CommentUseCase;
 import com.codecrafters.companity.application.in.post.PostUseCase;
@@ -35,6 +36,13 @@ public class CommentController {
         Comment result = commentUseCase.add(request.toCommentForCreate(post, getUser()));
         ResponseComment responsePost = COMMENT_MAPPER.toDto(result);
         return new ResponseEntity<>(responsePost, HttpStatus.CREATED);
+    }
+
+    @PutMapping
+    public ResponseEntity<ResponseComment> update(@RequestBody UpdatingCommentDto request){
+        Comment result = commentUseCase.update(request.toCommentForUpdate(getUser()));
+        ResponseComment responsePost = COMMENT_MAPPER.toDto(result);
+        return new ResponseEntity<>(responsePost, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

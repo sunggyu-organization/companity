@@ -5,12 +5,13 @@ import com.codecrafters.companity.adapter.comment.infrastructure.jpa.CommentEnti
 import com.codecrafters.companity.domain.comment.Comment;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
 import org.mapstruct.control.DeepClone;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(mappingControl = DeepClone.class)
+@Mapper(mappingControl = DeepClone.class, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CommentMapper {
     CommentMapper COMMENT_MAPPER = Mappers.getMapper(CommentMapper.class);
     @Mapping(source = "owner", target = "user")
