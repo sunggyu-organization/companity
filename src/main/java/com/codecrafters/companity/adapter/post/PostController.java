@@ -19,7 +19,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import static com.codecrafters.companity.adapter.post.mapper.PostMapper.POST_MAPPER;
 
 @RestController
 @RequestMapping("/posts")
@@ -52,7 +51,7 @@ public class PostController {
     @GetMapping
     public ResponseEntity<Page<ResponsePost>> getList(@RequestBody PostCriteria criteria, Pageable pageable){
         Page<Post> result = postRepository.findByCriteria(criteria, pageable);
-        List<ResponsePost> content = POST_MAPPER.toDtos(result.getContent());
+        List<ResponsePost> content = PostMapper.POST_MAPPER.toDtos(result.getContent());
         return new ResponseEntity<>(new PageImpl<>(content, result.getPageable(), result.getTotalElements()), HttpStatus.OK);
     }
 
