@@ -72,8 +72,8 @@ public class PostController {
     public ResponseEntity<Page<ResponseComment>> getCommentInPost(@PathVariable("id") Long postId, Pageable pageable){
         Post post = postUseCase.get(postId);
         Page<Comment> result = commentRepository.findAllByPost(post, pageable);
-        List<ResponseComment> content = COMMENT_MAPPER.toDtos(result.getContent());
-        return new ResponseEntity<>(new PageImpl<>(content, result.getPageable(), result.getTotalElements()), HttpStatus.OK);
+        List<ResponseComment> comments = COMMENT_MAPPER.toDtos(result.getContent());
+        return new ResponseEntity<>(new PageImpl<>(comments, result.getPageable(), result.getTotalElements()), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
