@@ -33,8 +33,7 @@ public class CommentController {
     public ResponseEntity<ResponseComment> add(@RequestBody AddCommentDto request){
         Post post = postUseCase.get(request.getPostId());
         Comment result = commentUseCase.add(request.toCommentForCreate(post, getUser()));
-        ResponseComment responsePost = COMMENT_MAPPER.toDto(result);
-        return new ResponseEntity<>(responsePost, HttpStatus.CREATED);
+        return new ResponseEntity<>(ResponseComment.toDto(result), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
