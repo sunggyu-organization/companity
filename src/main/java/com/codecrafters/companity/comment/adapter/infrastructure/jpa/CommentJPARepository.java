@@ -1,4 +1,4 @@
-package com.codecrafters.companity.adapter.comment.infrastructure.jpa;
+package com.codecrafters.companity.comment.adapter.infrastructure.jpa;
 
 import com.codecrafters.companity.adapter.post.infrastructure.jpa.PostEntity;
 import org.springframework.data.domain.Page;

@@ -1,4 +1,4 @@
-package com.codecrafters.companity.domain.comment;
+package com.codecrafters.companity.comment.domain;
 
 import com.codecrafters.companity.domain.user.User;
 import lombok.Builder;

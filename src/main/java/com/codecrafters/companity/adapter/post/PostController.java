@@ -1,10 +1,13 @@
 package com.codecrafters.companity.adapter.post;
 
+import com.codecrafters.companity.comment.adapter.dto.response.ResponseComment;
 import com.codecrafters.companity.adapter.post.dto.request.RequestForCreatingPost;
 import com.codecrafters.companity.adapter.post.dto.request.RequestForUpdatingPost;
+import com.codecrafters.companity.comment.application.port.out.persistence.CommentRepository;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.adapter.post.dto.response.ResponsePost;
 import com.codecrafters.companity.application.in.post.PostUseCase;
+import com.codecrafters.companity.comment.domain.Comment;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.domain.post.PostForDelete;
@@ -20,6 +23,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+import static com.codecrafters.companity.comment.adapter.CommentMapper.COMMENT_MAPPER;
+
 @RestController
 @RequestMapping("/posts")
 @RequiredArgsConstructor
@@ -28,6 +33,8 @@ public class PostController {
     private final PostUseCase postUseCase;
     //user usecase
     private final PostRepository postRepository;
+
+    private final CommentRepository commentRepository;
     @PostMapping
     public ResponseEntity<ResponsePost> add(@RequestBody RequestForCreatingPost requestPost){
         //TODO need to use user use case
@@ -61,9 +68,18 @@ public class PostController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}/comments")
+    public ResponseEntity<Page<ResponseComment>> getCommentInPost(@PathVariable("id") Long postId, Pageable pageable){
+        Post post = postUseCase.get(postId);
+        Page<Comment> result = commentRepository.findAllByPost(post, pageable);
+        List<ResponseComment> comments = COMMENT_MAPPER.toDtos(result.getContent());
+        return new ResponseEntity<>(new PageImpl<>(comments, result.getPageable(), result.getTotalElements()), HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id){
         postUseCase.delete(PostForDelete.builder().postId(id).owner(getUser()).build());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }

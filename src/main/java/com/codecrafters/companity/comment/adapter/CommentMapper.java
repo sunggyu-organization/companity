@@ -1,8 +1,8 @@
-package com.codecrafters.companity.adapter.comment;
+package com.codecrafters.companity.comment.adapter;
 
-import com.codecrafters.companity.adapter.comment.dto.response.ResponseComment;
-import com.codecrafters.companity.adapter.comment.infrastructure.jpa.CommentEntity;
-import com.codecrafters.companity.domain.comment.Comment;
+import com.codecrafters.companity.comment.adapter.dto.response.ResponseComment;
+import com.codecrafters.companity.comment.adapter.infrastructure.jpa.CommentEntity;
+import com.codecrafters.companity.comment.domain.Comment;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;

@@ -1,10 +1,10 @@
-package com.codecrafters.companity.application.service.comment;
+package com.codecrafters.companity.comment.application.port;
 
-import com.codecrafters.companity.application.in.comment.CommentUseCase;
-import com.codecrafters.companity.application.out.persistence.CommentRepository;
-import com.codecrafters.companity.domain.comment.CommentForCreate;
-import com.codecrafters.companity.domain.comment.Comment;
-import com.codecrafters.companity.domain.comment.CommentForUpdate;
+import com.codecrafters.companity.comment.application.port.in.CommentUseCase;
+import com.codecrafters.companity.comment.application.port.out.persistence.CommentRepository;
+import com.codecrafters.companity.comment.domain.CommentForCreate;
+import com.codecrafters.companity.comment.domain.Comment;
+import com.codecrafters.companity.comment.domain.CommentForUpdate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

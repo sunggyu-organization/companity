@@ -1,6 +1,6 @@
-package com.codecrafters.companity.application.out.persistence;
+package com.codecrafters.companity.comment.application.port.out.persistence;
 
-import com.codecrafters.companity.domain.comment.Comment;
+import com.codecrafters.companity.comment.domain.Comment;
 import com.codecrafters.companity.domain.post.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

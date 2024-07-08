@@ -2,10 +2,11 @@ package com.codecrafters.companity.adapter.user.dto.response;
 
 import com.codecrafters.companity.adapter.user.dto.resposne.UserCreateResponse;
 import com.codecrafters.companity.domain.user.User;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static com.codecrafters.companity.static_reference.UserStatic.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 public class UserCreateResponseTest {
 
@@ -22,11 +23,10 @@ public class UserCreateResponseTest {
         UserCreateResponse resposne = UserCreateResponse.from(user);
 
         //then
-
-        Assertions.assertAll(() -> {
-            Assertions.assertEquals(user.getUserId(), resposne.getUserId());
-            Assertions.assertEquals(user.getUserName(), resposne.getUserName());
-            Assertions.assertEquals(user.getNickName(), resposne.getNickName());
+        assertSoftly(softAssertions -> {
+            assertThat(resposne.getUserId()).isEqualTo(user.getUserId());
+            assertThat(resposne.getUserName()).isEqualTo(user.getUserName());
+            assertThat(resposne.getNickName()).isEqualTo(user.getNickName());
         });
     }
 }

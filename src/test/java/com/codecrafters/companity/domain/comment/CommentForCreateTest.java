@@ -1,5 +1,7 @@
 package com.codecrafters.companity.domain.comment;
 
+import com.codecrafters.companity.comment.domain.Comment;
+import com.codecrafters.companity.comment.domain.CommentForCreate;
 import com.codecrafters.companity.domain.enums.City;
 import com.codecrafters.companity.domain.enums.Sport;
 import com.codecrafters.companity.domain.post.Post;
