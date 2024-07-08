@@ -1,13 +1,13 @@
 package com.codecrafters.companity.adapter.post;
 
-import com.codecrafters.companity.adapter.comment.dto.response.ResponseComment;
+import com.codecrafters.companity.comment.adapter.dto.response.ResponseComment;
 import com.codecrafters.companity.adapter.post.dto.request.RequestForCreatingPost;
 import com.codecrafters.companity.adapter.post.dto.request.RequestForUpdatingPost;
-import com.codecrafters.companity.application.out.persistence.CommentRepository;
+import com.codecrafters.companity.comment.application.port.out.persistence.CommentRepository;
 import com.codecrafters.companity.application.out.persistence.PostCriteria;
 import com.codecrafters.companity.adapter.post.dto.response.ResponsePost;
 import com.codecrafters.companity.application.in.post.PostUseCase;
-import com.codecrafters.companity.domain.comment.Comment;
+import com.codecrafters.companity.comment.domain.Comment;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.application.out.persistence.PostRepository;
 import com.codecrafters.companity.domain.post.PostForDelete;
@@ -23,7 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-import static com.codecrafters.companity.adapter.comment.CommentMapper.COMMENT_MAPPER;
+import static com.codecrafters.companity.comment.adapter.CommentMapper.COMMENT_MAPPER;
 
 @RestController
 @RequestMapping("/posts")

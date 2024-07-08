@@ -1,10 +1,10 @@
-package com.codecrafters.companity.adapter.comment;
+package com.codecrafters.companity.comment.adapter;
 
-import com.codecrafters.companity.adapter.comment.dto.request.AddCommentDto;
-import com.codecrafters.companity.adapter.comment.dto.response.ResponseComment;
-import com.codecrafters.companity.application.in.comment.CommentUseCase;
+import com.codecrafters.companity.comment.adapter.dto.request.AddCommentDto;
+import com.codecrafters.companity.comment.adapter.dto.response.ResponseComment;
+import com.codecrafters.companity.comment.application.port.in.CommentUseCase;
 import com.codecrafters.companity.application.in.post.PostUseCase;
-import com.codecrafters.companity.domain.comment.Comment;
+import com.codecrafters.companity.comment.domain.Comment;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.user.User;
 import lombok.RequiredArgsConstructor;

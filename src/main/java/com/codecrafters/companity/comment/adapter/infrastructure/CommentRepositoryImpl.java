@@ -1,7 +1,9 @@
-package com.codecrafters.companity.adapter.comment.infrastructure.jpa;
+package com.codecrafters.companity.comment.adapter.infrastructure;
 
-import com.codecrafters.companity.application.out.persistence.CommentRepository;
-import com.codecrafters.companity.domain.comment.Comment;
+import com.codecrafters.companity.comment.application.port.out.persistence.CommentRepository;
+import com.codecrafters.companity.comment.adapter.infrastructure.jpa.CommentEntity;
+import com.codecrafters.companity.comment.adapter.infrastructure.jpa.CommentJPARepository;
+import com.codecrafters.companity.comment.domain.Comment;
 import com.codecrafters.companity.domain.post.Post;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Repository;
 
-import static com.codecrafters.companity.adapter.comment.CommentMapper.COMMENT_MAPPER;
+import static com.codecrafters.companity.comment.adapter.CommentMapper.COMMENT_MAPPER;
 import static com.codecrafters.companity.adapter.post.PostMapper.POST_MAPPER;
 
 @Repository

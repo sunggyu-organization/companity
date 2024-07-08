@@ -1,6 +1,6 @@
-package com.codecrafters.companity.adapter.comment.dto.request;
+package com.codecrafters.companity.comment.adapter.dto.request;
 
-import com.codecrafters.companity.domain.comment.CommentForCreate;
+import com.codecrafters.companity.comment.domain.CommentForCreate;
 import com.codecrafters.companity.domain.post.Post;
 import com.codecrafters.companity.domain.user.User;
 import lombok.Getter;
