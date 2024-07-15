@@ -1,12 +1,14 @@
-package com.codecrafters.companity.adapter.comment;
+package com.codecrafters.companity.comment.adapter;
 
-import com.codecrafters.companity.adapter.comment.dto.response.ResponseComment;
-import com.codecrafters.companity.adapter.comment.infrastructure.jpa.CommentEntity;
-import com.codecrafters.companity.domain.comment.Comment;
+import com.codecrafters.companity.comment.adapter.dto.response.ResponseComment;
+import com.codecrafters.companity.comment.adapter.infrastructure.jpa.CommentEntity;
+import com.codecrafters.companity.comment.domain.Comment;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.control.DeepClone;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 @Mapper(mappingControl = DeepClone.class)
 public interface CommentMapper {
@@ -16,5 +18,10 @@ public interface CommentMapper {
     @Mapping(source = "user", target = "owner")
     Comment toDomain(CommentEntity entity);
 
+    @Mapping(source = "user", target = "owner")
+    List<Comment> toDomains(List<CommentEntity> entities);
+
     ResponseComment toDto(Comment result);
+
+    List<ResponseComment> toDtos(List<Comment> content);
 }
