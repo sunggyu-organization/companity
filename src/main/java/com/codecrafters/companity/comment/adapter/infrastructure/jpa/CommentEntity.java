@@ -5,12 +5,12 @@ import com.codecrafters.companity.adapter.post.infrastructure.jpa.PostEntity;
 import com.codecrafters.companity.adapter.user.infrastructure.jpa.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity(name = "Comment")
 @Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@SuperBuilder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CommentEntity extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

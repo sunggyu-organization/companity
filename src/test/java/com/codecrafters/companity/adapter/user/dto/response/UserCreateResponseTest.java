@@ -2,11 +2,8 @@ package com.codecrafters.companity.adapter.user.dto.response;
 
 import com.codecrafters.companity.adapter.user.dto.resposne.UserCreateResponse;
 import com.codecrafters.companity.domain.user.User;
-import org.assertj.core.api.SoftAssertions;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.codecrafters.companity.static_reference.PostStatic.CITY;
 import static com.codecrafters.companity.static_reference.UserStatic.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;

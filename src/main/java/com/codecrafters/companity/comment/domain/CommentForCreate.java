@@ -13,6 +13,7 @@ public class CommentForCreate {
     private Post post;
     private User user;
 
+    //FIXME: This method is not used. Remove it.
     public Comment toComment(){
         validate();
         return Comment.builder().post(post.clone()).owner(user.clone()).content(content).build();

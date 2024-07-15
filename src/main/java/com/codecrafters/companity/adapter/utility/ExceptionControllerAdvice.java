@@ -1,7 +1,6 @@
 package com.codecrafters.companity.adapter.utility;
 
 import com.codecrafters.companity.adapter.utility.dto.response.ExceptionResponse;
-import com.codecrafters.companity.adapter.utility.dto.response.ResultCode;
 import com.codecrafters.companity.exception.CustomException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -23,8 +23,30 @@ public class CommentRepositoryImpl implements CommentRepository {
     private final String CREATED_AT = "createdAt";
     @Override
     public Comment add(Comment comment) {
-        CommentEntity savedEntity = commentJPARepository.save(COMMENT_MAPPER.toEntity(comment));
-        return COMMENT_MAPPER.toDomain(savedEntity);
+        CommentEntity savedEntity = commentJPARepository.save(toEntity(comment));
+        return toDomain(savedEntity);
+    }
+
+    @Override
+    public Comment getById(Long id) {
+        CommentEntity entity = commentJPARepository.findById(id).orElseThrow(() -> {
+            throw new IllegalArgumentException("존재하지 않는 댓글입니다.");
+        });
+        return toDomain(entity);
+    }
+
+    @Override
+    public Comment update(Comment comment) {
+        CommentEntity save = commentJPARepository.save(toEntity(comment));
+        return toDomain(save);
+    }
+
+    private Comment toDomain(CommentEntity entity){
+        return COMMENT_MAPPER.toDomain(entity);
+    }
+
+    private CommentEntity toEntity(Comment comment){
+        return COMMENT_MAPPER.toEntity(comment);
     }
 
     @Override

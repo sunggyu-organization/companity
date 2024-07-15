@@ -6,6 +6,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface CommentRepository {
+    //TODO : change to use commentForCreate directly
     Comment add(Comment comment);
     Page<Comment> findAllByPost(Post post, Pageable pageable);
+
+    Comment update(Comment comment);
+
+    Comment getById(Long id);
 }
