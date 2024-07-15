@@ -16,6 +16,7 @@ public class CommentService implements CommentUseCase {
     private final CommentRepository commentRepository;
     @Override
     public Comment add(CommentForCreate commentForCreate) {
+        //TODO : change to use commentForCreate directly and validate here
         Comment comment = commentForCreate.toComment();
         return commentRepository.add(comment);
     }
